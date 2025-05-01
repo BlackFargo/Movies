@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a class="header__logo-flex" href="./index.html">
+            <img src="./assets/icons/pngwing.com.png" alt="logo"></img>
+            <div class="header__logo-flex_sitename">
+                <p>REACT</p>
+                <p>CINEMA</p>
+            </div>
+        </a>
+        <ul class="header__navbar-flex">
+            <a href="./index.html">Home</a>
+            <a href="./favorites.html">Favorites</a>
+            <a href="#categoryes">Movies</a>
+            <a href="#categoryes">Cartoon</a>
+            <a href="#categoryes">Fantasy</a>
+        </ul>
+        <div class="header__auth-flex">
+            <div class="favorites__movies">
+                <img src="./assets/icons/icons8-червы-100.png" alt="">
+                <p>0</p>
+            </div>
+            <a>Account</a>
+        </div>
+    </header>
+    <div class="favorites__banner">
+        <div class="gradient__overlay"></div>
+        <img src="./assets/Blade Runner 2049(2).jpg" alt="">
+    </div>
+    <div class="container">
+        <div class="filter">
+            <div id="categoryes" class="filter__categoryes">
+                <div class="filter__categoryes-flex">
+                    <div onclick="changeActiveCategorySort(this)" class="filter__categoryes-item active-category">
+                        <p>Popular</p>
+                        <span></span>
+                    </div>
+                    <div onclick="changeActiveCategorySort(this)" class="filter__categoryes-item">
+                        <p>Novelty</p>
+                        <span></span>
+                    </div>
+                    <div onclick="changeActiveCategorySort(this)" class="filter__categoryes-item">
+                        <p>Featured</p>
+                        <span></span>
+                    </div>
+                    <div onclick="changeActiveCategorySort(this)" class="filter__categoryes-item">
+                        <p>Short films</p>
+                        <span></span>
+                    </div>
+                </div>
+                <span></span>
+            </div>
+            <div class="filter__buttons">
+                 <button>Movies</button>
+                 <button>Cinema</button>
+                 <button>Adventure</button>
+                 <button>Comedy</button>
+                 <button>Fantasy</button>
+                 <button>History</button>
+                 <button>Cartoon</button>
+                 <button>Detective</button>
+                 <button>Mysticism</button>
+                 <button>Drama</button>
+            </div>
+            <div class="filter__search">
+                <input type="text" placeholder="Search...">
+                <button>
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="favorites_movies">
+            <div class="top-movies">
+                <p>Top Rated Films</p>
+                <div class="top-movies__card">
+                    <div class="top-movies__card-padding">
+                        <img src="./assets/ImageFılm.jpg" alt="">
+                        <div class="top-movies__card-info">
+                            <div class="top-movies__card-info-title">
+                                <p>Бегущий по лезвию 2049</p>
+                                <p>Ридли Скотт</p>
+                            </div>
+                            <div class="top-movies__card-info-description">
+                                <p>Film</p>
+                                <p>2019</p>
+                                <p>180m</p>
+                                <p>9.1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-movies__card">
+                    <div class="top-movies__card-padding">
+                        <img src="./assets/ImageFılm.jpg" alt="">
+                        <div class="top-movies__card-info">
+                            <div class="top-movies__card-info-title">
+                                <p>Бегущий по лезвию 2049</p>
+                                <p>Ридли Скотт</p>
+                            </div>
+                            <div class="top-movies__card-info-description">
+                                <p>Film</p>
+                                <p>2019</p>
+                                <p>180m</p>
+                                <p>9.1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-movies__card">
+                    <div class="top-movies__card-padding">
+                        <img src="./assets/ImageFılm.jpg" alt="">
+                        <div class="top-movies__card-info">
+                            <div class="top-movies__card-info-title">
+                                <p>Бегущий по лезвию 2049</p>
+                                <p>Ридли Скотт</p>
+                            </div>
+                            <div class="top-movies__card-info-description">
+                                <p>Film</p>
+                                <p>2019</p>
+                                <p>180m</p>
+                                <p>9.1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-movies__card">
+                    <div class="top-movies__card-padding">
+                        <img src="./assets/ImageFılm.jpg" alt="">
+                        <div class="top-movies__card-info">
+                            <div class="top-movies__card-info-title">
+                                <p>Бегущий по лезвию 2049</p>
+                                <p>Ридли Скотт</p>
+                            </div>
+                            <div class="top-movies__card-info-description">
+                                <p>Film</p>
+                                <p>2019</p>
+                                <p>180m</p>
+                                <p>9.1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-movies__card">
+                    <div class="top-movies__card-padding">
+                        <img src="./assets/ImageFılm.jpg" alt="">
+                        <div class="top-movies__card-info">
+                            <div class="top-movies__card-info-title">
+                                <p>Бегущий по лезвию 2049</p>
+                                <p>Ридли Скотт</p>
+                            </div>
+                            <div class="top-movies__card-info-description">
+                                <p>Film</p>
+                                <p>2019</p>
+                                <p>180m</p>
+                                <p>9.1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="movies">
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+                <a class="movies__card" href="/">
+                    <div class="movies__card-rating">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                        <img src="./assets/icons/star.png" alt="">
+                    </div>
+                    <img src="./assets/ImageFılm.jpg" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="movies__scroll">
+            <button><i class="fa-solid fa-arrow-down"></i></button>
+        </div>
+    </div>
+    <footer>
+        <div class="footer__padding">
+            <div class="site__info">
+                <p>REACT CINEMA</p>
+                <div>
+                    <img src="./assets/icons/icons8-facebook-новый-144.png" alt="">
+                    <img src="./assets/icons/icons8-instagram-144.png" alt="">
+                    <img src="./assets/icons/icons8-youtube-144.png" alt="">
+                    <img src="./assets/icons/icons8-линкедин-144.png" alt="">
+                </div>
+            </div>
+            <div class="footer__hrefs">
+                <div>
+                    <p>Main</p>
+                    <p>Topic</p>
+                    <p>Topic</p>
+                    <p>Topic</p>
+                </div>
+                <div>
+                    <p>FAQ</p>
+                    <p>Topic</p>
+                    <p>Topic</p>
+                    <p>Topic</p>
+                </div>
+                <div>
+                    <p>Reports</p>
+                    <p>Topic</p>
+                    <p>Topic</p>
+                    <p>Topic</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./index.js"></script>
+</body>
+</html>
