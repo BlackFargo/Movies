@@ -30,8 +30,8 @@ const APIKEY =
 export const fetchMovies = createAsyncThunk(
 	'movies/fetchByGenre',
 
-	async function ({ category, genre }, { rejectedWithValue }) {
-		let url = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}`
+	async function ({ category, genre = 28, page = 1 }, { rejectedWithValue }) {
+		let url = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&page=${page}`
 		switch (category) {
 			case 'Popular':
 				url += '&sort_by=popularity.desc'
@@ -63,10 +63,6 @@ export const fetchMovies = createAsyncThunk(
 					...result,
 					genres,
 				}
-				return {
-					...result,
-					genres: 'Test',
-				}
 			})
 
 			return updated
@@ -92,7 +88,11 @@ const moviesSlice = createSlice({
 			})
 			.addCase(fetchMovies.fulfilled, (state, action) => {
 				state.status = 'resolved'
-				state.movies = action.payload
+				if (action.meta.arg.page === 1) {
+					state.movies = action.payload
+				} else {
+					state.movies = [...state.movies, ...action.payload]
+				}
 			})
 			.addCase(fetchMovies.rejected, (state, action) => {
 				state.status = 'rejected'
