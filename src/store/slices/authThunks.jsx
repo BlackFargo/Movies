@@ -24,7 +24,6 @@ export const registerUserAsync = createAsyncThunk(
 			const userRef = doc(db, 'users', userCredentials.user.uid)
 
 			if (userCredentials.user) {
-				// Обновляем displayName в Firebase Authentication
 				await updateProfile(userCredentials.user, {
 					displayName: nickname || 'No name',
 				})

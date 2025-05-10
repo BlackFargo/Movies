@@ -22,7 +22,7 @@ export default function Registration() {
 
 	const state = useSelector(state => state.auth)
 	const dispatch = useDispatch()
-	const user = useSelector(state => state.auth?.user)
+
 	const loading = useSelector(state => state.auth?.loading)
 	const errorMessage = useSelector(state => state.auth?.error)
 
