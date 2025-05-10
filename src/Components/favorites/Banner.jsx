@@ -1,5 +1,5 @@
 import React from 'react'
-import background from '../../assets/Blade.jpg'
+import background from '../../assets/images/Blade.jpg'
 
 export default function Banner() {
 	return (

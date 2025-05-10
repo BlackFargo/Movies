@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 
 // debounce +
-// block next page
+// block next page +
 // затестить отдельный слайс с очищением
 // загруженные фильмы
-// abort Controller вечером(завтра)
+// abort Controller +
 // Загрузка
 // env
 // улушченее слайсов

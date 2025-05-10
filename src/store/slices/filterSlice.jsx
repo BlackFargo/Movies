@@ -2,13 +2,16 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const filterSlice = createSlice({
 	name: 'filtreSlice',
-	initialState: '',
+	initialState: {},
 	reducers: {
 		getCategory(state, action) {
-			return (state = action.payload)
+			state['category'] = action.payload.category
+		},
+		getPage(state, action) {
+			state['page'] = action.payload.page
 		},
 	},
 })
 
 export default filterSlice.reducer
-export const { getCategory } = filterSlice.actions
+export const { getCategory, getPage } = filterSlice.actions

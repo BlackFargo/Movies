@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import MoviesCard from './MoviesCard'
-import posterPlaceholder from '../../assets/poster-placeholder.png'
+import posterPlaceholder from '../../assets/images/poster-placeholder.png'
 
 import { useSelector } from 'react-redux'
 

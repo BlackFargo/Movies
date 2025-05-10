@@ -24,7 +24,8 @@ export default function Header() {
 					<img src={heart} alt='' />
 					<p>0</p>
 				</div>
-				<a href='./favorites.html'>Account</a>
+				<Link to={'/sign-in'}>Account</Link>
+				<Link to={'/user'}>user</Link>
 			</div>
 		</header>
 	)

@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-const baseurl = 'https://api.themoviedb.org/3/movie/popular?page=1'
-
 const genreMap = {
 	28: 'Action',
 	12: 'Adventure',
@@ -76,6 +74,7 @@ const moviesSlice = createSlice({
 	name: 'movieSlice',
 	initialState: {
 		movies: [],
+		page: 1,
 		status: null,
 		error: null,
 	},
@@ -89,8 +88,10 @@ const moviesSlice = createSlice({
 			.addCase(fetchMovies.fulfilled, (state, action) => {
 				state.status = 'resolved'
 				if (action.meta.arg.page === 1) {
+					state.page = 1
 					state.movies = action.payload
 				} else {
+					state.page = action.meta.arg.page
 					state.movies = [...state.movies, ...action.payload]
 				}
 			})

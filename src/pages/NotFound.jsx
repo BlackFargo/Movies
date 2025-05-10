@@ -1,5 +1,5 @@
 import React from 'react'
-import notFound from '../assets/notFound.jpg'
+import notFound from '../assets/images/notFound.jpg'
 
 export default function NotFound() {
 	return (
@@ -15,7 +15,7 @@ export default function NotFound() {
 				alt='notFound'
 				width={800}
 				height={800}
-				style={{ borderRadius: '50%' }}
+				style={{ borderRadius: '50%', margin: '100px 0' }}
 			/>
 		</div>
 	)

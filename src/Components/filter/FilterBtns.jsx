@@ -3,6 +3,7 @@ import { genreIdByName } from '../../utils/genreUtils'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../../store/slices/moviesSlice'
 import UseDebounce from '../../hooks/UseDebounce'
+import { getPage } from '../../store/slices/filterSlice'
 
 const popularGenreMap = {
 	28: 'Action',
@@ -22,10 +23,14 @@ export default function FilterBtns() {
 	const filterState = useSelector(state => state.filter)
 	const movieState = useSelector(state => state.movies)
 	const dispatch = useDispatch()
-	const [page, setPage] = useState(1)
+
 	const debouncedActive = UseDebounce(active)
 
 	const loading = movieState.status === 'loading'
+
+	useEffect(() => {
+		console.log(filterState)
+	}, [filterState])
 
 	const controller = new AbortController()
 
@@ -35,9 +40,9 @@ export default function FilterBtns() {
 				if (debouncedActive && filterState) {
 					dispatch(
 						fetchMovies({
-							category: filterState,
+							category: filterState?.category,
 							genre: genreIdByName(active, popularGenreMap),
-							page: page,
+							page: filterState?.page,
 							signal: controller.signal,
 						})
 					)
@@ -54,11 +59,7 @@ export default function FilterBtns() {
 		return () => {
 			controller.abort()
 		}
-	}, [debouncedActive, filterState, page, dispatch])
-
-	const nextPage = () => {
-		setPage(prev => prev + 1)
-	}
+	}, [debouncedActive, filterState, dispatch])
 
 	return (
 		<div className='filter__buttons'>
@@ -69,16 +70,13 @@ export default function FilterBtns() {
 						className={`${active === category ? 'active' : ''}`}
 						onClick={() => {
 							setActive(category)
-							setPage(1)
+							dispatch(getPage({ page: 1 }))
 						}}
 					>
 						{category}
 					</button>
 				)
 			})}
-			<button onClick={nextPage} disabled={loading}>
-				Next page
-			</button>
 		</div>
 	)
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import imgFilm from '../../assets/imgFilm.jpg'
+import imgFilm from '../../assets/images/imgFilm.jpg'
 
 export default function FavoritesCard() {
 	return (

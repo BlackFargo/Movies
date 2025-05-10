@@ -5,8 +5,18 @@ import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import Movie from './pages/Movie'
 import NotFound from './pages/NotFound'
+import Registration from './pages/registration/Registration'
+import UserPage from './pages/userPage/UserPage'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import checkUserAuth from './utils/checkUserAuth'
 
 function App() {
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		checkUserAuth(dispatch)
+	}, [])
 	return (
 		<>
 			<BrowserRouter>
@@ -16,6 +26,8 @@ function App() {
 					<Route path='/favorites' element={<Favorites />} />
 					<Route path='/movie' element={<Movie />} />
 					<Route path='/movie/:movieName' element={<Movie />} />
+					<Route path='/sign-in' element={<Registration />} />
+					<Route path='/user' element={<UserPage />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 				<Footer />

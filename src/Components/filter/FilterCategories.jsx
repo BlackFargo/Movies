@@ -10,8 +10,8 @@ export default function FilterCategories() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(getCategory(status))
-	})
+		dispatch(getCategory({ category: status }))
+	}, [status])
 
 	return (
 		<div id='categoryes' className='filter__categoryes anchor'>

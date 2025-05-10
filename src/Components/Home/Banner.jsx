@@ -1,5 +1,5 @@
 import video from '../../assets/videos/Titanik.mp4'
-import header_banner from '../../assets/background.jpg'
+import header_banner from '../../assets/images/background.jpg'
 import { ReactTyped } from 'react-typed'
 
 export default function Banner() {
