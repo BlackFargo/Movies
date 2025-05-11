@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import starImage from '../../assets/icons/star.png'
 
 export default function Rating({ rating }) {
@@ -10,10 +9,11 @@ export default function Rating({ rating }) {
 
 	return (
 		<>
-			{stars.length &&
-				stars.map((star, index) => {
-					return <img src={starImage} alt='star icon' key={index} />
-				})}
+			{stars.length
+				? stars.map((star, index) => {
+						return <img src={starImage} alt='star icon' key={index} />
+				  })
+				: 'No rating'}
 		</>
 	)
 }

@@ -308,6 +308,8 @@ ul {
 	z-index: 1;
 	background-color: rgba(0, 0, 0, 0.78);
 	width: 100%;
+	color: gold;
+	font-size: 20px;
 }
 
 .movies__info-rating {
