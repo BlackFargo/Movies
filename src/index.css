@@ -79,6 +79,7 @@ header {
 	font-family: 'Inter', sans-serif;
 	font-size: 19px;
 }
+
 .header__auth-flex {
 	display: flex;
 	flex-direction: row;
@@ -88,7 +89,7 @@ header {
 }
 .header__auth-flex > a {
 	font-size: 18px;
-	font-weight: 400;
+	font-weight: 500;
 	text-decoration: none;
 	color: #fff;
 	font-family: 'Inter', sans-serif;
@@ -770,3 +771,16 @@ footer {
 	flex-direction: column;
 	flex-grow: 1;
 } */
+
+.login {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+	font-size: 20px;
+}
+
+.login img {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}

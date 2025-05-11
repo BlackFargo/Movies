@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/icons/pngwing.com.png'
 import heart from '../../assets/icons/icons8-червы-100.png'
+import { auth } from '../../firebase/firebaseConfing'
+import { useEffect, useState } from 'react'
 
 export default function Header() {
+	const [user, setUser] = useState()
+	useEffect(() => {
+		setUser(auth.currentUser)
+	}, [auth])
 	return (
 		<header>
 			<Link className='header__logo-flex' to={'/'}>
@@ -24,8 +30,14 @@ export default function Header() {
 					<img src={heart} alt='' />
 					<p>0</p>
 				</div>
-				<Link to={'/sign-in'}>Account</Link>
-				<Link to={'/user'}>user</Link>
+				{user ? (
+					<Link to={'/user'} className='login login_link'>
+						<img src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png' />
+						{auth.currentUser.displayName}
+					</Link>
+				) : (
+					<Link to={'/sign-in'}>Log in</Link>
+				)}
 			</div>
 		</header>
 	)
