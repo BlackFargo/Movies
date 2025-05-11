@@ -754,3 +754,19 @@ main > video {
 		transform: translate(-50%, -50%) rotate(360deg);
 	}
 }
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+footer {
+	margin-top: auto !important;
+}
+
+/* main {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+} */

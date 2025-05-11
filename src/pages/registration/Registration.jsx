@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import s from './Registration.module.scss'
 import { useNavigate } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import {
-	logoutUserAsync,
+	loginUserAsync,
 	registerUserAsync,
 } from '../../store/slices/authThunks'
 
 export default function Registration() {
+	const [switchType, setSwitchType] = useState(false)
+	const switchTypeRef = useRef()
+
 	const navigate = useNavigate()
 	const {
 		register,
@@ -36,7 +39,7 @@ export default function Registration() {
 			password: '',
 		})
 	}
-	const submit = async data => {
+	const signUpSubmit = async data => {
 		try {
 			const resultAction = await dispatch(
 				registerUserAsync({
@@ -57,18 +60,60 @@ export default function Registration() {
 
 		handleReset()
 	}
+
+	const logInSubmit = async data => {
+		try {
+			const resultAction = await dispatch(
+				loginUserAsync({
+					email: data.email,
+					password: data.password,
+				})
+			)
+
+			if (loginUserAsync.fulfilled.match(resultAction)) {
+				navigate('/user')
+			} else {
+				console.error('Log in failed:', resultAction.payload)
+			}
+		} catch (error) {
+			console.error('Log in error:', error)
+		}
+
+		handleReset()
+	}
+
 	return (
 		<div className={s.register_container}>
-			<form onSubmit={handleSubmit(submit)} className={s.form}>
-				<h1>Sign up</h1>
+			<form
+				onSubmit={handleSubmit(switchType ? logInSubmit : signUpSubmit)}
+				className={s.form}
+			>
 				<input
-					type='text'
-					{...register('nickname', { required: 'Nickname is required' })}
-					className={s.input}
-					placeholder='nickname'
-					name='nickname'
-					disabled={loading}
+					type='checkbox'
+					id='switch_register_type'
+					className={s.form_switch_type_checkbox}
+					ref={switchTypeRef}
+					onChange={() => setSwitchType(switchTypeRef.current.checked)}
 				/>
+				<label
+					htmlFor='switch_register_type'
+					className={s.form_switch_type_label}
+				></label>
+				{loading ? <div className={s.loading_round}></div> : ''}
+
+				{switchType ? (
+					''
+				) : (
+					<input
+						type='text'
+						{...register('nickname', { required: 'Nickname is required' })}
+						className={s.input}
+						placeholder='Nickname'
+						name='nickname'
+						disabled={loading}
+					/>
+				)}
+
 				{errors.nickname && (
 					<p className={s.error}>{errors.nickname.message}</p>
 				)}
@@ -76,7 +121,7 @@ export default function Registration() {
 					type='email'
 					{...register('email', { required: 'Email is required' })}
 					className={s.input}
-					placeholder='email'
+					placeholder='Email'
 					name='email'
 					disabled={loading}
 				/>
@@ -86,7 +131,7 @@ export default function Registration() {
 					type='password'
 					{...register('password', { required: 'Password is required' })}
 					className={s.input}
-					placeholder='password'
+					placeholder='Password'
 					name='password'
 					disabled={loading}
 				/>
@@ -104,7 +149,12 @@ export default function Registration() {
 				</button>
 
 				<button type='submit' className={s.button} disabled={loading}>
-					Sign up
+					<p
+						key={switchType ? 'login' : 'signup'}
+						className={s.switch_type_text}
+					>
+						{switchType ? 'Log in' : 'Sign up'}
+					</p>
 				</button>
 
 				<div>

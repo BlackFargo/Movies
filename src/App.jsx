@@ -21,6 +21,7 @@ function App() {
 		<>
 			<BrowserRouter>
 				<Header />
+				{/* <main> */}
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/favorites' element={<Favorites />} />
@@ -30,6 +31,7 @@ function App() {
 					<Route path='/user' element={<UserPage />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
+				{/* </main> */}
 				<Footer />
 			</BrowserRouter>
 		</>

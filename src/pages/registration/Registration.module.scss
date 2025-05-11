@@ -11,7 +11,7 @@
 	padding-top: 120px;
 	padding-bottom: 50px;
 
-	form {
+	.form {
 		border-radius: 12px;
 		background-color: #333;
 		padding: 30px;
@@ -19,12 +19,77 @@
 		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 		width: 100%;
 		max-width: 400px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 12px;
+
+		&_switch_type_label {
+			display: block;
+			border-radius: 20px;
+			width: 100%;
+			height: 50px;
+			position: relative;
+			background-color: #5c6bc0;
+			cursor: pointer;
+			margin-bottom: 10px;
+
+			&::before,
+			&::after {
+				transition: all 0.3s;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 22px;
+				font-weight: 500;
+				width: 50%;
+				height: 50px;
+				border-radius: 20px;
+				background-color: orange;
+				position: absolute;
+			}
+
+			&::before {
+				content: 'Sign up';
+				left: 0;
+				top: 0;
+			}
+			&::after {
+				content: 'Log in';
+				background-color: #5c6bc0;
+				right: 0;
+				top: 0;
+			}
+		}
+
+		&_switch_type_checkbox {
+			position: absolute;
+			padding: 0;
+			width: 0;
+			height: 0;
+			padding: 0;
+			margin: 0;
+			appearance: none;
+			visibility: hidden;
+			opacity: 0;
+		}
+
+		&_switch_type_checkbox:checked + label::before {
+			content: 'Log in';
+			left: 100%;
+			transform: translateX(-100%);
+		}
+		&_switch_type_checkbox:checked + label::after {
+			content: 'Sign up';
+			right: 100%;
+			transform: translateX(100%);
+		}
 	}
 
 	input {
 		width: calc(100% - 20px);
 		padding: 10px;
-		margin: 10px 0;
+
 		border: 1px solid #555;
 		border-radius: 4px;
 		background-color: #444;
@@ -40,7 +105,7 @@
 	button {
 		width: 100%;
 		padding: 10px;
-		margin: 10px 0;
+
 		border: none;
 		background-color: #5c6bc0;
 		color: white;
@@ -58,5 +123,37 @@
 		color: lightcoral;
 
 		font-size: 18px;
+	}
+}
+
+.switch_type_text {
+	animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.loading_round {
+	width: 20px;
+	height: 20px;
+	border: 2px solid white;
+	border-radius: 50%;
+	border-top: 2px solid transparent;
+	animation: loading 0.5s ease-in-out infinite;
+	margin-bottom: 10px;
+}
+
+@keyframes loading {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(360deg);
 	}
 }
