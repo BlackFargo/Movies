@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/icons/pngwing.com.png'
 import heart from '../../assets/icons/icons8-червы-100.png'
+import { logoutUserAsync } from '../../store/slices/authThunks'
+
+import { useDispatch, useSelector } from 'react-redux'
 import { auth } from '../../firebase/firebaseConfing'
-import { useEffect, useState } from 'react'
 
 export default function Header() {
-	const [user, setUser] = useState()
-	useEffect(() => {
-		setUser(auth.currentUser)
-	}, [auth])
+	const userState = useSelector(state => state.auth.user)
+	const dispatch = useDispatch()
+
 	return (
 		<header>
 			<Link className='header__logo-flex' to={'/'}>
@@ -30,14 +31,20 @@ export default function Header() {
 					<img src={heart} alt='' />
 					<p>0</p>
 				</div>
-				{user ? (
+				{userState ? (
 					<Link to={'/user'} className='login login_link'>
 						<img src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png' />
-						{auth.currentUser.displayName}
+						{userState.displayName}
 					</Link>
 				) : (
 					<Link to={'/sign-in'}>Log in</Link>
 				)}
+				<div
+					style={{ color: 'white' }}
+					onClick={() => dispatch(logoutUserAsync())}
+				>
+					Sign out
+				</div>
 			</div>
 		</header>
 	)

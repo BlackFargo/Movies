@@ -40,7 +40,7 @@ export const registerUserAsync = createAsyncThunk(
 
 			await sendEmailVerification(userCredentials.user)
 
-			deleteUserIfNotVerified(userCredentials.user)
+			deleteUserIfNotVerified(auth.currentUser)
 
 			return {
 				email: userCredentials.user?.email,
