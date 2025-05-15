@@ -1,26 +1,39 @@
 import './UserPage.module.scss'
-import { useSelector } from 'react-redux'
-import { auth } from '../../firebase/firebaseConfing'
-import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { logoutUserAsync } from '../../store/slices/authThunks'
+import s from './UserPage.module.scss'
 
 export default function UserPage() {
-	useEffect(() => {
-		console.log(auth.currentUser)
-	}, [auth])
+	const dispatch = useDispatch()
+
 	const authState = useSelector(state => state.auth)
 	return (
-		<div style={{ padding: '200px', color: 'white' }}>
-			<img
-				src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png'
-				style={{ width: '200px', borderRadius: '50%' }}
-			/>
-			<h1>{authState.user?.displayName || 'Nickname'}</h1>
-			<p>{authState.user?.role || 'user'}</p>
-			<p>
-				{authState.user?.emailVerified
-					? ''
-					: 'в течении 5 минут потвердите почту либо же аккаунт будет удален'}
-			</p>
+		<div className={s.user_container}>
+			<div className={s.user_profile}>
+				<ul className={s.user_profile_list}>
+					<li>{authState.user?.displayName || 'Nickname'}</li>
+					<li>{authState.user?.role || 'user'}</li>
+					<li>{authState.user?.email}</li>
+					<li>
+						<button
+							onClick={() => dispatch(logoutUserAsync())}
+							className={s.logoutButton}
+						>
+							Log out
+						</button>
+					</li>
+					<li>
+						{' '}
+						<p>
+							{authState.user?.emailVerified
+								? ''
+								: 'в течении 5 минут потвердите почту либо же аккаунт будет удален'}
+						</p>
+					</li>
+				</ul>
+			</div>
+			<div className=''>Liked films:</div>
 		</div>
 	)
 }

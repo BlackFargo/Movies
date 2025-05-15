@@ -12,10 +12,6 @@ export default function MainInfoLeft() {
 	const moviedata = movieState?.movies.find(movie => movie.title === movieName)
 
 	const movieDate = new Date(moviedata?.release_date).getFullYear()
-	console.log(movieDate)
-	useEffect(() => {
-		console.log(moviedata)
-	}, [moviedata])
 
 	return (
 		<div className='main__info-left'>

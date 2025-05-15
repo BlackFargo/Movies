@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/icons/pngwing.com.png'
 import heart from '../../assets/icons/icons8-червы-100.png'
-import { logoutUserAsync } from '../../store/slices/authThunks'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { auth } from '../../firebase/firebaseConfing'
 
 export default function Header() {
 	const userState = useSelector(state => state.auth.user)
-	const dispatch = useDispatch()
 
 	return (
 		<header>
@@ -39,12 +36,6 @@ export default function Header() {
 				) : (
 					<Link to={'/sign-in'}>Log in</Link>
 				)}
-				<div
-					style={{ color: 'white' }}
-					onClick={() => dispatch(logoutUserAsync())}
-				>
-					Sign out
-				</div>
 			</div>
 		</header>
 	)

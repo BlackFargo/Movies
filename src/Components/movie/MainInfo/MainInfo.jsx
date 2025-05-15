@@ -1,5 +1,3 @@
-import React from 'react'
-
 import MainInfoLeft from './MainInfoLeft'
 import MainInfoRight from './MainInfoRight'
 
