@@ -11,6 +11,10 @@ export default function UserPage() {
 	return (
 		<div className={s.user_container}>
 			<div className={s.user_profile}>
+				<img
+					src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png'
+					className={s.user_profile_img}
+				/>
 				<ul className={s.user_profile_list}>
 					<li>{authState.user?.displayName || 'Nickname'}</li>
 					<li>{authState.user?.role || 'user'}</li>

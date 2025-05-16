@@ -88,6 +88,7 @@ export const fetchTrailer = createAsyncThunk(
 				throw new Error('Server error')
 			}
 			const data = await response.json()
+			console.log(data)
 			const trailer = data.results.find(
 				item => item.name === 'Official Trailer'
 			)

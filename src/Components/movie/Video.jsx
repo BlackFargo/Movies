@@ -19,15 +19,27 @@ export default function Video() {
 
 	useEffect(() => {
 		console.log(trailerState)
+		console.log(moviedata)
 	}, [moviedata])
 
 	return (
 		<div className='video-wrapper'>
-			<iframe
-				src={`https://www.youtube.com/embed/${trailerState}`}
-				frameborder='0'
-				allowfullscreen
-			></iframe>
+			{trailerState ? (
+				<iframe
+					src={`https://www.youtube.com/embed/${trailerState}`}
+					frameborder='0'
+					allowfullscreen
+				></iframe>
+			) : (
+				<>
+					<img
+						src={`https://image.tmdb.org/t/p/w500/${moviedata?.backdrop_path}.jpg`}
+						alt='backdrop'
+						className='backdrop-image'
+					/>
+					<h3 className='trailer-text'>Trailer is not availiable</h3>
+				</>
+			)}
 		</div>
 	)
 }
