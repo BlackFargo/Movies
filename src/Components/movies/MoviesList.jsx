@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import MoviesCard from './MoviesCard'
 import posterPlaceholder from '../../assets/images/poster-placeholder.png'
 
