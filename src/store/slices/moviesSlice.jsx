@@ -22,8 +22,7 @@ const genreMap = {
 	37: 'Western',
 }
 
-const APIKEY =
-	'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZDI5NmJjNGE4ZTYyOGMyZTE3NzBiY2NiM2QwNTE3YSIsIm5iZiI6MTc0NTU4OTM4NS4wMDgsInN1YiI6IjY4MGI5NDg5MjAwNGJlOTNkOWFhOTRmMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EfQ-j_8AY5ZC8yKVOjn1lJIE04bw2sbyDasM0BSTz3I'
+const APIKEY = import.meta.env.VITE_API_KEY
 
 export const fetchMovies = createAsyncThunk(
 	'movies/fetchByGenre',
