@@ -58,11 +58,41 @@ header {
 	justify-content: center;
 	gap: 15px;
 }
+@media (max-width: 1000px) {
+	.header__navbar-flex {
+		position: fixed;
+		top: 80px;
+		display: flex;
+		justify-content: start;
+		width: 200px;
+		padding-top: 20px;
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.9);
+		left: 0;
+		opacity: 0;
+		visibility: hidden;
+		flex-direction: column;
+		transition: all 0.3s;
+		transform: translate(-200px, 0);
+	}
+}
+.active-navbar {
+	transform: translateX(0);
+	opacity: 1;
+	visibility: visible;
+}
+
 .header__navbar-flex > a {
+	padding: 10px;
 	color: #ffffff;
 	text-decoration: none;
 	font-family: 'Inter', sans-serif;
 	font-size: 16px;
+	opacity: 0.7;
+	transition: all 0.3s;
+}
+.header__navbar-flex > a:hover {
+	opacity: 1;
 }
 .favorites__movies {
 	display: flex;
@@ -359,6 +389,12 @@ ul {
 	gap: 120px;
 	margin-right: 200px;
 }
+
+@media (max-width: 1200px) {
+	.footer__hrefs {
+		margin-right: 40px;
+	}
+}
 .footer__hrefs > div {
 	display: flex;
 	flex-direction: column;
@@ -537,6 +573,8 @@ ul {
 }
 main {
 	display: flex;
+	max-width: 1920px;
+
 	flex-direction: column;
 	gap: 25px;
 	height: 100%;
@@ -772,11 +810,9 @@ footer {
 	margin-top: auto !important;
 }
 
-/* main {
-	display: flex;
-	flex-direction: column;
+main {
 	flex-grow: 1;
-} */
+}
 
 .login {
 	display: flex;
@@ -809,4 +845,73 @@ ul {
 	margin-top: 20px;
 	font-size: 24px;
 	color: white;
+}
+
+.header-burger-btn {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	background-color: #000000;
+	border: none;
+	cursor: pointer;
+}
+
+.header-burger-line {
+	position: absolute;
+	width: 75%;
+	height: 3px;
+	background-color: purple;
+	transition: all 0.3s;
+}
+
+.header-burger-line:nth-child(1) {
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -30%);
+}
+.header-burger-line:nth-child(2) {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.header-burger-line:nth-child(3) {
+	top: 70%;
+	left: 50%;
+	transform: translate(-50%, -70%);
+}
+
+.header-burger-line:nth-child(1).active-burger {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+.header-burger-line:nth-child(2).active-burger {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.header-burger-line:nth-child(3).active-burger {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media (min-width: 1000px) {
+	.header-burger-btn {
+		display: none;
+	}
+}
+
+.like-btn {
+	width: 200px;
+	height: 45px;
+	color: white;
+	border-radius: 12px;
+	background-color: rgba(122, 0, 0, 0.5);
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 5px;
+	cursor: pointer;
 }

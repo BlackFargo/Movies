@@ -8,6 +8,7 @@ export default function UserPage() {
 	const dispatch = useDispatch()
 
 	const authState = useSelector(state => state.auth)
+	const likesState = useSelector(state => state.likes.movies)
 	return (
 		<div className={s.user_container}>
 			<div className={s.user_profile}>
@@ -37,7 +38,10 @@ export default function UserPage() {
 					</li>
 				</ul>
 			</div>
-			<div className=''>Liked films:</div>
+			<div className=''>
+				Liked films:
+				{likesState[1011477].overview}
+			</div>
 		</div>
 	)
 }

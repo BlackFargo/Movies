@@ -6,7 +6,7 @@ import MoviesScroll from '../Components/movies/MoviesScroll'
 
 export default function Home() {
 	return (
-		<div>
+		<div className=''>
 			<Banner />
 			<div className='container'>
 				<Filter />

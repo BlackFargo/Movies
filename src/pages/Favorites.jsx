@@ -15,7 +15,7 @@ export default function Favorites() {
 
 				<div className='favorites_movies'>
 					<FavoritesList />
-					<MoviesList />
+					{/* <MoviesList /> */}
 				</div>
 
 				<MoviesScroll />

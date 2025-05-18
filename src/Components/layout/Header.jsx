@@ -1,14 +1,35 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/icons/pngwing.com.png'
 import heart from '../../assets/icons/icons8-червы-100.png'
-
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useModal } from '../../hooks/UseModal'
 
 export default function Header() {
+	const { isOpen, setIsOpen, toggle } = useModal()
 	const userState = useSelector(state => state.auth.user)
 
 	return (
 		<header>
+			<button
+				className='header-burger-btn'
+				onClick={toggle}
+				aria-label={isOpen ? 'Close menu' : 'Open menu'}
+				aria-expanded={isOpen}
+				type='button'
+			>
+				<span
+					className={`header-burger-line ${isOpen ? 'active-burger' : ''}`}
+					aria-hidden='true'
+				></span>
+				<span
+					className={`header-burger-line ${isOpen ? 'active-burger' : ''}`}
+					aria-hidden='true'
+				></span>
+				<span
+					className={`header-burger-line ${isOpen ? 'active-burger' : ''}`}
+					aria-hidden='true'
+				></span>
+			</button>
 			<Link className='header__logo-flex' to={'/'}>
 				<img src={logo} alt='logo' />
 				<div className='header__logo-flex_sitename'>
@@ -16,7 +37,7 @@ export default function Header() {
 					<p>CINEMA</p>
 				</div>
 			</Link>
-			<ul className='header__navbar-flex'>
+			<ul className={`header__navbar-flex ${isOpen ? 'active-navbar' : ''}`}>
 				<Link to={'/'}>Home</Link>
 				<Link to={'/favorites'}>Favorites</Link>
 				<a href='#categoryes'>Movies</a>

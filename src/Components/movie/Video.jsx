@@ -21,6 +21,9 @@ export default function Video() {
 		console.log(trailerState)
 		console.log(moviedata)
 	}, [moviedata])
+	if (movieState.status === 'loading') {
+		return <h1 style={{ color: 'white' }}>Loading ...</h1>
+	}
 
 	return (
 		<div className='video-wrapper'>
