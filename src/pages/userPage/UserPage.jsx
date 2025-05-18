@@ -5,6 +5,7 @@ import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { sendMoviesIds } from '../../firebase/firebaseFunctions'
 
 export default function UserPage() {
 	const dispatch = useDispatch()
@@ -39,6 +40,12 @@ export default function UserPage() {
 							{authState.user?.emailVerified
 								? ''
 								: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
+							<button
+								onClick={() => sendMoviesIds(['241421214214', '421241124412'])}
+							>
+								{' '}
+								Add
+							</button>
 						</p>
 					</li>
 				</ul>
