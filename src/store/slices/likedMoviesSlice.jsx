@@ -38,7 +38,7 @@ const likedMoviesSlice = createSlice({
 	},
 	reducers: {
 		addLike(state, action) {
-			state.movies = { ...state, [action.payload.id]: action.payload }
+			state.movies = { ...state.movies, [action.payload.id]: action.payload }
 		},
 	},
 	extraReducers: builder => {

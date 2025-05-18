@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function UserPage() {
 	const dispatch = useDispatch()
 
 	const authState = useSelector(state => state.auth)
-	const likesState = useSelector(state => state.likes.movies)
+	const likesState = useSelector(state => state.likes)
+
+	const likesMoviesArray = Object.values(likesState.movies)
+
 	return (
 		<div className={s.user_container}>
 			<div className={s.user_profile}>
@@ -33,14 +38,29 @@ export default function UserPage() {
 						<p>
 							{authState.user?.emailVerified
 								? ''
-								: 'в течении 5 минут потвердите почту либо же аккаунт будет удален'}
+								: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
 						</p>
 					</li>
 				</ul>
 			</div>
-			<div className=''>
-				Liked films:
-				{likesState[1011477].overview}
+			<div className={s.liked_container}>
+				<h1>Liked films:</h1>
+				<div className={s.liked_movies}>
+					{likesMoviesArray.map(movie => {
+						return (
+							<div className={s.liked_movies_card} key={movie?.id}>
+								<Link to={`/movie/${movie?.original_title}`}>
+									<h3 className={s.liked_movies_card_title}>
+										{movie?.original_title}
+									</h3>
+									<img
+										src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+									/>
+								</Link>
+							</div>
+						)
+					})}
+				</div>
 			</div>
 		</div>
 	)
