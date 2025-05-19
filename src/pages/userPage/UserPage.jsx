@@ -3,17 +3,37 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { sendMoviesIds } from '../../firebase/firebaseFunctions'
+import { getMoviesIds, sendMoviesIds } from '../../firebase/firebaseFunctions'
+import { likesActions } from '../../store/slices/likedMoviesSlice'
 
 export default function UserPage() {
+	const [likedMovies, setLikedMovies] = useState('')
 	const dispatch = useDispatch()
 
 	const authState = useSelector(state => state.auth)
 	const likesState = useSelector(state => state.likes)
 
 	const likesMoviesArray = Object.values(likesState.movies)
+
+	const array = Object.values(likedMovies)
+
+	useEffect(() => {
+		const set = async () => {
+			const response = await getMoviesIds()
+			setLikedMovies(response)
+		}
+		set()
+		dispatch(likesActions.getLikedMovies(likedMovies))
+	}, [])
+
+	console.log(array)
+	useEffect(() => {}, [likesState])
+
+	useEffect(() => {
+		console.log(likedMovies)
+	}, [likedMovies])
 
 	return (
 		<div className={s.user_container}>
@@ -25,7 +45,10 @@ export default function UserPage() {
 				<ul className={s.user_profile_list}>
 					<li>{authState.user?.displayName || 'Nickname'}</li>
 					<li>{authState.user?.role || 'user'}</li>
-					<li>{authState.user?.email}</li>
+					<li>
+						{authState.user?.email}
+						<button onClick={getMoviesIds}>123213</button>
+					</li>
 					<li>
 						<button
 							onClick={() => dispatch(logoutUserAsync())}
@@ -40,9 +63,7 @@ export default function UserPage() {
 							{authState.user?.emailVerified
 								? ''
 								: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
-							<button
-								onClick={() => sendMoviesIds(['241421214214', '421241124412'])}
-							>
+							<button onClick={() => sendMoviesIds(likesMoviesArray)}>
 								{' '}
 								Add
 							</button>
@@ -53,20 +74,21 @@ export default function UserPage() {
 			<div className={s.liked_container}>
 				<h1>Liked films:</h1>
 				<div className={s.liked_movies}>
-					{likesMoviesArray.map(movie => {
-						return (
-							<div className={s.liked_movies_card} key={movie?.id}>
-								<Link to={`/movie/${movie?.original_title}`}>
-									<h3 className={s.liked_movies_card_title}>
-										{movie?.original_title}
-									</h3>
-									<img
-										src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-									/>
-								</Link>
-							</div>
-						)
-					})}
+					{array &&
+						array.map(movie => {
+							return (
+								<div className={s.liked_movies_card} key={movie?.id}>
+									<Link to={`/movie/${movie?.original_title}`}>
+										<h3 className={s.liked_movies_card_title}>
+											{movie?.original_title}
+										</h3>
+										<img
+											src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+										/>
+									</Link>
+								</div>
+							)
+						})}
 				</div>
 			</div>
 		</div>
