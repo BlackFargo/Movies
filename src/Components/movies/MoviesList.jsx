@@ -9,10 +9,6 @@ const baseUrl = 'https://image.tmdb.org/t/p/w200/'
 export default function MoviesList() {
 	const state = useSelector(state => state.movies)
 
-	useEffect(() => {
-		console.log(state)
-	}, [state])
-
 	return (
 		<div id='movies' className='movies anchor'>
 			{state

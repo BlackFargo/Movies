@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Banner from '../Components/Home/Banner'
 import Filter from '../Components/filter/Filter'
 import MoviesList from '../Components/Movies/MoviesList'

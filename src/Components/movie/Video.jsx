@@ -30,8 +30,8 @@ export default function Video() {
 			{trailerState ? (
 				<iframe
 					src={`https://www.youtube.com/embed/${trailerState}`}
-					frameborder='0'
-					allowfullscreen
+					frameBorder='0'
+					allowFullScreen
 				></iframe>
 			) : (
 				<>

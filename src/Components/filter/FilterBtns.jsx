@@ -28,10 +28,6 @@ export default function FilterBtns() {
 
 	const loading = movieState.status === 'loading'
 
-	useEffect(() => {
-		console.log(filterState)
-	}, [filterState])
-
 	const controller = new AbortController()
 
 	useEffect(() => {

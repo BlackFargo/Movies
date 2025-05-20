@@ -40,7 +40,11 @@ const likedMoviesSlice = createSlice({
 			state.movies = { ...state.movies, [action.payload.id]: action.payload }
 		},
 		getLikedMovies(state, action) {
-			state.movies = { loaded: action.payload || {} }
+			const normalized = (action.payload || []).reduce((acc, movie) => {
+				if (movie?.id) acc[movie.id] = movie
+				return acc
+			}, {})
+			state.movies = { ...state.movies, ...normalized }
 		},
 	},
 	extraReducers: builder => {

@@ -57,19 +57,28 @@
 	margin-top: 20px;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
 	gap: 15px;
 
 	&_card {
 		max-width: 200px;
 
 		&_title {
+			height: 40px;
 			font-size: 16px;
 			color: orange;
 			text-align: center;
+			text-decoration: underline;
+			opacity: 0.8;
+			transition: all 0.3s;
+
+			&:hover {
+				opacity: 1;
+			}
 		}
 
 		img {
-			margin-top: 10px;
+			margin-top: 5px;
 			border-radius: 20px;
 		}
 	}

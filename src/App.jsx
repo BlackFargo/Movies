@@ -10,9 +10,23 @@ import UserPage from './pages/userPage/UserPage'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import checkUserAuth from './utils/checkUserAuth'
-
+import { likesActions } from './store/slices/likedMoviesSlice'
+import { getMoviesIds } from './firebase/firebaseFunctions'
 function App() {
 	const dispatch = useDispatch()
+
+	// useEffect(() => {
+	// 	const fetchAndSetLikes = async () => {
+	// 		try {
+	// 			const ids = await getMoviesIds()
+
+	// 			dispatch(likesActions.getLikedMovies(ids))
+	// 		} catch (err) {
+	// 			console.error('Ошибка при загрузке лайков:', err)
+	// 		}
+	// 	}
+	// 	fetchAndSetLikes()
+	// }, [])
 
 	useEffect(() => {
 		checkUserAuth(dispatch)

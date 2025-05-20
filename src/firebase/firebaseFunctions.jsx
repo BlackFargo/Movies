@@ -1,7 +1,6 @@
 import { setDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from './firebaseConfing'
 import { auth } from './firebaseConfing'
-import { onAuthStateChanged } from 'firebase/auth'
 
 export const sendMoviesIds = async ids => {
 	const id = auth?.currentUser?.uid
@@ -24,7 +23,7 @@ export const getMoviesIds = async () => {
 			throw new Error(`Документ с id=${id} не найден`)
 		}
 		const ids = docSnap.data()?.ids
-		console.log('getMoviesIds:', ids)
+
 		return ids
 	} catch (err) {
 		console.error('getMoviesIds error:', err)

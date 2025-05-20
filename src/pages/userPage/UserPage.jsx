@@ -1,6 +1,5 @@
 import './UserPage.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
 import { useEffect, useState } from 'react'
@@ -9,7 +8,6 @@ import { getMoviesIds, sendMoviesIds } from '../../firebase/firebaseFunctions'
 import { likesActions } from '../../store/slices/likedMoviesSlice'
 
 export default function UserPage() {
-	const [likedMovies, setLikedMovies] = useState('')
 	const dispatch = useDispatch()
 
 	const authState = useSelector(state => state.auth)
@@ -17,23 +15,18 @@ export default function UserPage() {
 
 	const likesMoviesArray = Object.values(likesState.movies)
 
-	const array = Object.values(likedMovies)
-
 	useEffect(() => {
-		const set = async () => {
-			const response = await getMoviesIds()
-			setLikedMovies(response)
+		const fetchAndSetLikes = async () => {
+			try {
+				const ids = await getMoviesIds()
+
+				dispatch(likesActions.getLikedMovies(ids))
+			} catch (err) {
+				console.error('Ошибка при загрузке лайков:', err)
+			}
 		}
-		set()
-		dispatch(likesActions.getLikedMovies(likedMovies))
+		fetchAndSetLikes()
 	}, [])
-
-	console.log(array)
-	useEffect(() => {}, [likesState])
-
-	useEffect(() => {
-		console.log(likedMovies)
-	}, [likedMovies])
 
 	return (
 		<div className={s.user_container}>
@@ -74,8 +67,8 @@ export default function UserPage() {
 			<div className={s.liked_container}>
 				<h1>Liked films:</h1>
 				<div className={s.liked_movies}>
-					{array &&
-						array.map(movie => {
+					{likesMoviesArray &&
+						likesMoviesArray.map(movie => {
 							return (
 								<div className={s.liked_movies_card} key={movie?.id}>
 									<Link to={`/movie/${movie?.original_title}`}>
