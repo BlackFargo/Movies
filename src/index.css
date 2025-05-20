@@ -914,4 +914,9 @@ ul {
 	justify-content: center;
 	column-gap: 5px;
 	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.like-btn:hover {
+	background-color: rgba(122, 0, 0, 0.8);
 }

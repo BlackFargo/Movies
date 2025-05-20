@@ -7,6 +7,7 @@ import { useModal } from '../../hooks/UseModal'
 export default function Header() {
 	const { isOpen, setIsOpen, toggle } = useModal()
 	const userState = useSelector(state => state.auth.user)
+	const likesCount = useSelector(state => state.likes.likesCount)
 
 	return (
 		<header>
@@ -46,8 +47,10 @@ export default function Header() {
 			</ul>
 			<div className='header__auth-flex'>
 				<div className='favorites__movies'>
+					{/* <Link to={'/user'}> */}
 					<img src={heart} alt='' />
-					<p>0</p>
+					<p>{(likesCount && likesCount) || 0}</p>
+					{/* </Link> */}
 				</div>
 				{userState ? (
 					<Link to={'/user'} className='login login_link'>

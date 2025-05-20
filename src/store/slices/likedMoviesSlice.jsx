@@ -34,6 +34,7 @@ const likedMoviesSlice = createSlice({
 		status: null,
 		error: null,
 		loading: null,
+		likesCount: null,
 	},
 	reducers: {
 		addLike(state, action) {
@@ -44,6 +45,8 @@ const likedMoviesSlice = createSlice({
 				if (movie?.id) acc[movie.id] = movie
 				return acc
 			}, {})
+			const likes = Object.keys(normalized).length
+			state.likesCount = likes
 			state.movies = { ...state.movies, ...normalized }
 		},
 	},
