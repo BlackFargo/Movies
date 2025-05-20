@@ -15,6 +15,7 @@ export const sendMoviesIds = async ids => {
 
 export const getMoviesIds = async () => {
 	const id = auth?.currentUser?.uid
+	if (!id) return
 	try {
 		const docRef = doc(db, 'moviesIds', id)
 		const docSnap = await getDoc(docRef)
@@ -23,7 +24,7 @@ export const getMoviesIds = async () => {
 			throw new Error(`Документ с id=${id} не найден`)
 		}
 		const ids = docSnap.data()?.ids
-
+		console.log('Загружено')
 		return ids
 	} catch (err) {
 		console.error('getMoviesIds error:', err)

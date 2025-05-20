@@ -2,31 +2,17 @@ import './UserPage.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
-import { useEffect, useState } from 'react'
+
 import { Link } from 'react-router-dom'
-import { getMoviesIds, sendMoviesIds } from '../../firebase/firebaseFunctions'
-import { likesActions } from '../../store/slices/likedMoviesSlice'
 
 export default function UserPage() {
 	const dispatch = useDispatch()
 
 	const authState = useSelector(state => state.auth)
+
 	const likesState = useSelector(state => state.likes)
 
 	const likesMoviesArray = Object.values(likesState.movies)
-
-	useEffect(() => {
-		const fetchAndSetLikes = async () => {
-			try {
-				const ids = await getMoviesIds()
-
-				dispatch(likesActions.getLikedMovies(ids))
-			} catch (err) {
-				console.error('Ошибка при загрузке лайков:', err)
-			}
-		}
-		fetchAndSetLikes()
-	}, [])
 
 	return (
 		<div className={s.user_container}>
@@ -38,10 +24,7 @@ export default function UserPage() {
 				<ul className={s.user_profile_list}>
 					<li>{authState.user?.displayName || 'Nickname'}</li>
 					<li>{authState.user?.role || 'user'}</li>
-					<li>
-						{authState.user?.email}
-						<button onClick={getMoviesIds}>123213</button>
-					</li>
+					<li>{authState.user?.email}</li>
 					<li>
 						<button
 							onClick={() => dispatch(logoutUserAsync())}
@@ -56,10 +39,6 @@ export default function UserPage() {
 							{authState.user?.emailVerified
 								? ''
 								: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
-							<button onClick={() => sendMoviesIds(likesMoviesArray)}>
-								{' '}
-								Add
-							</button>
 						</p>
 					</li>
 				</ul>

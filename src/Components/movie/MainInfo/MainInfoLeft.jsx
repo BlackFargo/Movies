@@ -10,8 +10,6 @@ export default function MainInfoLeft() {
 	const movieState = useSelector(state => state.movies)
 	const likesState = useSelector(state => state.likes)
 
-	const likesMoviesArray = Object.values(likesState.movies)
-
 	useEffect(() => {
 		console.log(likesState)
 	}, [likesState])
@@ -24,6 +22,10 @@ export default function MainInfoLeft() {
 	const addMovie = moviedata => {
 		dispatch(likesActions.addLike(moviedata))
 	}
+
+	useEffect(() => {
+		sendMoviesIds(Object.values(likesState.movies))
+	}, [likesState.movies])
 
 	return (
 		<div className='main__info-left'>
@@ -50,7 +52,6 @@ export default function MainInfoLeft() {
 				className='like-btn'
 				onClick={() => {
 					addMovie(moviedata)
-					sendMoviesIds(likesMoviesArray)
 				}}
 			>
 				<svg
