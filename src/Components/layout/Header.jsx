@@ -47,10 +47,10 @@ export default function Header() {
 			</ul>
 			<div className='header__auth-flex'>
 				<div className='favorites__movies'>
-					{/* <Link to={'/user'}> */}
-					<img src={heart} alt='' />
-					<p>{(likesCount && likesCount) || 0}</p>
-					{/* </Link> */}
+					<Link to={'/user'} className='favorites__movies__link'>
+						<img src={heart} alt='' />
+						<p>{(likesCount && likesCount) || 0}</p>
+					</Link>
 				</div>
 				{userState ? (
 					<Link to={'/user'} className='login login_link'>

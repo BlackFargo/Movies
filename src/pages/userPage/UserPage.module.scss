@@ -83,11 +83,12 @@
 			font-size: 16px;
 			color: orange;
 			text-align: center;
-			text-decoration: underline;
-			opacity: 0.8;
+
+			opacity: 0.7;
 			transition: all 0.3s;
 
 			&:hover {
+				font-size: 18px;
 				opacity: 1;
 			}
 		}

@@ -96,18 +96,24 @@ header {
 }
 .favorites__movies {
 	display: flex;
-	flex-direction: row;
-	align-items: center;
+
 	gap: 5px;
 }
-.favorites__movies > img {
+.favorites__movies__link {
+	display: flex;
+	column-gap: 10px;
+	align-items: center;
+}
+
+.favorites__movies__link > img {
 	display: block;
 	width: 25px;
 }
-.favorites__movies > p {
+.favorites__movies__link > p {
 	color: #fff;
 	font-family: 'Inter', sans-serif;
 	font-size: 19px;
+	font-weight: 600;
 }
 
 .header__auth-flex {
@@ -919,4 +925,8 @@ ul {
 
 .like-btn:hover {
 	background-color: rgba(122, 0, 0, 0.8);
+}
+
+a {
+	text-decoration: none;
 }
