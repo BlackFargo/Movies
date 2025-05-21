@@ -2,7 +2,6 @@ import './UserPage.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
-
 import { Link } from 'react-router-dom'
 
 export default function UserPage() {

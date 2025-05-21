@@ -42,7 +42,7 @@ export default function Header() {
 				<Link to={'/'}>Home</Link>
 				<Link to={'/favorites'}>Favorites</Link>
 				<a href='#categoryes'>Movies</a>
-				<a href='#categoryes'>FAQ</a>
+				<Link to={'/faq'}>FAQ</Link>
 				<a href='#categoryes'>Help</a>
 			</ul>
 			<div className='header__auth-flex'>

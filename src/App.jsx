@@ -13,6 +13,7 @@ import checkUserAuth from './utils/checkUserAuth'
 import { likesActions } from './store/slices/likedMoviesSlice'
 import { useSelector } from 'react-redux'
 import { getMoviesIds } from './firebase/firebaseFunctions'
+import { Faq } from './pages/faq/Faq'
 function App() {
 	const dispatch = useDispatch()
 	const authState = useSelector(state => state.auth)
@@ -59,6 +60,7 @@ function App() {
 					<Route path='/movie' element={<Movie />} />
 					<Route path='/movie/:movieName' element={<Movie />} />
 					<Route path='/sign-in' element={<Registration />} />
+					<Route path='/faq' element={<Faq />} />
 					<Route path='/user' element={<UserPage />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>

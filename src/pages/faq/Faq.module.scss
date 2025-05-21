@@ -1,0 +1,27 @@
+.faq {
+	padding: 200px;
+	color: white;
+
+	&_title {
+		color: orange;
+		font-size: 40px;
+	}
+
+	&_list {
+		margin-top: 20px;
+		display: flex;
+		flex-direction: column;
+		row-gap: 20px;
+
+		&_item {
+			&_question {
+				font-size: 24px;
+				color: rgb(144, 3, 252);
+			}
+			&_answer {
+				margin-top: 10px;
+				font-size: 20px;
+			}
+		}
+	}
+}
