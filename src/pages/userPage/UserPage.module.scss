@@ -18,6 +18,29 @@
 	background-color: #101010;
 	align-items: center;
 
+	&_functions {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+		margin-top: 20px;
+
+		button {
+			height: 35px;
+			border-radius: 12px;
+			background-color: orange;
+			color: white;
+			font-size: 20px;
+			font-weight: 500;
+			border: none;
+			cursor: pointer;
+			transition: all 0.3s;
+
+			&:hover {
+				transform: scale(1.03);
+			}
+		}
+	}
+
 	@media (max-width: 1000px) {
 		flex-direction: column;
 		text-align: center;

@@ -14,34 +14,35 @@ export default function UserPage() {
 	const likesMoviesArray = Object.values(likesState.movies)
 
 	return (
-		<div className={s.user_container}>
+		<section className={s.user_container}>
 			<div className={s.user_profile}>
 				<img
 					// src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png'
 					src='https://media.gqindia.com/wp-content/uploads/2017/09/harvey-specter.jpg'
 					className={s.user_profile_img}
 				/>
-				<ul className={s.user_profile_list}>
-					<li>Nickname: {authState.user?.displayName || 'Nickname'}</li>
-					<li>Role: {authState.user?.role || 'user'}</li>
-					<li>Email: {authState.user?.email}</li>
-					<li>
-						<button
-							onClick={() => dispatch(logoutUserAsync())}
-							className={s.logoutButton}
-						>
-							Log out
-						</button>
-					</li>
-					<li>
-						{' '}
-						<p>
-							{authState.user?.emailVerified
-								? ''
-								: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
-						</p>
-					</li>
-				</ul>
+				<div className={s.user_profile_inner}>
+					<ul className={s.user_profile_list}>
+						<li>Nickname: {authState.user?.displayName || 'Nickname'}</li>
+						<li>Role: {authState.user?.role || 'user'}</li>
+						<li>Email: {authState.user?.email}</li>
+						<li>
+							{' '}
+							<p>
+								{authState.user?.emailVerified
+									? ''
+									: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
+							</p>
+						</li>
+					</ul>
+					<div className={s.user_profile_functions}>
+						<button onClick={() => dispatch(logoutUserAsync())}>Log out</button>
+						<button>123</button>
+						<button>123</button>
+						<button>123</button>
+						<button>123</button>
+					</div>
+				</div>
 			</div>
 			<div className={s.liked_container}>
 				<h1 className={s.liked_title}>Liked films</h1>
@@ -63,6 +64,6 @@ export default function UserPage() {
 						})}
 				</div>
 			</div>
-		</div>
+		</section>
 	)
 }
