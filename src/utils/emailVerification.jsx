@@ -4,23 +4,36 @@ import { auth } from '../firebase/firebaseConfing'
 let verificationTimeout
 
 export const deleteUserIfNotVerified = () => {
-	const user = auth.currentUser
+	onAuthStateChanged(auth, user => {
+		if (verificationTimeout) clearTimeout(verificationTimeout)
 
-	verificationTimeout = setTimeout(async () => {
-		if (user && !user.emailVerified) {
-			try {
-				await deleteUser(user)
-				console.log('User account deleted due to unverified email.')
-			} catch (e) {
-				console.error('Error deleting user:', e)
+		if (user) {
+			if (user.emailVerified) return
+
+			const createdAt = new Date(user.metadata.creationTime).getTime()
+			const now = Date.now()
+
+			const ageMs = now - createdAt
+			const lifespan = 1 * 60 * 1000
+			const remaining = lifespan - ageMs
+
+			if (remaining <= 0) {
+				deleteUser(user)
+					.then(() => console.log(`User has bene deleted`))
+					.catch(e => console.error(`Error deleting user`, e))
+			} else {
+				verificationTimeout = setTimeout(async () => {
+					try {
+						deleteUser(user)
+						console.log(`User was deleted on timeout`)
+					} catch (e) {
+						console.error(e)
+					}
+				}, remaining)
 			}
-		}
-	}, 5 * 60 * 1000)
-
-	onAuthStateChanged(auth, currentUser => {
-		if (currentUser && currentUser.emailVerified) {
-			clearTimeout(verificationTimeout)
-			console.log('Email is verified, no need to delete the account')
+			console.log(
+				`Запланировано удаление через ${Math.round(remaining / 1000)} с`
+			)
 		}
 	})
 }

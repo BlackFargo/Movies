@@ -8,7 +8,7 @@ export default function Banner() {
 			<div>
 				<p>
 					<ReactTyped
-						strings={['REACT CINEMA']}
+						strings={['TrailerNest']}
 						typeSpeed={150}
 						backSpeed={100}
 						backDelay={1000}

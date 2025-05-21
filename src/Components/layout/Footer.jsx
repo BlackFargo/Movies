@@ -9,7 +9,7 @@ export default function Footer() {
 			<footer>
 				<div className='footer__padding'>
 					<div className='site__info'>
-						<p>REACT CINEMA</p>
+						<p>TrailerNest</p>
 						<div>
 							<img src={facebook} alt='' />
 							<img src={instagram} alt='' />

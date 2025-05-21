@@ -14,6 +14,8 @@ import { likesActions } from './store/slices/likedMoviesSlice'
 import { useSelector } from 'react-redux'
 import { getMoviesIds } from './firebase/firebaseFunctions'
 import { Faq } from './pages/faq/Faq'
+import { auth } from './firebase/firebaseConfing'
+import { deleteUserIfNotVerified } from './utils/emailVerification'
 function App() {
 	const dispatch = useDispatch()
 	const authState = useSelector(state => state.auth)
@@ -49,6 +51,11 @@ function App() {
 	useEffect(() => {
 		checkUserAuth(dispatch)
 	}, [])
+
+	useEffect(() => {
+		deleteUserIfNotVerified(auth.currentUser)
+	}, [])
+
 	return (
 		<>
 			<BrowserRouter>

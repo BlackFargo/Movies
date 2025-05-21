@@ -54,7 +54,7 @@ export default function Header() {
 				</div>
 				{userState ? (
 					<Link to={'/user'} className='login login_link'>
-						<img src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png' />
+						<img src='https://s.yimg.com/ny/api/res/1.2/Q.ZSt87BOpN7F.3ImzY37Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTk2MA--/https://media.zenfs.com/en/woman_s_world_418/3ed63fb14fabf7ef2a5bd84b3c6c2a38' />
 						{userState.displayName}
 					</Link>
 				) : (
