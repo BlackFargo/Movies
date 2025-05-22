@@ -49,7 +49,7 @@ export default function Header() {
 				<Link to={'/favorites'}>Favorites</Link>
 				<a href='#categoryes'>Rang system</a>
 				<Link to={'/faq'}>FAQ</Link>
-				<a href='#categoryes'>Help</a>
+				<Link to={'/support'}>Support</Link>
 			</ul>
 			<div className='header__auth-flex'>
 				<div className='favorites__movies'>

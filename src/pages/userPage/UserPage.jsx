@@ -112,10 +112,10 @@ export default function UserPage() {
 								</div>
 							)}
 						</div>
-						<button>123</button>
-						<button>123</button>
-						<button>123</button>
-						<button>123</button>
+						<button>Coming soon</button>
+						<button>Coming soon</button>
+						<button>Coming soon</button>
+						<button>Coming soon</button>
 					</div>
 				</div>
 			</div>

@@ -16,6 +16,8 @@ import { getMoviesIds } from './firebase/firebaseFunctions'
 import { Faq } from './pages/faq/Faq'
 import { auth } from './firebase/firebaseConfing'
 import { deleteUserIfNotVerified } from './utils/emailVerification'
+import { Support } from './pages/Support/Support'
+
 function App() {
 	const dispatch = useDispatch()
 	const authState = useSelector(state => state.auth)
@@ -69,6 +71,7 @@ function App() {
 					<Route path='/sign-in' element={<Registration />} />
 					<Route path='/faq' element={<Faq />} />
 					<Route path='/user' element={<UserPage />} />
+					<Route path='/support' element={<Support />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 				{/* </main> */}

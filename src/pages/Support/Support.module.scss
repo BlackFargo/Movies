@@ -1,0 +1,15 @@
+.support {
+	padding: 200px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+
+	h1 {
+		font-size: 40px;
+		color: orange;
+	}
+
+	h3 {
+		font-size: 24px;
+	}
+}
