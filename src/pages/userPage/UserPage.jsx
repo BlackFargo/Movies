@@ -4,8 +4,18 @@ import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
 import { Link } from 'react-router-dom'
 import { auth } from '../../firebase/firebaseConfing'
+import { changePassword } from '../../firebase/firebaseFunctions'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 
 export default function UserPage() {
+	const [changePassowordContainer, setChangePasswordContainer] = useState(false)
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+	} = useForm()
+
 	const dispatch = useDispatch()
 
 	const authState = useSelector(state => state.auth)
@@ -13,6 +23,16 @@ export default function UserPage() {
 	const likesState = useSelector(state => state.likes)
 
 	const likesMoviesArray = Object.values(likesState.movies)
+
+	const onChangePassword = handleSubmit(async data => {
+		if (!changePassowordContainer) return
+		try {
+			await changePassword(data.oldPassword, data.newPassword)
+			alert('Password was changed successfully')
+		} catch (e) {
+			console.log(`Error ${e}`)
+		}
+	})
 
 	return (
 		<section className={s.user_container}>
@@ -47,7 +67,51 @@ export default function UserPage() {
 					</ul>
 					<div className={s.user_profile_functions}>
 						<button onClick={() => dispatch(logoutUserAsync())}>Log out</button>
-						<button>Change email</button>
+
+						<div>
+							<button
+								onClick={() => {
+									onChangePassword()
+									setChangePasswordContainer(prev => !prev)
+								}}
+								disabled={isSubmitting}
+							>
+								Change password
+							</button>
+							{changePassowordContainer && (
+								<div className={s.user_profile_functions_passwords}>
+									<label htmlFor='oldPassword'>Current password</label>
+
+									<input
+										name='oldPassword'
+										id='oldPassword'
+										type='password'
+										{...register('oldPassword', {
+											required: 'Current password is required',
+											minLength: {
+												value: 8,
+												message: 'At lest 6 symbols',
+											},
+										})}
+									/>
+									<p className={s.error}>{errors?.oldPassword?.message}</p>
+									<label htmlFor='newPassword'>New password</label>
+									<input
+										name='newPassword'
+										id='newPassword'
+										type='password'
+										{...register('newPassword', {
+											required: 'New password is required',
+											minLength: {
+												value: 8,
+												message: 'At lest 8 symbols',
+											},
+										})}
+									/>
+									<p className={s.error}>{errors?.newPassword?.message}</p>
+								</div>
+							)}
+						</div>
 						<button>123</button>
 						<button>123</button>
 						<button>123</button>

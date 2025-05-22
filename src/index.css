@@ -10,6 +10,7 @@ body {
 	width: 100%;
 	height: 100%;
 	color: white;
+	font-family: 'Roboto';
 }
 header {
 	position: fixed;
@@ -46,7 +47,7 @@ header {
 }
 .header__logo-flex_sitename > p {
 	font-size: 20px;
-	font-family: 'Inter', sans-serif;
+
 	font-weight: 900;
 	color: #fff;
 	line-height: 90%;
@@ -87,7 +88,7 @@ header {
 	padding: 10px;
 	color: #ffffff;
 	text-decoration: none;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 16px;
 	opacity: 0.7;
 	transition: all 0.3s;
@@ -112,7 +113,7 @@ header {
 }
 .favorites__movies__link > p {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 19px;
 	font-weight: 600;
 }
@@ -129,7 +130,6 @@ header {
 	font-weight: 500;
 	text-decoration: none;
 	color: #fff;
-	font-family: 'Inter', sans-serif;
 }
 .header__banner {
 	display: flex;
@@ -170,13 +170,11 @@ header {
 	font-size: 96px;
 	font-weight: bold;
 	color: #fff;
-	font-family: 'Inter', sans-serif;
 }
 .header__banner > div > p:last-of-type {
 	font-size: 24px;
 	font-weight: medium;
 	color: #fff;
-	font-family: 'Inter', sans-serif;
 }
 .header__banner > div > div {
 	display: flex;
@@ -210,7 +208,7 @@ header {
 	cursor: pointer;
 	color: #fff;
 	font-size: 19px;
-	font-family: 'Inter', sans-serif;
+
 	text-decoration: none;
 }
 .header__banner > div > div > a:hover {
@@ -268,7 +266,7 @@ ul {
 	border-radius: 32px;
 	border: 0px;
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 13px;
 	font-weight: bold;
 }
@@ -386,7 +384,7 @@ ul {
 	background-color: #222127;
 	color: #fff;
 	cursor: pointer;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 15px;
 }
 .footer__hrefs {
@@ -413,7 +411,7 @@ ul {
 }
 .footer__hrefs > div > p {
 	color: #454545;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 16px;
 }
 .footer__padding {
@@ -430,7 +428,7 @@ ul {
 }
 .site__info > p {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 25px;
 	font-weight: bolder;
 }
@@ -446,7 +444,7 @@ ul {
 }
 .favorites__title > div > p {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 20px;
 	font-weight: medium;
 }
@@ -503,7 +501,7 @@ ul {
 }
 .favorites__banner-title > div > p {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 20px;
 	font-weight: medium;
 }
@@ -520,7 +518,7 @@ ul {
 }
 .top-movies > p {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 23px;
 	font-weight: 600;
 }
@@ -552,13 +550,13 @@ ul {
 }
 .top-movies__card-info-title > p:first-of-type {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 14px;
 	font-weight: 400;
 }
 .top-movies__card-info-title > p:last-of-type {
 	color: #9ea2a8;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 11px;
 	font-weight: 300;
 }
@@ -569,7 +567,7 @@ ul {
 .top-movies__card-info-description > p {
 	padding: 0px 7px;
 	color: #9ea2a8;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 14px;
 	font-weight: 500;
 	border-left: 1px solid #43464b;
@@ -606,7 +604,7 @@ main > video {
 }
 .main__info-left-title p {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 36px;
 	font-weight: bold;
 }
@@ -619,7 +617,7 @@ main > video {
 .main__info-left-categoryes > p {
 	display: inline-block;
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 14px;
 	font-weight: 400;
 	padding: 7px 8px;
@@ -632,13 +630,13 @@ main > video {
 }
 .main__info-left-about > p:first-of-type {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 27px;
 	font-weight: bold;
 }
 .main__info-left-about > p:last-of-type {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 20px;
 	font-weight: 400;
 }
@@ -661,19 +659,19 @@ main > video {
 }
 .main__info-rigth-info > div > p:first-child {
 	color: #9ea2a8;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 16px;
 	font-weight: 400;
 }
 .main__info-rigth-info > div > p:last-of-type {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 16px;
 	font-weight: 400;
 }
 .main__info-right > p {
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 27px;
 	font-weight: bold;
 }
@@ -719,7 +717,7 @@ main > video {
 .filter__categoryes-item p {
 	transition: 0.2s ease;
 	color: #626262;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 16px;
 	font-weight: bold;
 }
@@ -737,7 +735,7 @@ main > video {
 .active-category p {
 	transition: 0.2s ease;
 	color: #fff;
-	font-family: 'Inter', sans-serif;
+
 	font-size: 32px;
 	font-weight: bold;
 }
@@ -930,4 +928,9 @@ ul {
 
 a {
 	text-decoration: none;
+}
+
+button,
+input {
+	border: none;
 }

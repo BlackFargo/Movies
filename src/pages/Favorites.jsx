@@ -26,20 +26,22 @@ export default function Favorites() {
 
 				<div className='favorites_movies'>
 					<FavoritesList />
-					{likedMoviesArray.map(movie => {
-						return (
-							<MoviesCard
-								rating={Math.round(movie.vote_average)}
-								key={movie.id}
-								img={
-									movie.poster_path
-										? `${baseUrl}${movie.poster_path}`
-										: posterPlaceholder
-								}
-								movieTitle={movie.title}
-							/>
-						)
-					})}
+					<div className='movies'>
+						{likedMoviesArray.map(movie => {
+							return (
+								<MoviesCard
+									rating={Math.round(movie.vote_average)}
+									key={movie.id}
+									img={
+										movie.poster_path
+											? `${baseUrl}${movie.poster_path}`
+											: posterPlaceholder
+									}
+									movieTitle={movie.title}
+								/>
+							)
+						})}
+					</div>
 				</div>
 
 				<MoviesScroll />

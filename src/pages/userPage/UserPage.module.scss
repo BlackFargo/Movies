@@ -45,6 +45,28 @@
 				transform: scale(1.03);
 			}
 		}
+
+		&_passwords {
+			display: flex;
+			flex-direction: column;
+			margin-top: 10px;
+			row-gap: 5px;
+
+			label {
+				font-size: 20px;
+			}
+
+			input {
+				margin-top: 5px;
+				padding: 5px;
+				font-size: 20px;
+				border-radius: 12px;
+			}
+
+			input:focus {
+				outline: none;
+			}
+		}
 	}
 
 	@media (max-width: 1000px) {
@@ -135,4 +157,9 @@
 
 .liked_title {
 	text-align: center;
+}
+
+.error {
+	color: rgb(252, 3, 44);
+	font-size: 18px;
 }

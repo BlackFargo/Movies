@@ -1,6 +1,8 @@
 import { setDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from './firebaseConfing'
 import { auth } from './firebaseConfing'
+import { updatePassword } from 'firebase/auth'
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth'
 
 export const sendMoviesIds = async ids => {
 	const id = auth?.currentUser?.uid
@@ -29,5 +31,20 @@ export const getMoviesIds = async () => {
 	} catch (err) {
 		console.error('getMoviesIds error:', err)
 		throw new Error('Не удалось загрузить IDs фильмов')
+	}
+}
+
+export const changePassword = async (currentPassword, newPassword) => {
+	const user = auth?.currentUser
+
+	if (!user) throw new Error('Пользователь не залогинен')
+
+	try {
+		const cred = EmailAuthProvider.credential(user.email, currentPassword)
+		await reauthenticateWithCredential(user, cred)
+		await updatePassword(user, newPassword)
+		console.log('Password changed')
+	} catch (e) {
+		console.log(`Error: ${e}`)
 	}
 }

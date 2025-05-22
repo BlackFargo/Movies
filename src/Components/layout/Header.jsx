@@ -3,11 +3,17 @@ import logo from '../../assets/icons/pngwing.com.png'
 import heart from '../../assets/icons/icons8-червы-100.png'
 import { useSelector } from 'react-redux'
 import { useModal } from '../../hooks/UseModal'
+import { useEffect, useState } from 'react'
 
 export default function Header() {
-	const { isOpen, setIsOpen, toggle } = useModal()
+	const [likesCount, setLikesCount] = useState(0)
+	const { isOpen, toggle } = useModal()
 	const userState = useSelector(state => state.auth.user)
-	const likesCount = useSelector(state => state.likes.likesCount)
+	const likesCountState = useSelector(state => state.likes.likesCount)
+
+	useEffect(() => {
+		setLikesCount(likesCountState)
+	}, [likesCountState])
 
 	return (
 		<header>
