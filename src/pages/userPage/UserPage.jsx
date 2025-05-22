@@ -25,10 +25,13 @@ export default function UserPage() {
 				<div className={s.user_profile_inner}>
 					<ul className={s.user_profile_list}>
 						<li>
-							<span>Nickname:</span> {authState.user?.displayName || 'Nickname'}
+							<span>Nickname:</span> {authState.user?.displayName}
 						</li>
 						<li>
-							<span>Role:</span> {authState.user?.role || 'user'}
+							<span>Rang:</span> Bog seksa
+						</li>
+						<li>
+							<span>Role:</span> ({authState.user?.role}) Founder
 						</li>
 						<li>
 							<span>Email:</span> {authState.user?.email}
@@ -44,7 +47,7 @@ export default function UserPage() {
 					</ul>
 					<div className={s.user_profile_functions}>
 						<button onClick={() => dispatch(logoutUserAsync())}>Log out</button>
-						<button>123</button>
+						<button>Change email</button>
 						<button>123</button>
 						<button>123</button>
 						<button>123</button>

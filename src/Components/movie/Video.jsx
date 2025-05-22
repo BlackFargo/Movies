@@ -22,7 +22,8 @@ export default function Video() {
 
 	useEffect(() => {
 		test()
-	}, [])
+		console.log(movieState)
+	}, [movieName])
 
 	if (movieState.status === 'loading') {
 		return <h1 style={{ color: 'white' }}>Loading ...</h1>
@@ -42,7 +43,9 @@ export default function Video() {
 						alt='backdrop'
 						className='backdrop-image'
 					/>
-					<h3 className='trailer-text'>Trailer is not availiable</h3>
+					<h3 className='trailer-text' onClick={test}>
+						Trailer is not availiable
+					</h3>
 				</>
 			)}
 		</div>

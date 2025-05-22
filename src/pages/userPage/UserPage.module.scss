@@ -18,11 +18,15 @@
 	background-color: #101010;
 	align-items: center;
 
+	&_inner {
+		width: 100%;
+	}
+
 	&_functions {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 20px;
-		margin-top: 20px;
+		margin-top: 50px;
 
 		button {
 			height: 35px;
@@ -34,6 +38,8 @@
 			border: none;
 			cursor: pointer;
 			transition: all 0.3s;
+			max-width: 600px;
+			width: 100%;
 
 			&:hover {
 				transform: scale(1.03);

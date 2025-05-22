@@ -87,7 +87,7 @@ export const fetchTrailer = createAsyncThunk(
 				throw new Error('Server error')
 			}
 			const data = await response.json()
-			console.log(data)
+
 			const trailer = data.results.find(
 				item => item.name === 'Official Trailer'
 			)
@@ -118,8 +118,16 @@ export const fetchMovie = createAsyncThunk(
 				throw new Error(`Server error`)
 			}
 			const data = await response.json()
-			console.log(data.results[0])
-			return data.results[0] || null
+
+			const updated = data?.results.map(result => {
+				const genres = result.genre_ids.map(id => genreMap[id])
+				return {
+					...result,
+					genres,
+				}
+			})
+
+			return updated[0] || null
 		} catch (e) {
 			return rejectedWithValue(e)
 		}
