@@ -1,6 +1,6 @@
 import Rating from '../Rating'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+
 import { likesActions } from '../../../store/slices/likedMoviesSlice'
 import { useEffect } from 'react'
 import { sendMoviesIds } from '../../../firebase/firebaseFunctions'
@@ -10,12 +10,7 @@ export default function MainInfoLeft() {
 	const movieState = useSelector(state => state.movies)
 	const likesState = useSelector(state => state.likes)
 
-	useEffect(() => {
-		console.log(likesState)
-	}, [likesState])
-	const { movieName } = useParams()
-
-	const moviedata = movieState?.movies.find(movie => movie.title === movieName)
+	const moviedata = movieState?.movies[0]
 
 	const movieDate = new Date(moviedata?.release_date).getFullYear()
 

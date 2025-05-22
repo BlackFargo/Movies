@@ -14,7 +14,7 @@ export const deleteUserIfNotVerified = () => {
 			const now = Date.now()
 
 			const ageMs = now - createdAt
-			const lifespan = 1 * 60 * 1000
+			const lifespan = 5 * 60 * 1000
 			const remaining = lifespan - ageMs
 
 			if (remaining <= 0) {

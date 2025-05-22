@@ -1,8 +1,7 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { fetchTrailer } from '../../store/slices/moviesSlice'
+import { fetchTrailer, fetchMovie } from '../../store/slices/moviesSlice'
 
 export default function Video() {
 	const movieState = useSelector(state => state.movies)
@@ -11,20 +10,23 @@ export default function Video() {
 
 	const { movieName } = useParams()
 
-	const moviedata = movieState?.movies.find(movie => movie.title === movieName)
+	const test = () => {
+		dispatch(fetchMovie({ title: movieName }))
+	}
+
+	const moviedata = movieState?.movies[0]
 
 	useEffect(() => {
 		dispatch(fetchTrailer({ movieId: moviedata?.id }))
 	}, [moviedata])
 
 	useEffect(() => {
-		console.log(trailerState)
-		console.log(moviedata)
-	}, [moviedata])
+		test()
+	}, [])
+
 	if (movieState.status === 'loading') {
 		return <h1 style={{ color: 'white' }}>Loading ...</h1>
 	}
-
 	return (
 		<div className='video-wrapper'>
 			{trailerState ? (

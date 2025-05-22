@@ -99,6 +99,33 @@ export const fetchTrailer = createAsyncThunk(
 	}
 )
 
+export const fetchMovie = createAsyncThunk(
+	'movies/fetchMovie',
+	async function ({ title }, { rejectedWithValue }) {
+		try {
+			const response = await fetch(
+				`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
+					title
+				)}`,
+				{
+					headers: {
+						'Content-type': 'application/json',
+						Authorization: `Bearer ${APIKEY}`,
+					},
+				}
+			)
+			if (!response.ok) {
+				throw new Error(`Server error`)
+			}
+			const data = await response.json()
+			console.log(data.results[0])
+			return data.results[0] || null
+		} catch (e) {
+			return rejectedWithValue(e)
+		}
+	}
+)
+
 const moviesSlice = createSlice({
 	name: 'movieSlice',
 	initialState: {
@@ -139,6 +166,18 @@ const moviesSlice = createSlice({
 				state.trailerKey = action.payload
 			})
 			.addCase(fetchTrailer.rejected, (state, action) => {
+				state.status = 'rejected'
+				state.error = action.payload
+			})
+			.addCase(fetchMovie.pending, (state, action) => {
+				state.status = 'loading'
+				state.error = null
+			})
+			.addCase(fetchMovie.fulfilled, (state, action) => {
+				state.status = 'resolved'
+				state.movies = [action.payload]
+			})
+			.addCase(fetchMovie.rejected, (state, action) => {
 				state.status = 'rejected'
 				state.error = action.payload
 			})

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
 import { Link } from 'react-router-dom'
+import { auth } from '../../firebase/firebaseConfing'
 
 export default function UserPage() {
 	const dispatch = useDispatch()
@@ -35,7 +36,7 @@ export default function UserPage() {
 						<li>
 							{' '}
 							<p>
-								{authState.user?.emailVerified
+								{auth && auth?.currentUser?.emailVerified
 									? ''
 									: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
 							</p>
