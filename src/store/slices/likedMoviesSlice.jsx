@@ -39,6 +39,8 @@ const likedMoviesSlice = createSlice({
 	reducers: {
 		addLike(state, action) {
 			state.movies = { ...state.movies, [action.payload.id]: action.payload }
+			const normalized = Object.values(state.movies).length
+			state.likesCount = normalized
 		},
 		getLikedMovies(state, action) {
 			const normalized = (action.payload || []).reduce((acc, movie) => {
@@ -48,6 +50,7 @@ const likedMoviesSlice = createSlice({
 			const likes = Object.keys(normalized).length
 			state.likesCount = likes
 			state.movies = { ...state.movies, ...normalized }
+			console.log(state.likesCount)
 		},
 	},
 	extraReducers: builder => {
