@@ -6,17 +6,16 @@ import s from './UserPage.module.scss'
 import { auth } from '../../firebase/firebaseConfing'
 import { changePassword, getRank } from '../../firebase/firebaseFunctions'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function UserPage() {
+	const [currentRank, setCurrentRank] = useState('')
 	const [changePassowordContainer, setChangePasswordContainer] = useState(false)
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
 	} = useForm()
-	console.log(auth.currentUser)
-	console.log(auth.currentUser)
 
 	const dispatch = useDispatch()
 
@@ -31,7 +30,20 @@ export default function UserPage() {
 			console.log(`Error ${e}`)
 		}
 	})
-	getRank(auth.currentUser.uid)
+	useEffect(() => {
+		const fetchRank = async () => {
+			try {
+				const rank = await getRank(auth?.currentUser?.uid)
+				setCurrentRank(rank)
+			} catch (error) {
+				console.error('Error in fetchRank:', error)
+			}
+		}
+
+		if (auth?.currentUser?.uid) {
+			fetchRank()
+		}
+	}, [auth.currentUser])
 
 	return (
 		<section className={s.user_container}>
@@ -47,7 +59,7 @@ export default function UserPage() {
 							<span>Nickname:</span> {authState.user?.displayName}
 						</li>
 						<li>
-							<span>Rank: </span> {authState.user?.rank}
+							<span>Rank: </span> {currentRank ? currentRank : ''}
 						</li>
 						<li>
 							<span>Role:</span> ({authState.user?.role}) Founder

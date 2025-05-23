@@ -50,12 +50,18 @@ export const changePassword = async (currentPassword, newPassword) => {
 }
 
 export const getRank = async uid => {
-	const ref = doc(db, 'users', uid)
-	const snap = await getDoc(ref)
-	if (snap.exists()) {
-		const data = snap.data()
-		return data.rank
-	} else {
+	try {
+		const ref = doc(db, 'users', uid)
+		const snap = await getDoc(ref)
+
+		if (snap.exists()) {
+			return snap.data().rank
+		} else {
+			return null
+		}
+	} catch (error) {
+		console.error('Failed to fetch rank:', error)
+
 		return null
 	}
 }
