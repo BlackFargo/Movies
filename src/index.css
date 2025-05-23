@@ -934,3 +934,11 @@ button,
 input {
 	border: none;
 }
+
+.noMoviesImg {
+	max-width: 375px;
+	width: 100%;
+
+	margin: 0 auto;
+	border-radius: 15px;
+}

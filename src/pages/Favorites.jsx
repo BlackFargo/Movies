@@ -1,5 +1,5 @@
 import Filter from '../Components/filter/Filter'
-
+import noMovies from '../assets/images/no movies.png'
 import MoviesScroll from '../Components/movies/MoviesScroll'
 import FavoritesList from '../Components/favorites/FavoritesList'
 import Banner from '../Components/favorites/Banner'
@@ -16,6 +16,7 @@ export default function Favorites() {
 	const likedMoviesArray = Object.values(likedMovies)
 
 	const filterByCategories = likedMoviesArray.filter(movie => {
+		if (category === 'All') return likedMoviesArray
 		if (movie.genres.includes(category)) {
 			return movie
 		}
@@ -30,22 +31,24 @@ export default function Favorites() {
 				<div className='favorites_movies'>
 					<FavoritesList />
 					<div className='movies'>
-						{filterByCategories
-							? filterByCategories.map(movie => {
-									return (
-										<MoviesCard
-											rating={Math.round(movie?.vote_average)}
-											key={movie?.id}
-											img={
-												movie?.poster_path
-													? `${baseUrl}${movie?.poster_path}`
-													: 'posterPlaceholder'
-											}
-											movieTitle={movie?.title}
-										/>
-									)
-							  })
-							: ''}
+						{filterByCategories.length ? (
+							filterByCategories.map(movie => {
+								return (
+									<MoviesCard
+										rating={Math.round(movie?.vote_average)}
+										key={movie?.id}
+										img={
+											movie?.poster_path
+												? `${baseUrl}${movie?.poster_path}`
+												: 'posterPlaceholder'
+										}
+										movieTitle={movie?.title}
+									/>
+								)
+							})
+						) : (
+							<img src={noMovies} className='noMoviesImg' />
+						)}
 					</div>
 				</div>
 

@@ -17,12 +17,13 @@ const popularGenreMap = {
 	10749: 'Romance',
 	80: 'Crime',
 	27: 'Horror',
+	100000: 'All',
 }
 
 export default function FilterBtns() {
 	const category = useSelector(state => state.filterBtns)
 	const { category: catFromFilter, page } = useSelector(state => state.filter)
-	const movieState = useSelector(state => state.movies)
+
 	const dispatch = useDispatch()
 
 	const debouncedCategory = UseDebounce(category)

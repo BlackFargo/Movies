@@ -29,6 +29,8 @@ export const fetchMovies = createAsyncThunk(
 
 	async function ({ category, genre = 28, page = 1 }, { rejectedWithValue }) {
 		let url = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&page=${page}`
+		if (genre == '100000')
+			url = `https://api.themoviedb.org/3/discover/movie?page=${page}`
 		switch (category) {
 			case 'Popular':
 				url += '&sort_by=popularity.desc'
@@ -43,6 +45,8 @@ export const fetchMovies = createAsyncThunk(
 				url += '&sort_by=popularity.desc'
 		}
 		try {
+			console.log(url)
+
 			const response = await fetch(url, {
 				method: 'GET',
 				headers: {
