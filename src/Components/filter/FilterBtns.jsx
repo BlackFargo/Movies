@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { genreIdByName } from '../../utils/genreUtils'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../../store/slices/moviesSlice'
 import UseDebounce from '../../hooks/UseDebounce'
 import { getPage } from '../../store/slices/filterSlice'
+import { setCategory } from '../../store/slices/filterBtnsSlice'
 
 const popularGenreMap = {
 	28: 'Action',
@@ -19,60 +20,53 @@ const popularGenreMap = {
 }
 
 export default function FilterBtns() {
-	const [active, setActive] = useState('Action')
-	const filterState = useSelector(state => state.filter)
+	const category = useSelector(state => state.filterBtns)
+	const { category: catFromFilter, page } = useSelector(state => state.filter)
 	const movieState = useSelector(state => state.movies)
 	const dispatch = useDispatch()
 
-	const debouncedActive = UseDebounce(active)
-
-	const loading = movieState.status === 'loading'
-
-	const controller = new AbortController()
+	const debouncedCategory = UseDebounce(category)
 
 	useEffect(() => {
+		const controller = new AbortController()
+
 		const fetchData = async () => {
 			try {
-				if (debouncedActive && filterState) {
+				if (debouncedCategory) {
 					dispatch(
 						fetchMovies({
-							category: filterState?.category,
-							genre: genreIdByName(active, popularGenreMap),
-							page: filterState?.page,
+							category: catFromFilter,
+							genre: genreIdByName(debouncedCategory, popularGenreMap),
+							page,
 							signal: controller.signal,
 						})
 					)
 				}
 			} catch (e) {
-				if (e.name !== 'AbourError') {
-					console.error('Error fetching movies', error)
+				if (e.name !== 'AbortError') {
+					console.error('Error fetching movies', e)
 				}
-			} finally {
 			}
 		}
 
 		fetchData()
-		return () => {
-			controller.abort()
-		}
-	}, [debouncedActive, filterState, dispatch])
+		return () => controller.abort()
+	}, [debouncedCategory, catFromFilter, page, dispatch])
 
 	return (
 		<div className='filter__buttons'>
-			{Object.values(popularGenreMap).map((category, index) => {
-				return (
-					<button
-						key={index}
-						className={`${active === category ? 'active' : ''}`}
-						onClick={() => {
-							setActive(category)
-							dispatch(getPage({ page: 1 }))
-						}}
-					>
-						{category}
-					</button>
-				)
-			})}
+			{Object.values(popularGenreMap).map((cat, idx) => (
+				<button
+					key={idx}
+					className={category === cat ? 'active' : ''}
+					onClick={() => {
+						dispatch(setCategory(cat))
+						dispatch(getPage({ page: 1 }))
+					}}
+				>
+					{cat}
+				</button>
+			))}
 		</div>
 	)
 }

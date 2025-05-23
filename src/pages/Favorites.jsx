@@ -5,18 +5,21 @@ import FavoritesList from '../Components/favorites/FavoritesList'
 import Banner from '../Components/favorites/Banner'
 import { useSelector } from 'react-redux'
 import MoviesCard from '../Components/Movies/MoviesCard'
-import { useEffect } from 'react'
 
 const baseUrl = 'https://image.tmdb.org/t/p/w200/'
 
 export default function Favorites() {
 	const likedMovies = useSelector(state => state.likes.movies)
 
-	useEffect(() => {
-		console.log(likedMovies)
-	}, [likedMovies])
+	const category = useSelector(state => state.filterBtns)
 
 	const likedMoviesArray = Object.values(likedMovies)
+
+	const filterByCategories = likedMoviesArray.filter(movie => {
+		if (movie.genres.includes(category)) {
+			return movie
+		}
+	})
 
 	return (
 		<>
@@ -27,20 +30,22 @@ export default function Favorites() {
 				<div className='favorites_movies'>
 					<FavoritesList />
 					<div className='movies'>
-						{likedMoviesArray.map(movie => {
-							return (
-								<MoviesCard
-									rating={Math.round(movie.vote_average)}
-									key={movie.id}
-									img={
-										movie.poster_path
-											? `${baseUrl}${movie.poster_path}`
-											: posterPlaceholder
-									}
-									movieTitle={movie.title}
-								/>
-							)
-						})}
+						{filterByCategories
+							? filterByCategories.map(movie => {
+									return (
+										<MoviesCard
+											rating={Math.round(movie?.vote_average)}
+											key={movie?.id}
+											img={
+												movie?.poster_path
+													? `${baseUrl}${movie?.poster_path}`
+													: 'posterPlaceholder'
+											}
+											movieTitle={movie?.title}
+										/>
+									)
+							  })
+							: ''}
 					</div>
 				</div>
 
