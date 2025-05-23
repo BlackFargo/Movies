@@ -1,6 +1,7 @@
 import video from '../../assets/videos/Titanik.mp4'
 import header_banner from '../../assets/images/background.jpg'
 import { ReactTyped } from 'react-typed'
+import { Link } from 'react-router-dom'
 
 export default function Banner() {
 	return (
@@ -16,12 +17,16 @@ export default function Banner() {
 					/>
 				</p>
 				<p>
-					Subheading that sets up context, shares more info about the website,
-					or generally gets people psyched to keep scrolling.
+					Feel the magic of movies right here: we curate the most thrilling
+					trailers, hot-off-the-press news, and exclusive picks so you never
+					miss a hit—dive into on-screen adventures and discover the stories
+					that will inspire you!
 				</p>
 				<div>
 					<a href='#movies'>Movies</a>
-					<button>Favorites</button>
+					<button>
+						<Link to={'/favorites'}>Favorites</Link>
+					</button>
 				</div>
 			</div>
 			<video autoPlay muted loop>

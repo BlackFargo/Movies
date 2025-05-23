@@ -47,7 +47,7 @@ export default function Header() {
 			<ul className={`header__navbar-flex ${isOpen ? 'active-navbar' : ''}`}>
 				<Link to={'/'}>Movies</Link>
 				<Link to={'/favorites'}>Favorites</Link>
-				<a href='#categoryes'>Rang system</a>
+				<Link to={'/ranks'}>Rank system</Link>
 				<Link to={'/faq'}>FAQ</Link>
 				<Link to={'/support'}>Support</Link>
 			</ul>

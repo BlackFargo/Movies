@@ -48,3 +48,14 @@ export const changePassword = async (currentPassword, newPassword) => {
 		console.log(`Error: ${e}`)
 	}
 }
+
+export const getRank = async uid => {
+	const ref = doc(db, 'users', uid)
+	const snap = await getDoc(ref)
+	if (snap.exists()) {
+		const data = snap.data()
+		return data.rank
+	} else {
+		return null
+	}
+}

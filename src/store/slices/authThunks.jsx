@@ -35,6 +35,7 @@ export const registerUserAsync = createAsyncThunk(
 				displayName: nickname || 'No name',
 				role: 'user',
 				emailVerified: userCredentials.user?.emailVerified,
+				rank: 'Popcorn Rookie',
 				createdAt,
 			})
 
@@ -48,6 +49,7 @@ export const registerUserAsync = createAsyncThunk(
 				displayName: nickname || 'No name',
 				role: 'user',
 				emailVerified: userCredentials.user?.emailVerified,
+				rank: 'Popcorn Rookie',
 				createdAt,
 			}
 		} catch (error) {
@@ -73,6 +75,7 @@ export const loginUserAsync = createAsyncThunk(
 				uid: userCredentials.user?.uid,
 				displayName: userData.displayName || 'No name',
 				role: userData?.role || user,
+				rank: userData?.rank,
 			}
 		} catch (error) {
 			return rejectWithValue(error.message)

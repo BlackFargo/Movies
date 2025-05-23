@@ -2,9 +2,9 @@ import './UserPage.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
-import { Link } from 'react-router-dom'
+
 import { auth } from '../../firebase/firebaseConfing'
-import { changePassword } from '../../firebase/firebaseFunctions'
+import { changePassword, getRank } from '../../firebase/firebaseFunctions'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 
@@ -15,14 +15,12 @@ export default function UserPage() {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 	} = useForm()
+	console.log(auth.currentUser)
+	console.log(auth.currentUser)
 
 	const dispatch = useDispatch()
 
 	const authState = useSelector(state => state.auth)
-
-	const likesState = useSelector(state => state.likes)
-
-	const likesMoviesArray = Object.values(likesState.movies)
 
 	const onChangePassword = handleSubmit(async data => {
 		if (!changePassowordContainer) return
@@ -33,6 +31,7 @@ export default function UserPage() {
 			console.log(`Error ${e}`)
 		}
 	})
+	getRank(auth.currentUser.uid)
 
 	return (
 		<section className={s.user_container}>
@@ -48,7 +47,7 @@ export default function UserPage() {
 							<span>Nickname:</span> {authState.user?.displayName}
 						</li>
 						<li>
-							<span>Rang:</span> Bog seksa
+							<span>Rank: </span> {authState.user?.rank}
 						</li>
 						<li>
 							<span>Role:</span> ({authState.user?.role}) Founder
@@ -117,26 +116,6 @@ export default function UserPage() {
 						<button>Coming soon</button>
 						<button>Coming soon</button>
 					</div>
-				</div>
-			</div>
-			<div className={s.liked_container}>
-				<h1 className={s.liked_title}>Liked films</h1>
-				<div className={s.liked_movies}>
-					{likesMoviesArray &&
-						likesMoviesArray.map(movie => {
-							return (
-								<div className={s.liked_movies_card} key={movie?.id}>
-									<Link to={`/movie/${movie?.original_title}`}>
-										<h3 className={s.liked_movies_card_title}>
-											{movie?.original_title}
-										</h3>
-										<img
-											src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-										/>
-									</Link>
-								</div>
-							)
-						})}
 				</div>
 			</div>
 		</section>

@@ -22,6 +22,9 @@ const authSlice = createSlice({
 		setError(state, action) {
 			state.error = action.payload
 		},
+		// setRank(state, action) {
+		// 	state.user.rank = action.payload
+		// },
 	},
 	extraReducers: builder => {
 		builder
@@ -61,5 +64,5 @@ const authSlice = createSlice({
 	},
 })
 
-export const { setUser, setLoading, setError } = authSlice.actions
+export const { setUser, setLoading, setError, setRank } = authSlice.actions
 export default authSlice.reducer
