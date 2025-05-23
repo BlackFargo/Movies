@@ -1,19 +1,16 @@
-const checkRank = likes => {
-	switch (likes) {
-		case likes >= 10:
-			return { name: 'Trailer Trooper', emoji: '🎥' }
-			break
-		case likes >= 50:
-			return { name: 'Reel Fanatic', emoji: '🎬' }
-			break
-		case likes >= 100:
-			return { name: 'Scene Stealer', emoji: '⭐️' }
-			break
-		case likes >= 250:
-			return { name: 'Blockbuster Boss', emoji: '🏆' }
-			break
+export const checkRank = likes => {
+	switch (true) {
 		case likes >= 500:
 			return { name: 'Cinematic Conqueror', emoji: '👑' }
-			break
+		case likes >= 250:
+			return { name: 'Blockbuster Boss', emoji: '🏆' }
+		case likes >= 100:
+			return { name: 'Scene Stealer', emoji: '⭐️' }
+		case likes >= 50:
+			return { name: 'Reel Fanatic', emoji: '🎬' }
+		case likes >= 10:
+			return { name: 'Trailer Trooper', emoji: '🎥' }
+		default:
+			return { name: 'Popcorn Rookie', emoji: '🍿' }
 	}
 }

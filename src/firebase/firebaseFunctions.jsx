@@ -1,4 +1,4 @@
-import { setDoc, doc, getDoc } from 'firebase/firestore'
+import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from './firebaseConfing'
 import { auth } from './firebaseConfing'
 import { updatePassword } from 'firebase/auth'
@@ -63,5 +63,15 @@ export const getRank = async uid => {
 		console.error('Failed to fetch rank:', error)
 
 		return null
+	}
+}
+
+export const updateRank = async (uid, newRank) => {
+	try {
+		await updateDoc(doc(db, 'users', uid), {
+			rank: newRank,
+		})
+	} catch (e) {
+		console.error(`Error: ${e}`)
 	}
 }

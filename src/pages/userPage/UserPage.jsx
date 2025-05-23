@@ -30,6 +30,7 @@ export default function UserPage() {
 			console.log(`Error ${e}`)
 		}
 	})
+
 	useEffect(() => {
 		const fetchRank = async () => {
 			try {
@@ -59,7 +60,12 @@ export default function UserPage() {
 							<span>Nickname:</span> {authState.user?.displayName}
 						</li>
 						<li>
-							<span>Rank: </span> {currentRank ? currentRank : ''}
+							<span>Rank: </span>{' '}
+							{currentRank && (
+								<i>
+									{currentRank.name} {currentRank.emoji}
+								</i>
+							)}
 						</li>
 						<li>
 							<span>Role:</span> ({authState.user?.role}) Founder
