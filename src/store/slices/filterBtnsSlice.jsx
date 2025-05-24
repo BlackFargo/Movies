@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const filterBtnsSlice = createSlice({
 	name: 'filterBtnsSlice',
-	initialState: '',
+	initialState: 'All',
 	reducers: {
 		setCategory(state, action) {
 			return action.payload
