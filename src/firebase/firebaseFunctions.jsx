@@ -1,8 +1,9 @@
-import { setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
+import { setDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { db } from './firebaseConfing'
 import { auth } from './firebaseConfing'
 import { updatePassword } from 'firebase/auth'
 import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth'
+import { deleteUser } from 'firebase/auth'
 
 export const sendMoviesIds = async ids => {
 	const id = auth?.currentUser?.uid
@@ -74,4 +75,13 @@ export const updateRank = async (uid, newRank) => {
 	} catch (e) {
 		console.error(`Error: ${e}`)
 	}
+}
+
+export const deleteAccount = async () => {
+	if (!auth?.currentUser) return
+	const ref = doc(db, 'users', auth?.currentUser?.uid)
+	await deleteUser(auth?.currentUser).then(res => console.log(`User deleted`))
+
+	await deleteDoc(ref)
+	console.log('done')
 }

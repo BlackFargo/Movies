@@ -45,8 +45,6 @@ export const fetchMovies = createAsyncThunk(
 				url += '&sort_by=popularity.desc'
 		}
 		try {
-			console.log(url)
-
 			const response = await fetch(url, {
 				method: 'GET',
 				headers: {

@@ -5,11 +5,13 @@ import FavoritesList from '../Components/favorites/FavoritesList'
 import Banner from '../Components/favorites/Banner'
 import { useSelector } from 'react-redux'
 import MoviesCard from '../Components/Movies/MoviesCard'
+import { SkeletonMovie } from '../Components/skeletons/skeletonMovie'
 
 const baseUrl = 'https://image.tmdb.org/t/p/w200/'
 
 export default function Favorites() {
 	const likedMovies = useSelector(state => state.likes.movies)
+	const status = useSelector(state => state.likes.status)
 
 	const category = useSelector(state => state.filterBtns)
 
@@ -32,20 +34,24 @@ export default function Favorites() {
 					<FavoritesList />
 					<div className='movies'>
 						{filterByCategories.length ? (
-							filterByCategories.map(movie => {
-								return (
-									<MoviesCard
-										rating={Math.round(movie?.vote_average)}
-										key={movie?.id}
-										img={
-											movie?.poster_path
-												? `${baseUrl}${movie?.poster_path}`
-												: 'posterPlaceholder'
-										}
-										movieTitle={movie?.title}
-									/>
-								)
-							})
+							status === 'loading' ? (
+								[...Array(20)].map((_, i) => <SkeletonMovie key={i} />)
+							) : (
+								filterByCategories.map(movie => {
+									return (
+										<MoviesCard
+											rating={Math.round(movie?.vote_average)}
+											key={movie?.id}
+											img={
+												movie?.poster_path
+													? `${baseUrl}${movie?.poster_path}`
+													: 'posterPlaceholder'
+											}
+											movieTitle={movie?.title}
+										/>
+									)
+								})
+							)
 						) : (
 							<img src={noMovies} className='noMoviesImg' />
 						)}

@@ -2,9 +2,14 @@ import './UserPage.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUserAsync } from '../../store/slices/authThunks'
 import s from './UserPage.module.scss'
+import { SkeletonText } from '../../Components/skeletons/SkeletonText'
 
 import { auth } from '../../firebase/firebaseConfing'
-import { changePassword, getRank } from '../../firebase/firebaseFunctions'
+import {
+	changePassword,
+	deleteAccount,
+	getRank,
+} from '../../firebase/firebaseFunctions'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
@@ -46,33 +51,53 @@ export default function UserPage() {
 		}
 	}, [auth.currentUser])
 
+	const isLoading = !authState?.user?.displayName
+
 	return (
 		<section className={s.user_container}>
 			<div className={s.user_profile}>
 				<img
-					// src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png'
-					src='https://media.gqindia.com/wp-content/uploads/2017/09/harvey-specter.jpg'
+					src='https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png'
+					// src='https://media.gqindia.com/wp-content/uploads/2017/09/harvey-specter.jpg'
 					className={s.user_profile_img}
 				/>
 				<div className={s.user_profile_inner}>
 					<ul className={s.user_profile_list}>
-						<li>
-							<span>Nickname:</span> {authState.user?.displayName}
-						</li>
-						<li>
-							<span>Rank: </span>{' '}
-							{currentRank && (
-								<i>
-									{currentRank.name} {currentRank.emoji}
-								</i>
-							)}
-						</li>
-						<li>
-							<span>Role:</span> ({authState.user?.role}) Founder
-						</li>
-						<li>
-							<span>Email:</span> {authState.user?.email}
-						</li>
+						{isLoading ? (
+							<SkeletonText />
+						) : (
+							<li>
+								<span>Nickname:</span> {authState.user?.displayName}
+							</li>
+						)}
+
+						{isLoading ? (
+							<SkeletonText />
+						) : (
+							<li>
+								<span>Rank: </span>{' '}
+								{currentRank && (
+									<i>
+										{currentRank.name} {currentRank.emoji}
+									</i>
+								)}
+							</li>
+						)}
+						{isLoading ? (
+							<SkeletonText />
+						) : (
+							<li>
+								<span>Role:</span> ({authState.user?.role}) Founder
+							</li>
+						)}
+						{isLoading ? (
+							<SkeletonText />
+						) : (
+							<li>
+								<span>Email:</span> {authState.user?.email}
+							</li>
+						)}
+
 						<li>
 							{' '}
 							<p>
@@ -129,7 +154,7 @@ export default function UserPage() {
 								</div>
 							)}
 						</div>
-						<button>Coming soon</button>
+						<button onClick={deleteAccount}>Delete account</button>
 						<button>Coming soon</button>
 						<button>Coming soon</button>
 						<button>Coming soon</button>

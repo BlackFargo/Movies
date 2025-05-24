@@ -13,8 +13,10 @@
     "@reduxjs/toolkit": "^2.7.0",
     "firebase": "^11.7.1",
     "react": "^19.0.0",
+    "react-content-loader": "^7.0.2",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.3",
+    "react-loading-skeleton": "^3.5.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.2",
     "react-typed": "^2.0.12"
