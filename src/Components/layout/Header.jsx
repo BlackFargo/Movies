@@ -8,7 +8,7 @@ import { auth } from '../../firebase/firebaseConfing'
 import { getRank } from '../../firebase/firebaseFunctions'
 export default function Header() {
 	const [currentRank, setCurrentRank] = useState('')
-	const [likesCount, setLikesCount] = useState(0)
+
 	const { isOpen, toggle } = useModal()
 	const userState = useSelector(state => state.auth.user)
 	const likesCountState = useSelector(state => state.likes.likesCount)
@@ -68,7 +68,7 @@ export default function Header() {
 				<div className='favorites__movies'>
 					<Link to={'/favorites'} className='favorites__movies__link'>
 						<img src={heart} alt='' />
-						<p>{(likesCount && likesCount) || 0}</p>
+						<p>{(likesCountState && likesCountState) || 0}</p>
 					</Link>
 				</div>
 				{userState ? (
