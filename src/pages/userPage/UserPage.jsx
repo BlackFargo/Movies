@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
 export default function UserPage() {
-	const [currentRank, setCurrentRank] = useState('')
+	const [currentRank, setCurrentRank] = useState()
 	const [changePassowordContainer, setChangePasswordContainer] = useState(false)
 	const {
 		register,
@@ -40,6 +40,7 @@ export default function UserPage() {
 		const fetchRank = async () => {
 			try {
 				const rank = await getRank(auth?.currentUser?.uid)
+				console.log(rank)
 				setCurrentRank(rank)
 			} catch (error) {
 				console.error('Error in fetchRank:', error)
@@ -52,6 +53,20 @@ export default function UserPage() {
 	}, [auth.currentUser])
 
 	const isLoading = !authState?.user?.displayName
+
+	function confirmAndDeleteAccount() {
+		const userName = authState?.user?.displayName
+		if (!authState?.user) return
+		const promptValue = prompt('To confirm type your username')
+
+		if (promptValue === userName) {
+			deleteAccount()
+			console.log('success')
+		} else {
+			console.log('123')
+			return
+		}
+	}
 
 	return (
 		<section className={s.user_container}>
@@ -78,7 +93,8 @@ export default function UserPage() {
 								<span>Rank: </span>{' '}
 								{currentRank && (
 									<i>
-										{currentRank.name} {currentRank.emoji}
+										{currentRank}
+										{/* {currentRank} {currentRank?.emoji} */}
 									</i>
 								)}
 							</li>
@@ -154,7 +170,7 @@ export default function UserPage() {
 								</div>
 							)}
 						</div>
-						<button onClick={deleteAccount}>Delete account</button>
+						<button onClick={confirmAndDeleteAccount}>Delete account</button>
 						<button>Coming soon</button>
 						<button>Coming soon</button>
 						<button>Coming soon</button>

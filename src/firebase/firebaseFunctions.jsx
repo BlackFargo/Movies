@@ -78,10 +78,43 @@ export const updateRank = async (uid, newRank) => {
 }
 
 export const deleteAccount = async () => {
-	if (!auth?.currentUser) return
-	const ref = doc(db, 'users', auth?.currentUser?.uid)
-	await deleteUser(auth?.currentUser).then(res => console.log(`User deleted`))
+	const user = auth.currentUser
+	if (!user) return
 
-	await deleteDoc(ref)
-	console.log('done')
+	try {
+		await deleteUser(user)
+	} catch (error) {
+		if (error.code === 'auth/requires-recent-login') {
+			const password = window.prompt(
+				'Для удаления аккаунта, пожалуйста, введите пароль:'
+			)
+			if (!password) {
+				console.log('Переаутентификация отменена')
+				return
+			}
+			const credential = EmailAuthProvider.credential(user.email, password)
+			try {
+				await reauthenticateWithCredential(user, credential)
+
+				await deleteUser(user)
+			} catch (reauthError) {
+				console.error(
+					'Не удалось переаутентифицировать или удалить:',
+					reauthError
+				)
+				return
+			}
+		} else {
+			console.error('Ошибка при удалении пользователя:', error)
+			return
+		}
+	}
+
+	try {
+		const ref = doc(db, 'users', user.uid)
+		await deleteDoc(ref)
+		console.log('Пользователь и его данные удалены')
+	} catch (dbError) {
+		console.error('Ошибка при удалении документа:', dbError)
+	}
 }
