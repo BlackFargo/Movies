@@ -25,6 +25,12 @@ header {
 	justify-content: space-between;
 	box-sizing: border-box;
 }
+
+@media (max-width: 600px) {
+	header {
+		padding: 10px;
+	}
+}
 .anchor {
 	scroll-margin-top: 80px;
 }
@@ -943,3 +949,7 @@ input {
 	margin: 0 auto;
 	border-radius: 15px;
 }
+
+/* svg:hover {
+	fill: #fff !important;
+} */

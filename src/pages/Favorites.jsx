@@ -31,7 +31,6 @@ export default function Favorites() {
 				<Filter />
 
 				<div className='favorites_movies'>
-					<FavoritesList />
 					<div className='movies'>
 						{filterByCategories.length ? (
 							status === 'loading' ? (
