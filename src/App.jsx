@@ -72,7 +72,7 @@ function App() {
 					<Route path='/movie/:movieName' element={<Movie />} />
 					<Route path='/sign-in' element={<Registration />} />
 					<Route path='/faq' element={<Faq />} />
-					<Route path='/user' element={<UserPage />} />
+					<Route path='/user/:uid' element={<UserPage />} />
 					<Route path='/ranks' element={<Ranks />} />
 					<Route path='/support' element={<Support />} />
 					<Route path='*' element={<NotFound />} />

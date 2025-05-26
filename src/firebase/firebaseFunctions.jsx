@@ -8,6 +8,7 @@ import {
 	query,
 	collection,
 	orderBy,
+	limit,
 } from 'firebase/firestore'
 import { db } from './firebaseConfing'
 import { auth } from './firebaseConfing'
@@ -140,17 +141,29 @@ export const updateLikes = async count => {
 	}
 }
 
-export const getUsersByLikesDesc = async (limitCount = 20) => {
+export const getUsersByLikesDesc = async (limitCount = 50) => {
 	try {
 		const q = query(
 			collection(db, 'users'),
-			orderBy('moviesCount', 'desc')
-			// можно добавить limit(limitCount)
+			orderBy('moviesCount', 'desc'),
+			limit(limitCount)
 		)
 		const snap = await getDocs(q)
 		return snap.docs.map(d => ({ id: d.id, ...d.data() }))
 	} catch (error) {
 		console.error('Ошибка при получении пользователей:', error)
+		throw error
+	}
+}
+
+export const getUser = async uid => {
+	try {
+		const ref = doc(db, 'users', uid)
+		const user = await getDoc(ref)
+
+		return user.data()
+	} catch (e) {
+		console.error(e)
 		throw error
 	}
 }

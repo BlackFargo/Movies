@@ -6,12 +6,15 @@ import { useModal } from '../../hooks/UseModal'
 import { useEffect, useState } from 'react'
 import { auth } from '../../firebase/firebaseConfing'
 import { getRank } from '../../firebase/firebaseFunctions'
+import userImage from '../../assets/images/user.png'
 export default function Header() {
 	const [currentRank, setCurrentRank] = useState('')
 
 	const { isOpen, toggle } = useModal()
 	const userState = useSelector(state => state.auth.user)
 	const likesCountState = useSelector(state => state.likes.likesCount)
+
+	const uid = auth?.currentUser?.uid
 
 	useEffect(() => {
 		const fetchRank = async () => {
@@ -72,8 +75,8 @@ export default function Header() {
 					</Link>
 				</div>
 				{userState ? (
-					<Link to={'/user'} className='login login_link'>
-						<img src='https://s.yimg.com/ny/api/res/1.2/Q.ZSt87BOpN7F.3ImzY37Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTk2MA--/https://media.zenfs.com/en/woman_s_world_418/3ed63fb14fabf7ef2a5bd84b3c6c2a38' />
+					<Link to={`/user/${uid}`} className='login login_link'>
+						<img src={userImage} alt='user image' />
 						{userState.displayName} {currentRank?.emoji}
 					</Link>
 				) : (
