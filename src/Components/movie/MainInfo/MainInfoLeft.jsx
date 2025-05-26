@@ -1,6 +1,6 @@
 import Rating from '../Rating'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateRank } from '../../../firebase/firebaseFunctions'
+import { updateLikes, updateRank } from '../../../firebase/firebaseFunctions'
 import { likesActions } from '../../../store/slices/likedMoviesSlice'
 import { useEffect } from 'react'
 import { sendMoviesIds } from '../../../firebase/firebaseFunctions'
@@ -11,13 +11,18 @@ export default function MainInfoLeft() {
 	const dispatch = useDispatch()
 	const movieState = useSelector(state => state.movies)
 	const likesState = useSelector(state => state.likes)
+	const likesCountState = useSelector(state => state.likes.likesCount)
 
-	const rank = checkRank(2)
+	useEffect(() => {
+		const thresholds = [500, 200, 100, 50, 10]
 
-	if (likesState.likesCount >= 10) {
-		const rank = checkRank(10)
-		updateRank(auth?.currentUser?.uid, rank)
-	}
+		const matched = thresholds.find(t => likesCountState >= t)
+
+		if (matched) {
+			const newRank = checkRank(matched)
+			updateRank(auth.currentUser.uid, newRank)
+		}
+	}, [likesCountState])
 
 	const moviedata = movieState?.movies[0]
 
@@ -25,7 +30,12 @@ export default function MainInfoLeft() {
 
 	const addMovie = moviedata => {
 		dispatch(likesActions.addLike(moviedata))
+		updateLikes(likesCountState)
 	}
+
+	useEffect(() => {
+		updateLikes(likesCountState)
+	}, [likesCountState])
 
 	useEffect(() => {
 		sendMoviesIds(Object.values(likesState.movies))

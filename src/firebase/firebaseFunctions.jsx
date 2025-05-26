@@ -1,4 +1,14 @@
-import { setDoc, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore'
+import {
+	setDoc,
+	doc,
+	getDoc,
+	updateDoc,
+	deleteDoc,
+	getDocs,
+	query,
+	collection,
+	orderBy,
+} from 'firebase/firestore'
 import { db } from './firebaseConfing'
 import { auth } from './firebaseConfing'
 import { updatePassword } from 'firebase/auth'
@@ -89,7 +99,6 @@ export const deleteAccount = async () => {
 				'Для удаления аккаунта, пожалуйста, введите пароль:'
 			)
 			if (!password) {
-				console.log('Переаутентификация отменена')
 				return
 			}
 			const credential = EmailAuthProvider.credential(user.email, password)
@@ -111,10 +120,37 @@ export const deleteAccount = async () => {
 	}
 
 	try {
-		const ref = doc(db, 'users', user.uid)
-		await deleteDoc(ref)
-		console.log('Пользователь и его данные удалены')
+		const moviesRef = doc(db, 'moviesIds', user.uid)
+		const usersRef = doc(db, 'users', user.uid)
+		await deleteDoc(moviesRef)
+		await deleteDoc(usersRef)
 	} catch (dbError) {
 		console.error('Ошибка при удалении документа:', dbError)
+	}
+}
+export const updateLikes = async count => {
+	try {
+		const userRef = doc(db, 'users', auth.currentUser.uid)
+		await updateDoc(userRef, { moviesCount: count })
+		return true
+	} catch (error) {
+		console.error('Ошибка при обновлении likes:', error)
+
+		throw error
+	}
+}
+
+export const getUsersByLikesDesc = async (limitCount = 20) => {
+	try {
+		const q = query(
+			collection(db, 'users'),
+			orderBy('moviesCount', 'desc')
+			// можно добавить limit(limitCount)
+		)
+		const snap = await getDocs(q)
+		return snap.docs.map(d => ({ id: d.id, ...d.data() }))
+	} catch (error) {
+		console.error('Ошибка при получении пользователей:', error)
+		throw error
 	}
 }

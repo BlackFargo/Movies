@@ -92,10 +92,10 @@ export default function UserPage() {
 							<li>
 								<span>Rank: </span>{' '}
 								{currentRank && (
-									<i>
-										{currentRank}
-										{/* {currentRank} {currentRank?.emoji} */}
-									</i>
+									<>
+										{' '}
+										{currentRank.name} {currentRank?.emoji}
+									</>
 								)}
 							</li>
 						)}
@@ -116,66 +116,66 @@ export default function UserPage() {
 
 						<li>
 							{' '}
-							<p>
+							{/* <p>
 								{auth && auth?.currentUser?.emailVerified
 									? ''
 									: 'Within the next 5 minutes, please confirm your email address, otherwise your account will be deleted.'}
-							</p>
+							</p> */}
 						</li>
 					</ul>
-					<div className={s.user_profile_functions}>
-						<button onClick={() => dispatch(logoutUserAsync())}>Log out</button>
-
-						<div>
-							<button
-								onClick={() => {
-									onChangePassword()
-									setChangePasswordContainer(prev => !prev)
-								}}
-								disabled={isSubmitting}
-							>
-								Change password
-							</button>
-							{changePassowordContainer && (
-								<div className={s.user_profile_functions_passwords}>
-									<label htmlFor='oldPassword'>Current password</label>
-
-									<input
-										name='oldPassword'
-										id='oldPassword'
-										type='password'
-										{...register('oldPassword', {
-											required: 'Current password is required',
-											minLength: {
-												value: 8,
-												message: 'At lest 6 symbols',
-											},
-										})}
-									/>
-									<p className={s.error}>{errors?.oldPassword?.message}</p>
-									<label htmlFor='newPassword'>New password</label>
-									<input
-										name='newPassword'
-										id='newPassword'
-										type='password'
-										{...register('newPassword', {
-											required: 'New password is required',
-											minLength: {
-												value: 8,
-												message: 'At lest 8 symbols',
-											},
-										})}
-									/>
-									<p className={s.error}>{errors?.newPassword?.message}</p>
-								</div>
-							)}
-						</div>
-						<button onClick={confirmAndDeleteAccount}>Delete account</button>
-						<button>Coming soon</button>
-						<button>Coming soon</button>
-						<button>Coming soon</button>
-					</div>
 				</div>
+			</div>
+			<div className={s.user_profile_functions}>
+				<button onClick={() => dispatch(logoutUserAsync())}>Log out</button>
+
+				<div className={s.password_div}>
+					<button
+						onClick={() => {
+							onChangePassword()
+							setChangePasswordContainer(prev => !prev)
+						}}
+						disabled={isSubmitting}
+					>
+						Change password
+					</button>
+					{changePassowordContainer && (
+						<div className={s.user_profile_functions_passwords}>
+							<label htmlFor='oldPassword'>Current password</label>
+
+							<input
+								name='oldPassword'
+								id='oldPassword'
+								type='password'
+								{...register('oldPassword', {
+									required: 'Current password is required',
+									minLength: {
+										value: 8,
+										message: 'At lest 6 symbols',
+									},
+								})}
+							/>
+							<p className={s.error}>{errors?.oldPassword?.message}</p>
+							<label htmlFor='newPassword'>New password</label>
+							<input
+								name='newPassword'
+								id='newPassword'
+								type='password'
+								{...register('newPassword', {
+									required: 'New password is required',
+									minLength: {
+										value: 8,
+										message: 'At lest 8 symbols',
+									},
+								})}
+							/>
+							<p className={s.error}>{errors?.newPassword?.message}</p>
+						</div>
+					)}
+				</div>
+				<button onClick={confirmAndDeleteAccount}>Delete account</button>
+				<button>Coming soon</button>
+				<button>Coming soon</button>
+				<button>Coming soon</button>
 			</div>
 		</section>
 	)

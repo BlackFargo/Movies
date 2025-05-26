@@ -1,4 +1,6 @@
 import s from './Ranks.module.scss'
+import { getUsersByLikesDesc } from '../../firebase/firebaseFunctions'
+import { useEffect, useState } from 'react'
 
 const likeRanks = [
 	{ name: 'Popcorn Rookie', minLikes: 0, emoji: '🍿' },
@@ -10,6 +12,16 @@ const likeRanks = [
 ]
 
 export default function Ranks() {
+	const [users, setUsers] = useState([])
+	useEffect(() => {
+		const getUser = async () => {
+			const response = await getUsersByLikesDesc()
+			setUsers(response)
+			console.log(response)
+		}
+		getUser()
+	}, [])
+
 	return (
 		<section className={s.container}>
 			<div className={s.header}>
@@ -38,8 +50,17 @@ export default function Ranks() {
 			</div>
 
 			<div className={s.leaderboard}>
-				<h2 className={s.leaderboardTitle}>Leaderboard</h2>
-				<ul>#1 Batko yurko</ul>
+				<h2 className={s.leaderboard_title}>Champions leaderboard</h2>
+				<ul className={s.leaderboard_list}>
+					{users.length
+						? users.map((user, index) => (
+								<li key={user.id}>
+									#{index + 1} {user.rank.emoji}
+									{user.displayName} — {user.moviesCount} likes
+								</li>
+						  ))
+						: null}
+				</ul>
 			</div>
 		</section>
 	)

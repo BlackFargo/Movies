@@ -35,7 +35,7 @@ export const registerUserAsync = createAsyncThunk(
 				displayName: nickname || 'No name',
 				role: 'user',
 				emailVerified: userCredentials.user?.emailVerified,
-				rank: 'Popcorn Rookie',
+				rank: { name: 'Popcorn Rookie', emoji: '🍿' },
 				createdAt,
 			})
 
@@ -49,7 +49,7 @@ export const registerUserAsync = createAsyncThunk(
 				displayName: nickname || 'No name',
 				role: 'user',
 				emailVerified: userCredentials.user?.emailVerified,
-				rank: 'Popcorn Rookie',
+				rank: { name: 'Popcorn Rookie', emoji: '🍿' },
 				createdAt,
 			}
 		} catch (error) {

@@ -1,5 +1,6 @@
 import { deleteUser, onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../firebase/firebaseConfing'
+import { auth, db } from '../firebase/firebaseConfing'
+import { deleteDoc, doc } from 'firebase/firestore'
 
 let verificationTimeout
 
@@ -24,7 +25,12 @@ export const deleteUserIfNotVerified = () => {
 			} else {
 				verificationTimeout = setTimeout(async () => {
 					try {
+						let userUid = auth?.currentUser?.uid
+						await deleteDoc(doc(db, 'users', userUid))
+						await deleteDoc(doc(db, 'moviesIds', userUid))
+
 						deleteUser(user)
+
 						console.log(`User was deleted on timeout`)
 					} catch (e) {
 						console.error(e)
