@@ -1,6 +1,7 @@
 import s from './Ranks.module.scss'
 import { getUsersByLikesDesc } from '../../firebase/firebaseFunctions'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const likeRanks = [
 	{ name: 'Popcorn Rookie', minLikes: 0, emoji: '🍿' },
@@ -17,7 +18,6 @@ export default function Ranks() {
 		const getUser = async () => {
 			const response = await getUsersByLikesDesc()
 			setUsers(response)
-			console.log(response)
 		}
 		getUser()
 	}, [])
@@ -55,8 +55,10 @@ export default function Ranks() {
 					{users.length
 						? users.map((user, index) => (
 								<li key={user.id}>
-									#{index + 1} {user.rank.emoji}
-									{user.displayName} — {user.moviesCount} likes
+									#{index + 1} <span>{user.rank.emoji}</span>
+									<Link to={`/user/${user?.uid}`}>
+										{user.displayName} — {user.moviesCount} likes
+									</Link>
 								</li>
 						  ))
 						: null}

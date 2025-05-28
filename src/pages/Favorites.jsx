@@ -1,7 +1,7 @@
 import Filter from '../Components/filter/Filter'
 import noMovies from '../assets/images/no movies.png'
 import MoviesScroll from '../Components/movies/MoviesScroll'
-import FavoritesList from '../Components/favorites/FavoritesList'
+
 import Banner from '../Components/favorites/Banner'
 import { useSelector } from 'react-redux'
 import MoviesCard from '../Components/Movies/MoviesCard'

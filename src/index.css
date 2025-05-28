@@ -948,8 +948,22 @@ input {
 
 	margin: 0 auto;
 	border-radius: 15px;
+	animation: fade-out 0.3s ease-in-out;
 }
 
 /* svg:hover {
 	fill: #fff !important;
 } */
+
+.movies__card {
+	animation: fade-out 0.3s ease-in-out;
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

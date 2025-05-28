@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import moviesSlice from './slices/moviesSlice'
 import filterSlice from './slices/filterSlice'
-import authSlice from './slices/authSlice'
+import authSlice from './slices/auth/authSlice'
 import { LikesSlice } from './slices/likedMoviesSlice'
 import filterBtnsSlice from './slices/filterBtnsSlice'
 

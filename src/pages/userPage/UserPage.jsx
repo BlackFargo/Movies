@@ -1,6 +1,6 @@
 import './UserPage.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-import { logoutUserAsync } from '../../store/slices/authThunks'
+import { useDispatch } from 'react-redux'
+import { logoutUserAsync } from '../../store/slices/auth/authThunks'
 import s from './UserPage.module.scss'
 import { SkeletonText } from '../../Components/skeletons/SkeletonText'
 import {
@@ -16,36 +16,38 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 export default function UserPage() {
-	const [user, setUser] = useState(null)
-	const [currentRank, setCurrentRank] = useState(null)
-	const [showPasswordForm, setShowPasswordForm] = useState(false)
-
-	const userUid = auth?.currentUser?.uid
-	const { uid } = useParams()
-	const isMe = userUid === uid
-
 	const dispatch = useDispatch()
-	const authState = useSelector(state => state.auth)
-	const isLoading = !authState.user?.displayName
-
-	useEffect(() => {
-		if (!uid) return
-		getUser(uid).then(res => setUser(res))
-	}, [uid])
-
-	useEffect(() => {
-		if (isMe) {
-			getRank(userUid)
-				.then(rank => setCurrentRank(rank))
-				.catch(console.error)
-		}
-	}, [isMe, userUid])
-
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
 	} = useForm()
+
+	const userUid = auth?.currentUser?.uid
+	const { uid } = useParams()
+	const targetUid = uid || userUid
+	const isMe = targetUid === userUid
+
+	const [user, setUser] = useState(null)
+	const [currentRank, setCurrentRank] = useState(null)
+	const [showPasswordForm, setShowPasswordForm] = useState(false)
+
+	useEffect(() => {
+		if (!targetUid) return
+		setUser(null)
+		getUser(targetUid)
+			.then(res => setUser(res))
+			.catch(console.error)
+	}, [targetUid])
+
+	useEffect(() => {
+		if (isMe && userUid) {
+			setCurrentRank(null)
+			getRank(userUid)
+				.then(rank => setCurrentRank(rank))
+				.catch(console.error)
+		}
+	}, [isMe, userUid])
 
 	const onChangePassword = handleSubmit(async data => {
 		try {
@@ -58,12 +60,38 @@ export default function UserPage() {
 	})
 
 	const confirmAndDeleteAccount = () => {
-		const userName = authState.user?.displayName
-		if (!userName) return
+		if (!user?.displayName) return
 		const promptValue = prompt('To confirm, type your username:')
-		if (promptValue === userName) {
+		if (promptValue === user.displayName) {
 			deleteAccount()
 		}
+	}
+
+	if (!user) {
+		return (
+			<section className={s.user_container}>
+				<div className={s.user_profile}>
+					<div className={s.user_profile_inner}>
+						<ul className={s.user_profile_list}>
+							<li>
+								<span>Nickname:</span> <SkeletonText />
+							</li>
+							<li>
+								<span>Rank:</span> <SkeletonText />
+							</li>
+							<li>
+								<span>Role:</span> <SkeletonText />
+							</li>
+							{isMe && (
+								<li>
+									<span>Email:</span> <SkeletonText />
+								</li>
+							)}
+						</ul>
+					</div>
+				</div>
+			</section>
+		)
 	}
 
 	return (
@@ -73,47 +101,31 @@ export default function UserPage() {
 				<div className={s.user_profile_inner}>
 					<ul className={s.user_profile_list}>
 						<li>
-							<span>Nickname:</span>{' '}
-							{isLoading ? (
-								<SkeletonText />
-							) : isMe ? (
-								authState.user.displayName
-							) : (
-								user?.displayName
-							)}
+							<span>Nickname:</span> {user.displayName}
 						</li>
-
 						<li>
 							<span>Rank:</span>{' '}
-							{isLoading ? (
-								<SkeletonText />
-							) : isMe ? (
+							{isMe ? (
 								currentRank ? (
 									`${currentRank.name} ${currentRank.emoji}`
 								) : (
-									'—'
+									<SkeletonText />
 								)
-							) : user?.rank ? (
+							) : user.rank ? (
 								`${user.rank.name} ${user.rank.emoji}`
 							) : (
 								'—'
 							)}
 						</li>
-
 						<li>
-							<span>Role:</span>{' '}
-							{isLoading ? (
-								<SkeletonText />
-							) : isMe ? (
-								authState.user.role
-							) : (
-								user?.role
-							)}
+							<span>Likes:</span> {user.moviesCount}
+						</li>
+						<li>
+							<span>Role:</span> {user.role}
 						</li>
 						{isMe && (
 							<li>
-								<span>Email:</span>{' '}
-								{isLoading ? <SkeletonText /> : authState?.user?.email}
+								<span>Email:</span> {user.email}
 							</li>
 						)}
 					</ul>
@@ -166,8 +178,6 @@ export default function UserPage() {
 					</div>
 
 					<button onClick={confirmAndDeleteAccount}>Delete account</button>
-					<button disabled>Coming soon</button>
-					<button disabled>Coming soon</button>
 					<button disabled>Coming soon</button>
 				</div>
 			)}

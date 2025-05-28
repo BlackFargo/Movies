@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
 	loginUserAsync,
 	registerUserAsync,
-} from '../../store/slices/authThunks'
+} from '../../store/slices/auth/authThunks'
 
 export default function Registration() {
 	const [switchType, setSwitchType] = useState(false)

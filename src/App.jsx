@@ -18,7 +18,7 @@ import { auth } from './firebase/firebaseConfing'
 import { deleteUserIfNotVerified } from './utils/emailVerification'
 import { Support } from './pages/Support/Support'
 
-import Ranks from './pages/rangs/Ranks'
+import Ranks from './pages/ranks/Ranks'
 
 function App() {
 	const dispatch = useDispatch()

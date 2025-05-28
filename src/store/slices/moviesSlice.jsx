@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createSelector } from '@reduxjs/toolkit'
 
 const genreMap = {
 	28: 'Action',
@@ -144,8 +145,14 @@ const moviesSlice = createSlice({
 		page: 1,
 		status: null,
 		error: null,
+		movies: [],
+		searchTerm: '',
 	},
-	reducers: {},
+	reducers: {
+		setSearchTerm(state, action) {
+			state.searchTerm = action.payload
+		},
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(fetchMovies.pending, (state, action) => {
@@ -195,3 +202,15 @@ const moviesSlice = createSlice({
 })
 
 export default moviesSlice.reducer
+export const { setSearchTerm } = moviesSlice.actions
+
+export const selectFilteredMovies = createSelector(
+	state => state.movies.movies,
+	state => state.movies.searchTerm,
+	(movies, term) => {
+		const t = term.trim().toLowerCase()
+		return t
+			? movies.filter(m => m.title.toLowerCase().includes(t))
+			: movies.slice(0, 20)
+	}
+)

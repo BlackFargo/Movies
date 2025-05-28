@@ -4,11 +4,12 @@ import {
 	signInWithEmailAndPassword,
 } from 'firebase/auth'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { auth } from '../../firebase/firebaseConfing'
-import { db } from '../../firebase/firebaseConfing'
+import { auth } from '../../../firebase/firebaseConfing'
+import { db } from '../../../firebase/firebaseConfing'
 import { setDoc, doc, getDoc } from 'firebase/firestore'
-import { deleteUserIfNotVerified } from '../../utils/emailVerification'
+import { deleteUserIfNotVerified } from '../../../utils/emailVerification'
 import { updateProfile } from 'firebase/auth'
+import { serverTimestamp } from 'firebase/firestore'
 
 export const registerUserAsync = createAsyncThunk(
 	'auth/registerUser',
@@ -19,8 +20,7 @@ export const registerUserAsync = createAsyncThunk(
 				email,
 				password
 			)
-			const createdAt =
-				new Date(userCredentials.user.metadata.creationTime).getTime() / 1000
+
 			const userRef = doc(db, 'users', userCredentials.user.uid)
 
 			if (userCredentials.user) {
@@ -36,7 +36,7 @@ export const registerUserAsync = createAsyncThunk(
 				role: 'user',
 				emailVerified: userCredentials.user?.emailVerified,
 				rank: { name: 'Popcorn Rookie', emoji: '🍿' },
-				createdAt,
+				createdAt: serverTimestamp(),
 			})
 
 			await sendEmailVerification(userCredentials.user)
@@ -50,7 +50,7 @@ export const registerUserAsync = createAsyncThunk(
 				role: 'user',
 				emailVerified: userCredentials.user?.emailVerified,
 				rank: { name: 'Popcorn Rookie', emoji: '🍿' },
-				createdAt,
+				createdAt: serverTimestamp(),
 			}
 		} catch (error) {
 			return rejectWithValue(error.message)
@@ -74,7 +74,7 @@ export const loginUserAsync = createAsyncThunk(
 				email: userCredentials.user?.email,
 				uid: userCredentials.user?.uid,
 				displayName: userData.displayName || 'No name',
-				role: userData?.role || user,
+				role: userData?.role || 'user',
 				rank: userData?.rank,
 			}
 		} catch (error) {

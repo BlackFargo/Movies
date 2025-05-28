@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/firebaseConfing'
-import { setUser } from '../store/slices/authSlice'
+import { setUser } from '../store/slices/auth/authSlice'
 
 const checkUserAuth = dispatch => {
 	onAuthStateChanged(auth, currentUser => {
