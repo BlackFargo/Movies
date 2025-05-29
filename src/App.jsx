@@ -19,6 +19,7 @@ import { deleteUserIfNotVerified } from './utils/emailVerification'
 import { Support } from './pages/Support/Support'
 
 import Ranks from './pages/ranks/Ranks'
+import { Admin } from './pages/admin/Admin'
 
 function App() {
 	const dispatch = useDispatch()
@@ -76,6 +77,7 @@ function App() {
 					<Route path='/ranks' element={<Ranks />} />
 					<Route path='/support' element={<Support />} />
 					<Route path='*' element={<NotFound />} />
+					<Route path='admin' element={<Admin />} />
 				</Routes>
 				{/* </main> */}
 				<Footer />

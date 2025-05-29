@@ -167,3 +167,29 @@ export const getUser = async uid => {
 		throw error
 	}
 }
+
+export const getUsers = async () => {
+	try {
+		const snapshot = await getDocs(collection(db, 'users'))
+		const usersList = snapshot.docs.map(doc => ({
+			uid: doc.id,
+			...doc.data(),
+		}))
+		return usersList
+	} catch (e) {
+		console.error(e)
+		throw error
+	}
+}
+
+export const updateRole = async (uid, newRole) => {
+	try {
+		const userRef = doc(db, 'users', uid)
+		await updateDoc(userRef, { role: newRole })
+		return true
+	} catch (error) {
+		console.error('Updating role error', error)
+
+		throw error
+	}
+}

@@ -72,6 +72,7 @@ export default function Header() {
 				<Link to={'/ranks'}>Rank system</Link>
 				<Link to={'/faq'}>FAQ</Link>
 				<Link to={'/support'}>Support</Link>
+				<Link to={'/admin'}>Admin Panel</Link>
 			</ul>
 			<div className='header__auth-flex'>
 				<div className='favorites__movies'>

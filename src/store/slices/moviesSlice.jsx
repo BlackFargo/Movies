@@ -160,6 +160,13 @@ const moviesSlice = createSlice({
 				state.error = null
 			})
 			.addCase(fetchMovies.fulfilled, (state, action) => {
+				console.log(
+					'загружена страница',
+					action.meta.arg.page,
+					'теперь в сторе',
+					state.movies.length,
+					'фильмов'
+				)
 				state.status = 'resolved'
 				if (action.meta.arg.page === 1) {
 					state.page = 1
@@ -211,6 +218,6 @@ export const selectFilteredMovies = createSelector(
 		const t = term.trim().toLowerCase()
 		return t
 			? movies.filter(m => m.title.toLowerCase().includes(t))
-			: movies.slice(0, 20)
+			: movies.slice(0, movies.length)
 	}
 )

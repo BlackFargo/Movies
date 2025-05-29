@@ -2,6 +2,7 @@ import s from './Ranks.module.scss'
 import { getUsersByLikesDesc } from '../../firebase/firebaseFunctions'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { SkeletonRatingUsers } from '../../Components/skeletons/SkeletonRatingUsers'
 
 const likeRanks = [
 	{ name: 'Popcorn Rookie', minLikes: 0, emoji: '🍿' },
@@ -61,7 +62,9 @@ export default function Ranks() {
 									</Link>
 								</li>
 						  ))
-						: null}
+						: [...Array(50)].map((_, i) => {
+								return <SkeletonRatingUsers key={i} />
+						  })}
 				</ul>
 			</div>
 		</section>

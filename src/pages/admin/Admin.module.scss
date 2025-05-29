@@ -1,0 +1,108 @@
+.admin {
+	padding: 40px;
+	background-color: #1e1e2f;
+	min-height: 60vh;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding-top: 100px;
+
+	&_user_table {
+		width: 100%;
+		max-width: 800px;
+		border-collapse: separate;
+		border-spacing: 0;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+		thead {
+			background-color: #343450;
+
+			tr {
+				/* No hover effect on header rows */
+			}
+		}
+		th {
+			padding: 12px 16px;
+			color: #ffffff;
+			text-transform: uppercase;
+			font-size: 0.875rem;
+			letter-spacing: 0.05em;
+			border-bottom: 1px solid #44445a;
+			text-align: left;
+		}
+
+		tbody {
+			background-color: #ffffff;
+
+			tr {
+				transition: background-color 0.2s, transform 0.2s;
+
+				&:nth-of-type(even) {
+					background-color: #f5f5f7;
+				}
+				&:hover {
+					background-color: #d0d0d3;
+				}
+			}
+		}
+
+		td {
+			padding: 12px 16px;
+			color: #333;
+			font-size: 0.875rem;
+			font-weight: 600;
+		}
+
+		// Responsive: scroll horizontally on small screens
+		@media (max-width: 600px) {
+			display: block;
+			overflow-x: auto;
+			white-space: nowrap;
+
+			th,
+			td {
+				display: inline-block;
+			}
+			thead tr,
+			tbody tr {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+.role_td {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	row-gap: 4px;
+
+	input {
+		padding: 5px;
+		border: 2px solid orange;
+		border-radius: 12px;
+		transition: all 0.3s;
+		outline: orange;
+
+		&:focus {
+			background-color: gold;
+		}
+	}
+
+	button {
+		padding: 5px;
+		font-weight: 600;
+		background-color: orange;
+		border-radius: 6px;
+		cursor: pointer;
+		color: white;
+		transition: all 0.3s;
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+}
