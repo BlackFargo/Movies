@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../../assets/images/logo.png'
+
 import heart from '../../assets/icons/icons8-червы-100.png'
 import { useSelector } from 'react-redux'
 import { useModal } from '../../hooks/UseModal'

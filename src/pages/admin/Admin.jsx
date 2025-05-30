@@ -1,56 +1,163 @@
-import s from './Admin.module.scss'
-import { getUsers } from '../../firebase/firebaseFunctions'
 import { useEffect, useState } from 'react'
-import { updateRole } from '../../firebase/firebaseFunctions'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import s from './Admin.module.scss'
+import { getUsers, updateRole } from '../../firebase/firebaseFunctions'
+
+const VERIFY_URL =
+	'https://us-central1-movies-ea8b8.cloudfunctions.net/verifyAdminPass'
+
 export function Admin() {
-	const [users, setUsers] = useState([])
-	const [newRole, setNewRole] = useState('')
+	const authState = useSelector(state => state.auth.user)
+	const navigate = useNavigate()
 
 	useEffect(() => {
-		getUsers().then(users => setUsers(users))
-	}, [])
+		if (authState.role == 'user') {
+			navigate('/')
+		}
+	}, [authState, navigate])
 
-	const updateRoleHandler = async (uid, newRole) => {
-		if (newRole.length === 0) return
-		updateRole(uid, newRole)
-		setNewRole('')
+	const [password, setPassword] = useState('')
+	const [isAuthorized, setIsAuthorized] = useState(false)
+	const [passError, setPassError] = useState(null)
+	const [verifying, setVerifying] = useState(false)
+
+	const [users, setUsers] = useState([])
+	const [roleInputs, setRoleInputs] = useState({})
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState(null)
+
+	// Функция проверки пароля
+	const handleVerify = async e => {
+		e.preventDefault()
+		setPassError(null)
+		setVerifying(true)
+		try {
+			const res = await fetch(VERIFY_URL, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ password }),
+			})
+			const data = await res.json()
+			if (data.ok) {
+				setIsAuthorized(true)
+			} else {
+				setPassError(data.error || 'Wrong password')
+			}
+		} catch (e) {
+			console.error(e)
+			setPassError('Network error')
+		} finally {
+			setVerifying(false)
+		}
 	}
+
+	useEffect(() => {
+		if (!isAuthorized) return
+		setLoading(true)
+		getUsers()
+			.then(list => setUsers(list.map(u => ({ ...u, isEditing: false }))))
+			.catch(e => {
+				console.error(e)
+				setError('Failed to load users')
+			})
+			.finally(() => setLoading(false))
+	}, [isAuthorized])
+
+	const handleInputChange = (uid, value) => {
+		setRoleInputs(prev => ({ ...prev, [uid]: value }))
+	}
+
+	const handleButtonClick = async user => {
+		const { uid, isEditing } = user
+		if (isEditing) {
+			const newRole = (roleInputs[uid] || '').trim()
+			if (!newRole) return
+			try {
+				await updateRole(uid, newRole)
+				setUsers(prev =>
+					prev.map(u =>
+						u.uid === uid ? { ...u, role: newRole, isEditing: false } : u
+					)
+				)
+				setRoleInputs(prev => ({ ...prev, [uid]: '' }))
+			} catch (e) {
+				console.error('Failed to update role', e)
+			}
+		} else {
+			setUsers(prev =>
+				prev.map(u => (u.uid === uid ? { ...u, isEditing: true } : u))
+			)
+			setRoleInputs(prev => ({ ...prev, [uid]: user.role }))
+		}
+	}
+
+	if (!isAuthorized) {
+		return (
+			<section className={s.admin}>
+				<form onSubmit={handleVerify} className={s.admin_auth_form}>
+					<label htmlFor='#pass'> </label>
+					Enter admin password:{' '}
+					<input
+						id='pass'
+						type='password'
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+						disabled={verifying}
+					/>
+					<button type='submit' disabled={verifying || !password}>
+						{verifying ? 'Verifying…' : 'Verify'}
+					</button>
+					{passError && <p className={s.error}>{passError}</p>}
+				</form>
+			</section>
+		)
+	}
+
+	// После авторизации — показываем табличку
+	if (loading) return <p className={s.admin}>Loading users...</p>
+	if (error) return <p className={s.admin}>{error}</p>
 
 	return (
 		<section className={s.admin}>
 			<table className={s.admin_user_table}>
 				<thead>
-					<tr className={s.admin_user_table_firstLine}>
+					<tr>
 						<th>UID</th>
 						<th>Email</th>
 						<th>Role</th>
 					</tr>
 				</thead>
 				<tbody>
-					{users.length &&
-						users.map(user => {
-							return (
-								<tr>
-									<td>{user.uid}</td>
-									<td>{user.email}</td>
-									<td className={s.role_td}>
-										{user.role}
+					{users.map(user => (
+						<tr key={user.uid}>
+							<td>{user.uid}</td>
+							<td>{user.email}</td>
+							<td className={s.role_td}>
+								{user.isEditing ? (
+									<>
 										<input
 											type='text'
-											placeholder='new role'
-											value={newRole}
-											onChange={e => setNewRole(e.target.value)}
+											value={roleInputs[user.uid] || ''}
+											onChange={e =>
+												handleInputChange(user.uid, e.target.value)
+											}
 										/>
-										<button
-											className={s.changeRole}
-											onClick={() => updateRole(user?.uid, newRole)}
-										>
-											Change role
+										<button onClick={() => handleButtonClick(user)}>
+											Save
 										</button>
-									</td>
-								</tr>
-							)
-						})}
+									</>
+								) : (
+									<>
+										<span>{user.role}</span>
+										<button onClick={() => handleButtonClick(user)}>
+											Edit
+										</button>
+									</>
+								)}
+							</td>
+						</tr>
+					))}
 				</tbody>
 			</table>
 		</section>

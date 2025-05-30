@@ -10,7 +10,7 @@ const checkUserAuth = dispatch => {
 					email: currentUser.email,
 					uid: currentUser.uid,
 					displayName: currentUser.displayName || 'No name',
-					role: 'user',
+					role: 'founder',
 					emailVerified: currentUser.emailVerified,
 				})
 			)

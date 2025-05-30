@@ -7,6 +7,35 @@
 	align-items: flex-start;
 	padding-top: 100px;
 
+	&_auth_form {
+		display: flex;
+		column-gap: 10px;
+		align-items: center;
+		row-gap: 10px;
+
+		label {
+			font-size: 20px;
+		}
+
+		input {
+			font-size: 20px;
+			padding: 5px;
+		}
+		button {
+			padding: 10px;
+			color: white;
+			cursor: pointer;
+		}
+
+		@media (max-width: 700px) {
+			flex-direction: column;
+
+			button {
+				width: 100%;
+			}
+		}
+	}
+
 	&_user_table {
 		width: 100%;
 		max-width: 800px;
@@ -105,4 +134,9 @@
 			opacity: 0.8;
 		}
 	}
+}
+
+.password_inp {
+	height: 30px;
+	font-size: 20px;
 }
