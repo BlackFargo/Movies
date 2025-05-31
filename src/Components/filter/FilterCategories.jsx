@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategory } from '../../store/slices/filterSlice'
+import { useLocation } from 'react-router-dom'
 
 const filter__categoryes = ['Popular', 'Top Rated', 'Short films']
 
@@ -8,6 +9,10 @@ export default function FilterCategories() {
 	const [status, changeStatus] = useState('Popular')
 	const state = useSelector(state => state.filter)
 	const dispatch = useDispatch()
+
+	const location = useLocation()
+
+	let isDisabled = location.pathname === '/favorites' ? 'disabled' : ''
 
 	useEffect(() => {
 		dispatch(getCategory({ category: status }))
@@ -19,6 +24,11 @@ export default function FilterCategories() {
 				{filter__categoryes.map((value, index) => {
 					return (
 						<div
+							style={{
+								pointerEvents: isDisabled ? 'none' : 'auto',
+								opacity: isDisabled ? 0.5 : 1,
+								cursor: isDisabled ? 'not-allowed' : 'pointer',
+							}}
 							key={index}
 							onClick={() => changeStatus(value)}
 							className={`filter__categoryes-item ${

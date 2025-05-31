@@ -157,3 +157,23 @@
 		transform: rotate(360deg);
 	}
 }
+
+.privacy_label {
+	padding: 10px;
+	display: flex;
+	column-gap: 20px;
+	align-items: center;
+
+	p {
+		line-height: 1.5;
+	}
+
+	a {
+		color: orange;
+	}
+
+	input {
+		width: 40px;
+		height: 40px;
+	}
+}

@@ -11,7 +11,7 @@ export default function Header() {
 	const [currentRank, setCurrentRank] = useState('')
 
 	const { isOpen, toggle } = useModal()
-	const userState = useSelector(state => state.auth.user)
+	const userAuth = useSelector(state => state.auth.user)
 	const likesCountState = useSelector(state => state.likes.likesCount)
 
 	const uid = auth?.currentUser?.uid
@@ -71,8 +71,14 @@ export default function Header() {
 				<Link to={'/favorites'}>Favorites</Link>
 				<Link to={'/ranks'}>Rank system</Link>
 				<Link to={'/faq'}>FAQ</Link>
-				<Link to={'/support'}>Support</Link>
-				<Link to={'/admin'}>Admin Panel</Link>
+				<Link to={'/privacy-policy'}>Support</Link>
+				{userAuth?.role === 'Founder' ? (
+					<Link to={'/admin'} className='adminLink'>
+						Admin Panel
+					</Link>
+				) : (
+					''
+				)}
 			</ul>
 			<div className='header__auth-flex'>
 				<div className='favorites__movies'>
@@ -81,10 +87,10 @@ export default function Header() {
 						<p>{(likesCountState && likesCountState) || 0}</p>
 					</Link>
 				</div>
-				{userState ? (
+				{userAuth ? (
 					<Link to={`/user/${uid}`} className='login login_link'>
 						<img src={userImage} alt='user image' />
-						{userState.displayName} {currentRank?.emoji}
+						{userAuth.displayName} {currentRank?.emoji}
 					</Link>
 				) : (
 					<Link to={'/sign-in'}>Log in</Link>

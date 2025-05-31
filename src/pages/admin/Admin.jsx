@@ -8,14 +8,14 @@ const VERIFY_URL =
 	'https://us-central1-movies-ea8b8.cloudfunctions.net/verifyAdminPass'
 
 export function Admin() {
-	const authState = useSelector(state => state.auth.user)
+	const authUser = useSelector(state => state.auth.user)
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		if (authState.role == 'user') {
+		if (authUser?.role !== 'Founder') {
 			navigate('/')
 		}
-	}, [authState, navigate])
+	}, [authUser, navigate])
 
 	const [password, setPassword] = useState('')
 	const [isAuthorized, setIsAuthorized] = useState(false)

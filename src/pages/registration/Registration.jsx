@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import s from './Registration.module.scss'
 import { useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	loginUserAsync,
@@ -138,7 +138,22 @@ export default function Registration() {
 				{errors.password && (
 					<p className={s.error}>{errors.password.message}</p>
 				)}
-
+				<label className={s.privacy_label}>
+					<input
+						type='checkbox'
+						name='consent'
+						disabled={loading}
+						{...register('consent', { required: 'Consent required' })}
+					/>
+					{errors.consent && (
+						<p className={s.error}>{errors.consent.message}</p>
+					)}
+					<p>
+						I have read and agree to the processing of my personal data in
+						accordance with the{' '}
+						<Link to={'/privacy-policy'}>Privacy Policy</Link>.
+					</p>
+				</label>
 				<button
 					type='button'
 					onClick={handleReset}

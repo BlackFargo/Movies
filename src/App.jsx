@@ -75,7 +75,7 @@ function App() {
 					<Route path='/faq' element={<Faq />} />
 					<Route path='/user/:uid' element={<UserPage />} />
 					<Route path='/ranks' element={<Ranks />} />
-					<Route path='/support' element={<Support />} />
+					<Route path='/privacy-policy' element={<Support />} />
 					<Route path='*' element={<NotFound />} />
 					<Route path='admin' element={<Admin />} />
 				</Routes>

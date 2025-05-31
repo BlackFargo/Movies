@@ -967,3 +967,7 @@ input {
 		opacity: 1;
 	}
 }
+
+.adminLink {
+	color: gold !important;
+}

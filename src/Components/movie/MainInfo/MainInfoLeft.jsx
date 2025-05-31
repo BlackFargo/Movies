@@ -12,6 +12,7 @@ export default function MainInfoLeft() {
 	const movieState = useSelector(state => state.movies)
 	const likesState = useSelector(state => state.likes)
 	const likesCountState = useSelector(state => state.likes.likesCount)
+	const authUser = useSelector(state => state.auth.user)
 
 	useEffect(() => {
 		const thresholds = [500, 200, 100, 50, 10]
@@ -64,6 +65,7 @@ export default function MainInfoLeft() {
 			</div>
 			<button
 				className='like-btn'
+				disabled={authUser === null ? 'disabled' : ''}
 				onClick={() => {
 					addMovie(moviedata)
 				}}
