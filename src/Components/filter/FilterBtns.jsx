@@ -3,9 +3,8 @@ import { genreIdByName } from '../../utils/genreUtils'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../../store/slices/moviesSlice'
 import UseDebounce from '../../hooks/UseDebounce'
-import { getPage } from '../../store/slices/filterSlice'
-import { setCategory } from '../../store/slices/filterBtnsSlice'
-
+import { setPage } from '../../store/slices/filterSlice'
+import { setGenre } from '../../store/slices/filterSlice'
 const popularGenreMap = {
 	28: 'Action',
 	12: 'Adventure',
@@ -21,23 +20,26 @@ const popularGenreMap = {
 }
 
 export default function FilterBtns() {
-	const category = useSelector(state => state.filterBtns)
-	const { category: catFromFilter, page } = useSelector(state => state.filter)
+	const {
+		category: catFromFilter,
+		page,
+		genre,
+	} = useSelector(state => state.filter)
 
 	const dispatch = useDispatch()
 
-	const debouncedCategory = UseDebounce(category)
+	const debouncedGenre = UseDebounce(genre)
 
 	useEffect(() => {
 		const controller = new AbortController()
 
 		const fetchData = async () => {
 			try {
-				if (debouncedCategory) {
+				if (debouncedGenre) {
 					dispatch(
 						fetchMovies({
 							category: catFromFilter,
-							genre: genreIdByName(debouncedCategory, popularGenreMap),
+							genre: genreIdByName(debouncedGenre, popularGenreMap),
 							page,
 							signal: controller.signal,
 						})
@@ -52,17 +54,17 @@ export default function FilterBtns() {
 
 		fetchData()
 		return () => controller.abort()
-	}, [debouncedCategory, catFromFilter, page, dispatch])
+	}, [debouncedGenre, catFromFilter, page, dispatch])
 
 	return (
 		<div className='filter__buttons'>
 			{Object.values(popularGenreMap).map((cat, idx) => (
 				<button
 					key={idx}
-					className={category === cat ? 'active' : ''}
+					className={genre === cat ? 'active' : ''}
 					onClick={() => {
-						dispatch(setCategory(cat))
-						dispatch(getPage({ page: 1 }))
+						dispatch(setGenre({ genre: cat }))
+						dispatch(setPage({ page: 1 }))
 					}}
 				>
 					{cat}

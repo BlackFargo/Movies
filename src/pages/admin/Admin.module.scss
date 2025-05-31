@@ -83,20 +83,10 @@
 			font-weight: 600;
 		}
 
-		// Responsive: scroll horizontally on small screens
 		@media (max-width: 600px) {
 			display: block;
 			overflow-x: auto;
 			white-space: nowrap;
-
-			th,
-			td {
-				display: inline-block;
-			}
-			thead tr,
-			tbody tr {
-				display: inline-block;
-			}
 		}
 	}
 }
@@ -121,7 +111,7 @@
 	}
 
 	button {
-		padding: 5px;
+		padding: 10px;
 		font-weight: 600;
 		background-color: orange;
 		border-radius: 6px;
@@ -138,4 +128,17 @@
 .password_inp {
 	height: 30px;
 	font-size: 20px;
+}
+
+.delete_button {
+	padding: 10px;
+	border-radius: 12px;
+	background-color: red;
+	color: white;
+	font-weight: 600;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.8;
+	}
 }

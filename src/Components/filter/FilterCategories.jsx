@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCategory } from '../../store/slices/filterSlice'
+import { setCategory } from '../../store/slices/filterSlice'
 import { useLocation } from 'react-router-dom'
 
 const filter__categoryes = ['Popular', 'Top Rated', 'Short films']
@@ -15,7 +15,7 @@ export default function FilterCategories() {
 	let isDisabled = location.pathname === '/favorites' ? 'disabled' : ''
 
 	useEffect(() => {
-		dispatch(getCategory({ category: status }))
+		dispatch(setCategory({ category: status }))
 	}, [status])
 
 	return (

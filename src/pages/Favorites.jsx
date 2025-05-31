@@ -13,13 +13,13 @@ export default function Favorites() {
 	const likedMovies = useSelector(state => state.likes.movies)
 	const status = useSelector(state => state.likes.status)
 
-	const category = useSelector(state => state.filterBtns)
+	const { genre } = useSelector(state => state.filter)
 
 	const likedMoviesArray = Object.values(likedMovies)
 
 	const filterByCategories = likedMoviesArray.filter(movie => {
-		if (category === 'All') return likedMoviesArray
-		if (movie.genres.includes(category)) {
+		if (genre === 'All') return likedMoviesArray
+		if (movie.genres.includes(genre)) {
 			return movie
 		}
 	})

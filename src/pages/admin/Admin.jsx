@@ -8,6 +8,9 @@ import { Input } from '../../ui/input/Input'
 const VERIFY_URL =
 	'https://us-central1-movies-ea8b8.cloudfunctions.net/verifyAdminPass'
 
+const DELETE_USER_URL =
+	'https://us-central1-movies-ea8b8.cloudfunctions.net/deleteUser'
+
 export function Admin() {
 	const authUser = useSelector(state => state.auth.user)
 	const navigate = useNavigate()
@@ -57,7 +60,14 @@ export function Admin() {
 		if (!isAuthorized) return
 		setLoading(true)
 		getUsers()
-			.then(list => setUsers(list.map(u => ({ ...u, isEditing: false }))))
+			.then(list =>
+				setUsers(
+					list.map(u => ({
+						...u,
+						isEditing: false,
+					}))
+				)
+			)
 			.catch(e => {
 				console.error(e)
 				setError('Failed to load users')
@@ -93,11 +103,35 @@ export function Admin() {
 		}
 	}
 
+	// Новая функция: удаление пользователя
+	const handleDeleteUser = async uid => {
+		if (!window.confirm('Вы точно хотите удалить этого пользователя?')) return
+
+		try {
+			const res = await fetch(DELETE_USER_URL, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ password, uidToDelete: uid }),
+			})
+			const data = await res.json()
+			if (res.ok && data.success) {
+				// Удаляем из локального стейта
+				setUsers(prev => prev.filter(u => u.uid !== uid))
+			} else {
+				const errMsg = data.error || 'Failed to delete user'
+				alert(errMsg)
+			}
+		} catch (e) {
+			console.error('Network error:', e)
+			alert('Network error while deleting user')
+		}
+	}
+
 	if (!isAuthorized) {
 		return (
 			<section className={s.admin}>
 				<form onSubmit={handleVerify} className={s.admin_auth_form}>
-					<label htmlFor='#pass'> </label>
+					<label htmlFor='pass'> </label>
 					Enter admin password:{' '}
 					<Input
 						id='pass'
@@ -115,7 +149,6 @@ export function Admin() {
 		)
 	}
 
-	// После авторизации — показываем табличку
 	if (loading) return <p className={s.admin}>Loading users...</p>
 	if (error) return <p className={s.admin}>{error}</p>
 
@@ -127,6 +160,7 @@ export function Admin() {
 						<th>UID</th>
 						<th>Email</th>
 						<th>Role</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -157,8 +191,23 @@ export function Admin() {
 									</>
 								)}
 							</td>
+							<td>
+								<button
+									className={s.delete_button}
+									onClick={() => handleDeleteUser(user.uid)}
+								>
+									Delete
+								</button>
+							</td>
 						</tr>
 					))}
+					{users.length === 0 && (
+						<tr>
+							<td colSpan={4} style={{ textAlign: 'center', padding: '16px' }}>
+								No users found
+							</td>
+						</tr>
+					)}
 				</tbody>
 			</table>
 		</section>
