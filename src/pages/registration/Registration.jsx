@@ -8,6 +8,7 @@ import {
 	loginUserAsync,
 	registerUserAsync,
 } from '../../store/slices/auth/authThunks'
+import { Input } from '../../ui/input/Input'
 
 export default function Registration() {
 	const [switchType, setSwitchType] = useState(false)
@@ -104,7 +105,7 @@ export default function Registration() {
 				{switchType ? (
 					''
 				) : (
-					<input
+					<Input
 						type='text'
 						{...register('nickname', { required: 'Nickname is required' })}
 						className={s.input}
@@ -117,7 +118,7 @@ export default function Registration() {
 				{errors.nickname && (
 					<p className={s.error}>{errors.nickname.message}</p>
 				)}
-				<input
+				<Input
 					type='email'
 					{...register('email', { required: 'Email is required' })}
 					className={s.input}
@@ -127,7 +128,7 @@ export default function Registration() {
 				/>
 				{errors.email && <p className={s.error}>{errors.email.message}</p>}
 
-				<input
+				<Input
 					type='password'
 					{...register('password', { required: 'Password is required' })}
 					className={s.input}
@@ -138,6 +139,7 @@ export default function Registration() {
 				{errors.password && (
 					<p className={s.error}>{errors.password.message}</p>
 				)}
+
 				<label className={s.privacy_label}>
 					<input
 						type='checkbox'

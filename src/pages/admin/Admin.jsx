@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import s from './Admin.module.scss'
 import { getUsers, updateRole } from '../../firebase/firebaseFunctions'
+import { Input } from '../../ui/input/Input'
 
 const VERIFY_URL =
 	'https://us-central1-movies-ea8b8.cloudfunctions.net/verifyAdminPass'
@@ -98,7 +99,7 @@ export function Admin() {
 				<form onSubmit={handleVerify} className={s.admin_auth_form}>
 					<label htmlFor='#pass'> </label>
 					Enter admin password:{' '}
-					<input
+					<Input
 						id='pass'
 						type='password'
 						value={password}

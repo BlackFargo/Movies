@@ -1,0 +1,15 @@
+/* Input.scss */
+.my_input {
+	width: 100%;
+	padding: 10px;
+
+	border: 1px solid #555;
+	border-radius: 4px;
+	background-color: #444;
+	color: white;
+	font-size: 16px;
+}
+.my_input:focus {
+	border-color: #fff;
+	outline: none;
+}
