@@ -9,7 +9,7 @@ import { SkeletonMovie } from '../Components/skeletons/skeletonMovie'
 
 const baseUrl = 'https://image.tmdb.org/t/p/w200/'
 
-export default function Favorites() {
+export function Favorites() {
 	const likedMovies = useSelector(state => state.likes.movies)
 	const status = useSelector(state => state.likes.status)
 

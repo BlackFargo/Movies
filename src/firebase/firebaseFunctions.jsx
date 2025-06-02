@@ -11,10 +11,12 @@ import {
 	limit,
 } from 'firebase/firestore'
 import { db } from './firebaseConfing'
-import { auth } from './firebaseConfing'
+import { googleProvider } from './firebaseConfing'
 import { updatePassword } from 'firebase/auth'
 import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth'
 import { deleteUser } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
+import { auth } from './firebaseConfing'
 
 export const sendMoviesIds = async ids => {
 	const id = auth?.currentUser?.uid
@@ -191,5 +193,32 @@ export const updateRole = async (uid, newRole) => {
 		console.error('Updating role error', error)
 
 		throw error
+	}
+}
+
+export const signInWithGoogle = async () => {
+	try {
+		// signInWithPopup возвращает { user, … }
+		const { user } = await signInWithPopup(auth, googleProvider)
+
+		// user теперь точно не null
+		if (!user) return
+
+		// ...далее записываем его в Firestore, если нужно
+		const userRef = doc(db, 'users', user.uid)
+		const snap = await getDoc(userRef)
+		if (snap.exists()) return
+
+		await setDoc(userRef, {
+			email: user.email || '',
+			uid: user.uid,
+			displayName: user.displayName || 'No name',
+			role: 'user',
+			emailVerified: user.emailVerified,
+			rank: { name: 'Popcorn Rookie', emoji: '🍿' },
+			createdAt: serverTimestamp(),
+		})
+	} catch (e) {
+		console.error('signInWithGoogle error:', e)
 	}
 }

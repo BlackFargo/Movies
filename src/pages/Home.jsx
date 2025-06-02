@@ -3,7 +3,7 @@ import Filter from '../Components/filter/Filter'
 import MoviesList from '../Components/Movies/MoviesList'
 import MoviesScroll from '../Components/movies/MoviesScroll'
 
-export default function Home() {
+export function Home() {
 	return (
 		<div className=''>
 			<Banner />

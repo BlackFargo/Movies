@@ -24,6 +24,25 @@
 		align-items: center;
 		row-gap: 12px;
 
+		&_google_login {
+			position: relative;
+			border-radius: 20px;
+			background-color: rgba(0, 0, 0, 0.3);
+
+			&_icon {
+				display: inline-block;
+			}
+
+			&_icon::before {
+				content: '';
+				position: absolute;
+				width: 25px;
+				height: 25px;
+				background-color: orange;
+				filter: blur(15px);
+			}
+		}
+
 		&_switch_type_label {
 			display: block;
 			border-radius: 20px;
@@ -32,7 +51,6 @@
 			position: relative;
 			background-color: #5c6bc0;
 			cursor: pointer;
-			margin-bottom: 10px;
 
 			&::before,
 			&::after {

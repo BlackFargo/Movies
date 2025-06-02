@@ -1,25 +1,17 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import Header from './Components/Layout/Header'
 import Footer from './Components/Layout/Footer'
-import Home from './pages/Home'
-import Favorites from './pages/Favorites'
-import Movie from './pages/Movie'
-import NotFound from './pages/NotFound'
-import Registration from './pages/registration/Registration'
-import UserPage from './pages/userPage/UserPage'
+
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import checkUserAuth from './utils/checkUserAuth'
 import { likesActions } from './store/slices/likedMoviesSlice'
 import { useSelector } from 'react-redux'
-import { getMoviesIds } from './firebase/firebaseFunctions'
-import { Faq } from './pages/faq/Faq'
+
 import { auth } from './firebase/firebaseConfing'
 import { deleteUserIfNotVerified } from './utils/emailVerification'
-import { Support } from './pages/Support/Support'
 
-import Ranks from './pages/ranks/Ranks'
-import { Admin } from './pages/admin/Admin'
+import { RoutesConfig } from './RoutesConfig'
 
 function App() {
 	const dispatch = useDispatch()
@@ -66,19 +58,7 @@ function App() {
 			<BrowserRouter>
 				<Header />
 				{/* <main> */}
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/favorites' element={<Favorites />} />
-					<Route path='/movie' element={<Movie />} />
-					<Route path='/movie/:movieName' element={<Movie />} />
-					<Route path='/sign-in' element={<Registration />} />
-					<Route path='/faq' element={<Faq />} />
-					<Route path='/user/:uid' element={<UserPage />} />
-					<Route path='/ranks' element={<Ranks />} />
-					<Route path='/privacy-policy' element={<Support />} />
-					<Route path='*' element={<NotFound />} />
-					<Route path='admin' element={<Admin />} />
-				</Routes>
+				<RoutesConfig />
 				{/* </main> */}
 				<Footer />
 			</BrowserRouter>

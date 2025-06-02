@@ -1,7 +1,7 @@
 import React from 'react'
 import notFound from '../assets/images/notFound.jpg'
 
-export default function NotFound() {
+export function NotFound() {
 	return (
 		<div
 			style={{

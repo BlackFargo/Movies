@@ -13,7 +13,7 @@ const likeRanks = [
 	{ name: 'Cinematic Conqueror', minLikes: 500, emoji: '👑' },
 ]
 
-export default function Ranks() {
+export function Ranks() {
 	const [users, setUsers] = useState([])
 	useEffect(() => {
 		const getUser = async () => {

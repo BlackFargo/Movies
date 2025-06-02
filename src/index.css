@@ -971,3 +971,28 @@ input {
 .adminLink {
 	color: gold !important;
 }
+
+.fade-enter {
+	opacity: 0;
+}
+
+/* Активная фаза входа: плавный переход к opacity:1 */
+.fade-enter-active {
+	opacity: 1;
+	transition: opacity 300ms ease-out;
+}
+
+/* -------------------------------------------------
+   2) Выход (exit): старый элемент из opacity:1 → opacity:0
+---------------------------------------------------*/
+
+/* Начальное состояние перед анимацией выхода */
+.fade-exit {
+	opacity: 1;
+}
+
+/* Активная фаза выхода: плавный переход к opacity:0 */
+.fade-exit-active {
+	opacity: 0;
+	transition: opacity 300ms ease-out;
+}

@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-export default function UserPage() {
+export function UserPage() {
 	const dispatch = useDispatch()
 	const {
 		register,
