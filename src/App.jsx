@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 
 import { auth } from './firebase/firebaseConfing'
 import { deleteUserIfNotVerified } from './utils/emailVerification'
-
+import { getMoviesIds } from './firebase/firebaseFunctions'
 import { RoutesConfig } from './RoutesConfig'
 
 function App() {
@@ -52,6 +52,8 @@ function App() {
 	useEffect(() => {
 		deleteUserIfNotVerified(auth.currentUser)
 	}, [])
+
+	console.log(auth.currentUser)
 
 	return (
 		<>

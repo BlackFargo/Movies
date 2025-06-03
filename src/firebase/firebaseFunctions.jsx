@@ -17,6 +17,7 @@ import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth'
 import { deleteUser } from 'firebase/auth'
 import { signInWithPopup } from 'firebase/auth'
 import { auth } from './firebaseConfing'
+import { sendPasswordResetEmail } from 'firebase/auth'
 
 export const sendMoviesIds = async ids => {
 	const id = auth?.currentUser?.uid
@@ -133,7 +134,7 @@ export const deleteAccount = async () => {
 }
 export const updateLikes = async count => {
 	try {
-		const userRef = doc(db, 'users', auth.currentUser.uid)
+		const userRef = doc(db, 'users', auth?.currentUser?.uid)
 		await updateDoc(userRef, { moviesCount: count })
 		return true
 	} catch (error) {
@@ -220,5 +221,14 @@ export const signInWithGoogle = async () => {
 		})
 	} catch (e) {
 		console.error('signInWithGoogle error:', e)
+	}
+}
+
+export async function resetPasswordByEmail(email) {
+	try {
+		const response = await sendPasswordResetEmail(auth, email)
+		return { success: true }
+	} catch (e) {
+		return { success: false, code: e.code, message: e.message }
 	}
 }

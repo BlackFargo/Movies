@@ -2,7 +2,7 @@ import { faqs } from './faqs'
 import s from './Faq.module.scss'
 export function Faq() {
 	return (
-		<section className={s.faq}>
+		<section className={s.faq} id='trailerNestQuestion'>
 			<h1 className={s.faq_title}>FAQ for TrailerNest</h1>
 			<ul className={s.faq_list}>
 				{faqs.map(({ question, answer }, idx) => (

@@ -9,11 +9,17 @@ import {
 	registerUserAsync,
 } from '../../store/slices/auth/authThunks'
 import { Input } from '../../ui/input/Input'
-import { signInWithGoogle } from '../../firebase/firebaseFunctions'
+import {
+	resetPasswordByEmail,
+	signInWithGoogle,
+} from '../../firebase/firebaseFunctions'
 import { auth } from '../../firebase/firebaseConfing'
 
 export function Registration() {
 	const [switchType, setSwitchType] = useState(false)
+	const [resetPasswordStatus, setResetPasswordStatus] = useState('')
+	const authError = useSelector(state => state.auth.error)
+
 	const switchTypeRef = useRef()
 
 	const navigate = useNavigate()
@@ -21,6 +27,7 @@ export function Registration() {
 		register,
 		handleSubmit,
 		reset,
+		watch,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {},
@@ -74,7 +81,7 @@ export function Registration() {
 			)
 
 			if (loginUserAsync.fulfilled.match(resultAction)) {
-				navigate('/user')
+				navigate(`/user/${auth?.currentUser?.uid}`)
 			} else {
 				console.error('Log in failed:', resultAction.payload)
 			}
@@ -84,6 +91,14 @@ export function Registration() {
 
 		handleReset()
 	}
+
+	const resetPasswordHandler = async () => {
+		const response = await resetPasswordByEmail(currentEmail)
+		console.log(response)
+		setResetPasswordStatus(response)
+	}
+
+	const currentEmail = watch('email')
 
 	return (
 		<div className={s.register_container}>
@@ -174,22 +189,37 @@ export function Registration() {
 					<p className={s.error}>{errors.password.message}</p>
 				)}
 
-				<label className={s.privacy_label}>
-					<input
-						type='checkbox'
-						name='consent'
-						disabled={loading}
-						{...register('consent', { required: 'Consent required' })}
-					/>
-					{errors.consent && (
-						<p className={s.error}>{errors.consent.message}</p>
-					)}
-					<p>
-						I have read and agree to the processing of my personal data in
-						accordance with the{' '}
-						<Link to={'/privacy-policy'}>Privacy Policy</Link>.
-					</p>
-				</label>
+				{!switchType && (
+					<label className={s.privacy_label}>
+						<input
+							type='checkbox'
+							name='consent'
+							disabled={loading}
+							{...register('consent', { required: 'Consent required' })}
+						/>
+						{errors.consent && (
+							<p className={s.error}>{errors.consent.message}</p>
+						)}
+						<p>
+							I have read and agree to the processing of my personal data in
+							accordance with the{' '}
+							<Link to={'/privacy-policy'}>Privacy Policy</Link>.
+						</p>
+					</label>
+				)}
+				{switchType && (
+					<>
+						<p onClick={resetPasswordHandler} className={s.reset_password}>
+							Reset password
+						</p>
+						<p>
+							{resetPasswordStatus.success === true
+								? 'The request has been sent to your email'
+								: resetPasswordStatus.message}
+						</p>
+					</>
+				)}
+
 				<button
 					type='button'
 					onClick={handleReset}
@@ -208,9 +238,7 @@ export function Registration() {
 					</p>
 				</button>
 
-				<div>
-					{errorMessage && <div className={s.error}>Email-already-in-use</div>}
-				</div>
+				<div>{errorMessage && <div className={s.error}>{authError}</div>}</div>
 			</form>
 		</div>
 	)

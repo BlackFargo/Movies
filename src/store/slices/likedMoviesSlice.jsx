@@ -52,6 +52,13 @@ const likedMoviesSlice = createSlice({
 			state.movies = { ...state.movies, ...normalized }
 			console.log(state.likesCount)
 		},
+		disLike(state, action) {
+			const id = action.payload.id
+
+			delete state.movies[id]
+
+			state.likesCount = Object.keys(state.movies).length
+		},
 	},
 	extraReducers: builder => {
 		builder

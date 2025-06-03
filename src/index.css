@@ -415,7 +415,7 @@ ul {
 	color: #fff;
 	font-weight: bold;
 }
-.footer__hrefs > div > p {
+.footer__hrefs > div > a:not(:first-child) {
 	color: #454545;
 
 	font-size: 16px;
@@ -651,6 +651,11 @@ main > video {
 	flex-direction: column;
 	gap: 11px;
 	width: 958px;
+}
+.main__info-left-about-actions {
+	width: 100%;
+	display: flex;
+	column-gap: 20px;
 }
 .main__info-rigth-info {
 	display: flex;
@@ -913,8 +918,10 @@ ul {
 	}
 }
 
-.like-btn {
-	width: 200px;
+.like-btn,
+.dislike-btn {
+	max-width: 200px;
+	width: 100%;
 	height: 45px;
 	color: white;
 	border-radius: 12px;
@@ -928,7 +935,12 @@ ul {
 	transition: all 0.3s;
 }
 
-.like-btn:hover {
+.dislike-btn svg {
+	transform: rotate(180deg);
+}
+
+.like-btn:hover,
+.dislike-btn:hover {
 	background-color: rgba(122, 0, 0, 0.8);
 }
 
@@ -976,23 +988,20 @@ input {
 	opacity: 0;
 }
 
-/* Активная фаза входа: плавный переход к opacity:1 */
 .fade-enter-active {
 	opacity: 1;
 	transition: opacity 300ms ease-out;
 }
 
-/* -------------------------------------------------
-   2) Выход (exit): старый элемент из opacity:1 → opacity:0
----------------------------------------------------*/
-
-/* Начальное состояние перед анимацией выхода */
 .fade-exit {
 	opacity: 1;
 }
 
-/* Активная фаза выхода: плавный переход к opacity:0 */
 .fade-exit-active {
 	opacity: 0;
 	transition: opacity 300ms ease-out;
+}
+
+.site__info img {
+	cursor: pointer;
 }

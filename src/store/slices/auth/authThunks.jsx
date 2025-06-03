@@ -52,8 +52,15 @@ export const registerUserAsync = createAsyncThunk(
 				rank: { name: 'Popcorn Rookie', emoji: '🍿' },
 				createdAt: serverTimestamp(),
 			}
-		} catch (error) {
-			return rejectWithValue(error.message)
+		} catch (err) {
+			if (err.code === 'auth/email-already-in-use') {
+				return rejectWithValue('Email is already in use')
+			}
+			if (err.code === 'auth/weak-password') {
+				return rejectWithValue('Weak password')
+			}
+
+			return rejectWithValue(err.message)
 		}
 	}
 )
