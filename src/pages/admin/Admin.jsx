@@ -16,7 +16,7 @@ export function Admin() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		if (authUser?.role !== 'Founder') {
+		if (authUser?.role !== 'Admin') {
 			navigate('/')
 		}
 	}, [authUser, navigate])

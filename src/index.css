@@ -411,14 +411,29 @@ ul {
 	flex-direction: column;
 	gap: 24px;
 }
+.footer__hrefs > div > a:first-of-type {
+	color: #fff;
+	font-weight: bold;
+}
 .footer__hrefs > div > p:first-of-type {
 	color: #fff;
 	font-weight: bold;
 }
 .footer__hrefs > div > a:not(:first-child) {
 	color: #454545;
+	transition: all 0.3s;
+	font-size: 16px;
+}
+
+.footer__hrefs > div > p:not(:first-child) {
+	color: #454545;
 
 	font-size: 16px;
+}
+.footer__hrefs > div > a:not(:first-child):hover {
+	color: #bdbdbd;
+
+	font-size: 18px;
 }
 .footer__padding {
 	display: flex;

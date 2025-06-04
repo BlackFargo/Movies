@@ -178,7 +178,6 @@ export function UserPage() {
 					</div>
 
 					<button onClick={confirmAndDeleteAccount}>Delete account</button>
-					<button disabled>Coming soon</button>
 				</div>
 			)}
 		</section>

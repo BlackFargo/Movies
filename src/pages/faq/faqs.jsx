@@ -3,6 +3,7 @@ export const faqs = [
 		question: 'What is TrailerNest?',
 		answer:
 			'TrailerNest is an online platform where you can watch official movie and TV series trailers and “like” the ones you enjoy.',
+		id: 'trailer-nest-question',
 	},
 	{
 		question: 'How do I register?',
@@ -17,7 +18,7 @@ export const faqs = [
 	{
 		question: 'How can I browse trailers?',
 		answer:
-			'There’s no search bar yet. Use the main menu to explore by Genres (Drama, Comedy, Sci-Fi), New Releases, or Popular Trailers.',
+			'Use the main menu to explore by Genres (Drama, Comedy, Sci-Fi), New Releases, or Popular Trailers.',
 	},
 	{
 		question: 'Can I watch the full movie on TrailerNest?',
@@ -37,7 +38,8 @@ export const faqs = [
 	{
 		question: 'How do I remove a like?',
 		answer:
-			'Click the ❤ icon again on a trailer you’ve previously liked to “unlike” it.',
+			'Click the dislike button on a trailer you’ve previously liked to “unlike” it.',
+		id: 'trailer-nest-dislike',
 	},
 	{
 		question: 'How can I delete or deactivate my account?',
@@ -48,6 +50,7 @@ export const faqs = [
 		question: 'How do I contact support?',
 		answer:
 			'Send your questions to support@trailernest.com or use the contact form at the bottom of any page. We reply within 24 hours on business days.',
+		id: 'trailer-nest-support',
 	},
 	{
 		question: 'How is my personal data handled?',

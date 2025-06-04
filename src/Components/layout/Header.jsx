@@ -72,7 +72,7 @@ export default function Header() {
 				<Link to={'/ranks'}>Rank system</Link>
 				<Link to={'/faq'}>FAQ</Link>
 				<Link to={'/privacy-policy'}>Support</Link>
-				{userAuth?.role === 'Founder' ? (
+				{userAuth?.role === 'Admin' ? (
 					<Link to={'/admin'} className='adminLink'>
 						Admin Panel
 					</Link>
