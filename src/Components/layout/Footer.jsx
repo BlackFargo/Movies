@@ -52,12 +52,6 @@ export default function Footer() {
 							</HashLink>
 						))}
 					</div>
-					<div>
-						<p>Reports</p>
-						<p>Topic</p>
-						<p>Topic</p>
-						<p>Topic</p>
-					</div>
 				</div>
 			</div>
 		</footer>

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { genreIdByName } from '../../utils/genreUtils'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../../store/slices/moviesSlice'
-import UseDebounce from '../../hooks/UseDebounce'
+import { useDebounce } from '../../hooks/useDebounce'
 import { setPage } from '../../store/slices/filterSlice'
 import { setGenre } from '../../store/slices/filterSlice'
 const popularGenreMap = {
@@ -28,7 +28,7 @@ export default function FilterBtns() {
 
 	const dispatch = useDispatch()
 
-	const debouncedGenre = UseDebounce(genre)
+	const debouncedGenre = useDebounce(genre)
 
 	useEffect(() => {
 		const controller = new AbortController()

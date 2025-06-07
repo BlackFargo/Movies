@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 import { auth } from './firebase/firebaseConfing'
 import { deleteUserIfNotVerified } from './utils/emailVerification'
 import { getMoviesIds } from './firebase/firebaseFunctions'
-import { RoutesConfig } from './RoutesConfig'
+import { RoutesConfig } from './routes/RoutesConfig'
 
 function App() {
 	const dispatch = useDispatch()
@@ -59,9 +59,9 @@ function App() {
 		<>
 			<BrowserRouter>
 				<Header />
-				{/* <main> */}
+
 				<RoutesConfig />
-				{/* </main> */}
+
 				<Footer />
 			</BrowserRouter>
 		</>

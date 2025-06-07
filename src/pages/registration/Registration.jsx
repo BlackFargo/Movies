@@ -101,7 +101,7 @@ export function Registration() {
 	const currentEmail = watch('email')
 
 	return (
-		<div className={s.register_container}>
+		<section className={s.register_container}>
 			<form
 				onSubmit={handleSubmit(switchType ? logInSubmit : signUpSubmit)}
 				className={s.form}
@@ -240,6 +240,6 @@ export function Registration() {
 
 				<div>{errorMessage && <div className={s.error}>{authError}</div>}</div>
 			</form>
-		</div>
+		</section>
 	)
 }

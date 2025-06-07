@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-export default function UseDebounce(query) {
-	const [debouncedQuery, setDebouncedQuery] = useState('')
-
+export function useDebounce(query) {
+	const [debounceQuery, setDebounceQuery] = useState()
 	useEffect(() => {
-		const timeoutId = setTimeout(() => {
-			setDebouncedQuery(query)
-		}, 100)
+		let timeout = setTimeout(() => {
+			setDebounceQuery(query)
+		}, 200)
 
-		return () => clearTimeout(timeoutId)
+		return () => clearTimeout(timeout)
 	}, [query])
-	return debouncedQuery
+	return debounceQuery
 }

@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Routes, useLocation, Navigate } from 'react-router-dom'
 import { publicRoutes, privateRoutes } from './routes'
-import { NotFound } from './pages/NotFound'
+import { NotFound } from '../pages/NotFound'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 function PrivateRoute({ children }) {
@@ -23,7 +23,7 @@ export function RoutesConfig() {
 				timeout={300}
 				exit={false}
 			>
-				<div ref={nodeRef}>
+				<div ref={nodeRef} className='main_container'>
 					<Routes location={location}>
 						{publicRoutes.map(route => {
 							const { path, element } = route

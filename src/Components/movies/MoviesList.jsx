@@ -13,11 +13,15 @@ export default function MoviesList() {
 
 	const test = useSelector(selectFilteredMovies)
 
+	useEffect(() => {
+		console.log(movies)
+	}, [movies])
+
 	return (
 		<div id='movies' className='movies anchor'>
 			{status === 'loading'
 				? [...Array(20)].map((_, i) => <SkeletonMovie key={i} />)
-				: test.map(movie => (
+				: movies.map(movie => (
 						<MoviesCard
 							rating={Math.round(movie.vote_average)}
 							key={movie.id}

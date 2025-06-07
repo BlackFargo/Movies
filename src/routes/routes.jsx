@@ -1,12 +1,12 @@
-import { Home } from './pages/Home'
-import { Favorites } from './pages/Favorites'
-import { Movie } from './pages/Movie'
-import { Registration } from './pages/registration/Registration'
-import { UserPage } from './pages/userPage/UserPage'
-import { Faq } from './pages/faq/Faq'
-import { Support } from './pages/Support/Support'
-import { Ranks } from './pages/ranks/Ranks'
-import { Admin } from './pages/admin/Admin'
+import { Home } from '../pages/Home'
+import { Favorites } from '../pages/Favorites'
+import { Movie } from '../pages/Movie'
+import { Registration } from '../pages/registration/Registration'
+import { UserPage } from '../pages/userPage/UserPage'
+import { Faq } from '../pages/faq/Faq'
+import { Support } from '../pages/Support/Support'
+import { Ranks } from '../pages/ranks/Ranks'
+import { Admin } from '../pages/admin/Admin'
 
 export const publicRoutes = [
 	{ path: '/', element: <Home /> },
