@@ -839,7 +839,7 @@ body {
 }
 
 footer {
-	margin-top: auto !important;
+	margin-top: auto;
 }
 
 .login {
@@ -1053,7 +1053,7 @@ body {
 }
 
 section {
-	margin-top: 100px !important;
+	margin-top: 75px !important;
 	padding: 80px;
 }
 

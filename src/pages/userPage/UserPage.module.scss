@@ -36,6 +36,10 @@
 
 		margin-top: 50px;
 
+		@media (max-width: 600px) {
+			grid-template-columns: repeat(1, 1fr);
+		}
+
 		button {
 			height: 50px;
 			border-radius: 12px;
