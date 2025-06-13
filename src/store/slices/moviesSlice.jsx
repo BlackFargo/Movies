@@ -167,11 +167,9 @@ const moviesSlice = createSlice({
 					state.movies = action.payload
 				} else {
 					const merged = [...state.movies, ...action.payload]
-
 					const uniqueById = Array.from(
 						new Map(merged.map(movie => [movie.id, movie])).values()
 					)
-
 					state.movies = uniqueById
 				}
 			})
