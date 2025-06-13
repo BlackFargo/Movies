@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createSelector } from '@reduxjs/toolkit'
+import { act } from 'react'
 
 const genreMap = {
 	28: 'Action',
@@ -28,7 +29,7 @@ const APIKEY = import.meta.env.VITE_API_KEY
 export const fetchMovies = createAsyncThunk(
 	'movies/fetchByGenre',
 
-	async function ({ category, genre = 28, page = 1 }, { rejectedWithValue }) {
+	async function ({ category, genre = 28, page = 1 }, { rejectWithValue }) {
 		let url = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&page=${page}`
 		if (genre == '100000')
 			url = `https://api.themoviedb.org/3/discover/movie?page=${page}`
@@ -67,14 +68,14 @@ export const fetchMovies = createAsyncThunk(
 
 			return updated
 		} catch (e) {
-			return rejectedWithValue(e.message)
+			return rejectWithValue(e.message)
 		}
 	}
 )
 
 export const fetchTrailer = createAsyncThunk(
 	'movies/fetchTrailer',
-	async function ({ movieId }, { rejectedWithValue }) {
+	async function ({ movieId }, { rejectWithValue }) {
 		try {
 			const response = await fetch(
 				`https://api.themoviedb.org/3/movie/${movieId}/videos`,
@@ -97,14 +98,14 @@ export const fetchTrailer = createAsyncThunk(
 
 			return trailer.key
 		} catch (e) {
-			return rejectedWithValue(e.message)
+			return rejectWithValue(e.message)
 		}
 	}
 )
 
 export const fetchMovie = createAsyncThunk(
 	'movies/fetchMovie',
-	async function ({ title }, { rejectedWithValue }) {
+	async function ({ title }, { rejectWithValue }) {
 		try {
 			const response = await fetch(
 				`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
@@ -132,7 +133,7 @@ export const fetchMovie = createAsyncThunk(
 
 			return updated[0] || null
 		} catch (e) {
-			return rejectedWithValue(e)
+			return rejectWithValue(e)
 		}
 	}
 )
@@ -145,7 +146,7 @@ const moviesSlice = createSlice({
 		page: 1,
 		status: null,
 		error: null,
-		movies: [],
+
 		searchTerm: '',
 	},
 	reducers: {
@@ -160,20 +161,18 @@ const moviesSlice = createSlice({
 				state.error = null
 			})
 			.addCase(fetchMovies.fulfilled, (state, action) => {
-				console.log(
-					'загружена страница',
-					action.meta.arg.page,
-					'теперь в сторе',
-					state.movies.length,
-					'фильмов'
-				)
 				state.status = 'resolved'
 				if (action.meta.arg.page === 1) {
 					state.page = 1
 					state.movies = action.payload
 				} else {
-					state.page = action.meta.arg.page
-					state.movies = [...state.movies, ...action.payload]
+					const merged = [...state.movies, ...action.payload]
+
+					const uniqueById = Array.from(
+						new Map(merged.map(movie => [movie.id, movie])).values()
+					)
+
+					state.movies = uniqueById
 				}
 			})
 			.addCase(fetchMovies.rejected, (state, action) => {

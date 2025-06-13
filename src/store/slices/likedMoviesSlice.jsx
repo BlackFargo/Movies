@@ -50,7 +50,6 @@ const likedMoviesSlice = createSlice({
 			const likes = Object.keys(normalized).length
 			state.likesCount = likes
 			state.movies = { ...state.movies, ...normalized }
-			console.log(state.likesCount)
 		},
 		disLike(state, action) {
 			const id = action.payload.id
