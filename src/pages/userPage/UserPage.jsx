@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux'
 import { logoutUserAsync } from '../../store/slices/auth/authThunks'
 import s from './UserPage.module.scss'
 import { SkeletonText } from '../../Components/skeletons/SkeletonText'
+
+import { getUser } from '../../firebase/firebaseHelpers/users'
 import {
-	getUser,
 	changePassword,
 	deleteAccount,
-	getRank,
-} from '../../firebase/firebaseFunctions'
+} from '../../firebase/firebaseHelpers/auth'
+import { getRank } from '../../firebase/firebaseHelpers/rank'
+
 import userImage from '../../assets/images/user.png'
 import { auth } from '../../firebase/firebaseConfing'
 import { useForm } from 'react-hook-form'

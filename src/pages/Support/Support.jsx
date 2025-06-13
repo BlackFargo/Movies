@@ -60,7 +60,7 @@ export function Support() {
 			<p>
 				If you have any questions or wish to exercise your rights, please
 				contact us at{' '}
-				<a href='mailto:uriymulyar@gmail.com'>privacy@yourdomain.com</a>.
+				<a href='mailto:uriymulyar@gmail.com'>uriymulyar@gmail.com</a>.
 			</p>
 		</section>
 	)

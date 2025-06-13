@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import s from './Admin.module.scss'
-import { getUsers, updateRole } from '../../firebase/firebaseFunctions'
+import { getUsers } from '../../firebase/firebaseHelpers/users'
+import { updateRole } from '../../firebase/firebaseHelpers/roles'
 import { Input } from '../../ui/input/Input'
 
 const VERIFY_URL =

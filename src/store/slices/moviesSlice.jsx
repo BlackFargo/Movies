@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createSelector } from '@reduxjs/toolkit'
+import { act } from 'react'
 
 const genreMap = {
 	28: 'Action',
@@ -165,11 +166,11 @@ const moviesSlice = createSlice({
 					state.page = 1
 					state.movies = action.payload
 				} else {
-					state.page = action.meta.arg.page
-
-					const ids = new Set(state.movies.map(m => m.id))
-					const newMovies = action.payload.filter(m => !ids.has(m.id))
-					state.movies = [...state.movies, ...newMovies]
+					const merged = [...state.movies, ...action.payload]
+					const uniqueById = Array.from(
+						new Map(merged.map(movie => [movie.id, movie])).values()
+					)
+					state.movies = uniqueById
 				}
 			})
 			.addCase(fetchMovies.rejected, (state, action) => {

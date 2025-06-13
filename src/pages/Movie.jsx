@@ -6,9 +6,9 @@ import { useParams } from 'react-router-dom'
 
 export function Movie() {
 	return (
-		<main>
+		<div className='main'>
 			<Video />
 			<MainInfo />
-		</main>
+		</div>
 	)
 }

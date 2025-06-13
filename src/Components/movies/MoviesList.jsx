@@ -10,13 +10,13 @@ const baseUrl = 'https://image.tmdb.org/t/p/w200/'
 export default function MoviesList() {
 	const { movies, status } = useSelector(state => state.movies)
 
-	const filtredMovies = useSelector(selectFilteredMovies)
+	const selectFiltredMovies = useSelector(selectFilteredMovies)
 
 	return (
 		<div id='movies' className='movies anchor'>
 			{status === 'loading'
 				? [...Array(20)].map((_, i) => <SkeletonMovie key={i} />)
-				: filtredMovies.map(movie => (
+				: selectFiltredMovies.map(movie => (
 						<MoviesCard
 							rating={Math.round(movie.vote_average)}
 							key={movie.id}

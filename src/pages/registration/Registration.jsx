@@ -9,10 +9,8 @@ import {
 	registerUserAsync,
 } from '../../store/slices/auth/authThunks'
 import { Input } from '../../ui/input/Input'
-import {
-	resetPasswordByEmail,
-	signInWithGoogle,
-} from '../../firebase/firebaseFunctions'
+import { resetPasswordByEmail } from '../../firebase/firebaseHelpers/auth'
+import { signInWithGoogle } from '../../firebase/firebaseHelpers/auth'
 import { auth } from '../../firebase/firebaseConfing'
 
 export function Registration() {
@@ -60,7 +58,7 @@ export function Registration() {
 			)
 
 			if (registerUserAsync.fulfilled.match(resultAction)) {
-				navigate('/user')
+				navigate(`/user/${auth?.currentUser?.uid}`)
 			} else {
 				console.error('Registration failed:', resultAction.payload)
 			}

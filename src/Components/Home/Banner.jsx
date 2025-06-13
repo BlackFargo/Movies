@@ -24,9 +24,8 @@ export default function Banner() {
 				</p>
 				<div>
 					<a href='#movies'>Movies</a>
-					<button>
-						<Link to={'/favorites'}>Favorites</Link>
-					</button>
+
+					<Link to={'/favorites'}>Favorites</Link>
 				</div>
 			</div>
 			<video autoPlay muted loop>
