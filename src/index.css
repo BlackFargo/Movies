@@ -650,6 +650,7 @@ main > video {
 	gap: 14px;
 }
 .main__info-left-categoryes > p {
+	flex-wrap: wrap;
 	display: inline-block;
 	color: #fff;
 
@@ -679,7 +680,6 @@ main > video {
 	display: flex;
 	flex-direction: column;
 	gap: 11px;
-	width: 958px;
 }
 .main__info-left-about-actions {
 	width: 100%;
@@ -732,7 +732,9 @@ main > video {
 	justify-content: space-between;
 }
 .video-wrapper {
-	width: calc(100% - 29%);
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
 	/* 1500 */
 	box-sizing: border-box;
 	display: flex;
