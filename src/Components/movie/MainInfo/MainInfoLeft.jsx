@@ -1,9 +1,10 @@
 import Rating from '../Rating'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateLikes, updateRank } from '../../../firebase/firebaseFunctions'
+import { updateRank } from '../../../firebase/firebaseHelpers/rank'
+import { updateLikes } from '../../../firebase/firebaseHelpers/users'
 import { likesActions } from '../../../store/slices/likedMoviesSlice'
 import { useEffect } from 'react'
-import { sendMoviesIds } from '../../../firebase/firebaseFunctions'
+import { sendMoviesIds } from '../../../firebase/firebaseHelpers/movies'
 import { auth } from '../../../firebase/firebaseConfing'
 import { checkRank } from '../../../utils/checkRank'
 

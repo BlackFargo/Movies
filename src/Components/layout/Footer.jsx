@@ -4,7 +4,7 @@ import youtube from '../../assets/icons/icons8-youtube-144.png'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 import { useState, useEffect } from 'react'
-import { getUsersByLikesDesc } from '../../firebase/firebaseFunctions'
+import { getUsersByLikesDesc } from '../../firebase/firebaseHelpers/users'
 
 export default function Footer() {
 	const [users, setUsers] = useState([])

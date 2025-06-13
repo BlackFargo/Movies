@@ -1,5 +1,5 @@
 import s from './Ranks.module.scss'
-import { getUsersByLikesDesc } from '../../firebase/firebaseFunctions'
+import { getUsersByLikesDesc } from '../../firebase/firebaseHelpers/users'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { SkeletonRatingUsers } from '../../Components/skeletons/SkeletonRatingUsers'

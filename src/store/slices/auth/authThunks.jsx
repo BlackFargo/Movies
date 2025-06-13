@@ -7,7 +7,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { auth } from '../../../firebase/firebaseConfing'
 import { db } from '../../../firebase/firebaseConfing'
 import { setDoc, doc, getDoc } from 'firebase/firestore'
-import { deleteUserIfNotVerified } from '../../../utils/emailVerification'
+
 import { updateProfile } from 'firebase/auth'
 import { serverTimestamp } from 'firebase/firestore'
 
@@ -40,8 +40,6 @@ export const registerUserAsync = createAsyncThunk(
 			})
 
 			await sendEmailVerification(userCredentials.user)
-
-			deleteUserIfNotVerified(auth.currentUser)
 
 			return {
 				email: userCredentials.user?.email,
