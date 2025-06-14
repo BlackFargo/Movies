@@ -3,8 +3,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
-	"homepage": "https://BlackFargo.github.io/Movies",
-
+	"homepage": "https://blackfargo.github.io/Movies",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
