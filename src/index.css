@@ -1115,3 +1115,9 @@ section {
 	margin-top: 100px;
 	padding: 20px;
 }
+
+.notFound_image {
+	width: 100%;
+	max-width: 800px;
+	margin-block: 100px;
+}

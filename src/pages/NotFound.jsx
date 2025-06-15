@@ -8,14 +8,14 @@ export function NotFound() {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
+				padding: '20px',
 			}}
 		>
 			<img
 				src={notFound}
 				alt='notFound'
-				width={800}
-				height={800}
-				style={{ borderRadius: '50%', margin: '100px 0' }}
+				className='notFound_image'
+				style={{ borderRadius: '50%', margin: '140px 0' }}
 			/>
 		</div>
 	)
