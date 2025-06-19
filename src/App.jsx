@@ -49,8 +49,6 @@ function App() {
 		checkUserAuth(dispatch)
 	}, [])
 
-	console.log(auth.currentUser)
-
 	return (
 		<>
 			basename='/Movies'

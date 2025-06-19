@@ -1028,6 +1028,25 @@ input {
 	color: gold !important;
 }
 
+.soundButton {
+	color: white;
+	width: 70px;
+	font-size: 16px;
+	padding: 10px;
+	height: 70px;
+	border-radius: 50%;
+	background-color: red;
+	cursor: pointer;
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	font-weight: 600;
+	transition: opacity 0.3s;
+}
+.soundButton:hover {
+	opacity: 0.6;
+}
+
 .fade-enter {
 	opacity: 0;
 }

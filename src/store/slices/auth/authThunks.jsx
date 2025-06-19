@@ -48,7 +48,6 @@ export const registerUserAsync = createAsyncThunk(
 				role: 'user',
 				emailVerified: userCredentials.user?.emailVerified,
 				rank: { name: 'Popcorn Rookie', emoji: '🍿' },
-				createdAt: serverTimestamp(),
 			}
 		} catch (err) {
 			if (err.code === 'auth/email-already-in-use') {
@@ -72,8 +71,8 @@ export const loginUserAsync = createAsyncThunk(
 				email,
 				password
 			)
-			const useRef = doc(db, 'users', userCredentials.user.uid)
-			const userDoc = await getDoc(useRef)
+			const userRef = doc(db, 'users', userCredentials.user.uid)
+			const userDoc = await getDoc(userRef)
 			const userData = userDoc.data()
 			return {
 				email: userCredentials.user?.email,

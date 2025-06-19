@@ -104,7 +104,6 @@ export function Admin() {
 		}
 	}
 
-	// Новая функция: удаление пользователя
 	const handleDeleteUser = async uid => {
 		if (!window.confirm('Вы точно хотите удалить этого пользователя?')) return
 
