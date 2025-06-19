@@ -8,8 +8,6 @@ import checkUserAuth from './utils/checkUserAuth'
 import { likesActions } from './store/slices/likedMoviesSlice'
 import { useSelector } from 'react-redux'
 
-import { auth } from './firebase/firebaseConfing'
-
 import { getMoviesIds } from './firebase/firebaseHelpers/movies'
 import { RoutesConfig } from './routes/RoutesConfig'
 
