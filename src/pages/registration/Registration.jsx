@@ -37,10 +37,6 @@ export function Registration() {
 	const loading = useSelector(state => state.auth?.loading)
 	const errorMessage = useSelector(state => state.auth?.error)
 
-	useEffect(() => {
-		console.log(state)
-	}, [state])
-
 	const handleReset = () => {
 		reset({
 			email: '',

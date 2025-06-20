@@ -64,7 +64,7 @@ export function UserPage() {
 	const confirmAndDeleteAccount = () => {
 		if (!user?.displayName) return
 		const promptValue = prompt('To confirm, type your username:')
-		if (promptValue === user.displayName) {
+		if (promptValue === user?.displayName) {
 			deleteAccount()
 		}
 	}
@@ -103,7 +103,7 @@ export function UserPage() {
 				<div className={s.user_profile_inner}>
 					<ul className={s.user_profile_list}>
 						<li>
-							<span>Nickname:</span> {user.displayName}
+							<span>Nickname:</span> {user?.displayName}
 						</li>
 						<li>
 							<span>Rank:</span>{' '}
@@ -113,21 +113,21 @@ export function UserPage() {
 								) : (
 									<SkeletonText />
 								)
-							) : user.rank ? (
+							) : user?.rank ? (
 								`${user.rank.name} ${user.rank.emoji}`
 							) : (
 								'—'
 							)}
 						</li>
 						<li>
-							<span>Likes:</span> {user.moviesCount}
+							<span>Likes:</span> {user.moviesCount ? user.moviesCount : 0}
 						</li>
 						<li>
-							<span>Role:</span> {user.role}
+							<span>Role:</span> {user?.role}
 						</li>
 						{isMe && (
 							<li>
-								<span>Email:</span> {user.email}
+								<span>Email:</span> {user?.email}
 							</li>
 						)}
 					</ul>
@@ -169,6 +169,7 @@ export function UserPage() {
 										required: 'Required',
 										minLength: 8,
 									})}
+									className={s.newpass}
 								/>
 								<p className={s.error}>{errors.newPassword?.message}</p>
 

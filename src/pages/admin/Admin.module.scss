@@ -8,22 +8,35 @@
 	padding-top: 100px;
 
 	&_auth_form {
+		max-width: 800px;
+		width: 100%;
 		display: flex;
 		column-gap: 10px;
 		align-items: center;
 		row-gap: 10px;
+		padding: 10px;
 
 		label {
-			font-size: 20px;
+			font-size: 18px;
 		}
 
 		input {
-			padding: 5px;
+			padding: 10px;
+			max-width: 500px;
+			width: 100%;
 		}
 		button {
-			padding: 5px;
+			padding: 10px;
 			color: white;
 			cursor: pointer;
+			font-size: 20px;
+			border-radius: 5px;
+			transition: opacity 0.3s;
+			background-color: #44445a;
+
+			&:hover {
+				opacity: 0.7;
+			}
 		}
 
 		@media (max-width: 700px) {
@@ -46,10 +59,6 @@
 
 		thead {
 			background-color: #343450;
-
-			tr {
-				/* No hover effect on header rows */
-			}
 		}
 		th {
 			padding: 12px 16px;

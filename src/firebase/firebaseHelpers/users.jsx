@@ -42,6 +42,11 @@ export const getUsersByLikesDesc = async (limitCount = 50) => {
 }
 
 export const updateLikes = async count => {
-	const userRef = doc(db, 'users', auth?.currentUser?.uid)
+	if (!auth?.currentUser?.uid) {
+		console.warn('User is not authenticated yet, cannot update likes')
+		return
+	}
+
+	const userRef = doc(db, 'users', auth.currentUser.uid)
 	await updateDoc(userRef, { moviesCount: count })
 }

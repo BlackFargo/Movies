@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateRank } from '../../../firebase/firebaseHelpers/rank'
 import { updateLikes } from '../../../firebase/firebaseHelpers/users'
 import { likesActions } from '../../../store/slices/likedMoviesSlice'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { sendMoviesIds } from '../../../firebase/firebaseHelpers/movies'
 import { auth } from '../../../firebase/firebaseConfing'
 import { checkRank } from '../../../utils/checkRank'
@@ -15,9 +15,11 @@ export default function MainInfoLeft() {
 	const likesCountState = useSelector(state => state.likes.likesCount)
 	const authUser = useSelector(state => state.auth.user)
 
+	const [likedAnimate, setLikedAnimate] = useState(false)
+	const [dislikedAnimate, setDislikedAnimate] = useState(false)
+
 	useEffect(() => {
 		const thresholds = [500, 200, 100, 50, 10]
-
 		const matched = thresholds.find(t => likesCountState >= t)
 
 		if (matched) {
@@ -27,12 +29,19 @@ export default function MainInfoLeft() {
 	}, [likesCountState])
 
 	const moviedata = movieState?.movies[0]
-
 	const movieDate = new Date(moviedata?.release_date).getFullYear()
 
 	const addMovie = moviedata => {
 		dispatch(likesActions.addLike(moviedata))
 		updateLikes(likesCountState)
+		setLikedAnimate(true)
+		setTimeout(() => setLikedAnimate(false), 300)
+	}
+
+	const removeMovie = moviedata => {
+		dispatch(likesActions.disLike(moviedata))
+		setDislikedAnimate(true)
+		setTimeout(() => setDislikedAnimate(false), 300)
 	}
 
 	useEffect(() => {
@@ -48,29 +57,34 @@ export default function MainInfoLeft() {
 			<div className='main__info-left-title'>
 				<p>{moviedata?.title}</p>
 			</div>
+
 			<div className='movies__info-rating'>
 				<Rating rating={moviedata?.vote_average} />
 			</div>
+
 			<div className='main__info-left-categoryes'>
 				{moviedata?.adult ? <p>18+</p> : ''}
-
-				{moviedata?.genres
-					? moviedata.genres.map((genre, index) => <p key={index}>{genre}</p>)
-					: ''}
+				{moviedata?.genres?.map((genre, index) => (
+					<p key={index}>{genre}</p>
+				))}
 				{moviedata?.release_date ? <p>{movieDate}</p> : ''}
 				<p>HD</p>
 			</div>
+
 			<div className='main__info-left-about'>
 				<p>Description</p>
-				<p>{moviedata?.overview}</p>
+				<p>
+					{moviedata?.overview
+						? moviedata?.overview
+						: 'There is no description'}
+				</p>
 			</div>
+
 			<div className='main__info-left-about-actions'>
 				<button
-					className='like-btn'
-					disabled={authUser === null ? 'disabled' : ''}
-					onClick={() => {
-						addMovie(moviedata)
-					}}
+					className={`like-btn ${likedAnimate ? 'animate' : ''}`}
+					disabled={!authUser}
+					onClick={() => addMovie(moviedata)}
 				>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -91,11 +105,9 @@ export default function MainInfoLeft() {
 				</button>
 
 				<button
-					className='dislike-btn'
-					disabled={authUser === null ? 'disabled' : ''}
-					onClick={() => {
-						dispatch(likesActions.disLike(moviedata))
-					}}
+					className={`dislike-btn ${dislikedAnimate ? 'animate' : ''}`}
+					disabled={!authUser}
+					onClick={() => removeMovie(moviedata)}
 				>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -103,7 +115,7 @@ export default function MainInfoLeft() {
 						viewBox='0 0 24 24'
 						strokeWidth='1.5'
 						stroke='currentColor'
-						class='size-6'
+						className='size-6'
 						width={24}
 						height={24}
 					>

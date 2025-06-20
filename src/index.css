@@ -140,12 +140,15 @@ header {
 	position: relative;
 	align-items: center;
 }
-.header__banner > video {
-	display: block;
+.header__banner > iframe {
 	position: absolute;
-	width: 100%;
-	object-fit: cover;
-	height: 100%;
+	top: 50%;
+	left: 50%;
+	width: 177.77vh; /* 16:9 ratio */
+	height: 100vh;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	border: none;
 	opacity: 1;
 }
 .header__banner > img {
@@ -328,10 +331,12 @@ ul {
 	font-size: 17px;
 	color: #fff;
 }
+
 .movies {
 	margin-top: 25px;
 	width: 100%;
 	display: grid;
+	justify-items: center;
 	grid-template-columns: repeat(
 		auto-fit,
 		minmax(150px, 1fr)
@@ -731,23 +736,66 @@ main > video {
 	width: 100%;
 	justify-content: space-between;
 }
-.video-wrapper {
-	max-width: 1000px;
+.video-container {
 	width: 100%;
-	margin: 0 auto;
-	/* 1500 */
+	max-width: 1200px;
+	margin: 0 auto 30px;
+	padding: 0 20px;
 	box-sizing: border-box;
+}
+
+.video-container.no-trailer {
 	display: flex;
-	justify-content: center;
 	flex-direction: column;
 	align-items: center;
+	gap: 20px;
 }
-.video-wrapper iframe {
+
+.video-wrapper {
+	position: relative;
 	width: 100%;
-	height: 700px;
+	padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+	height: 0;
+	overflow: hidden;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-.video-wrapper img {
+
+.video-wrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: none;
 }
+
+.backdrop-image {
+	width: 100%;
+	max-height: 500px;
+	object-fit: cover;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.trailer-text {
+	color: #fff;
+	font-size: 1.5rem;
+	text-align: center;
+	margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+	.video-container {
+		padding: 0 10px;
+		margin-bottom: 20px;
+	}
+
+	.trailer-text {
+		font-size: 1.2rem;
+	}
+}
+
 .filter__categoryes-item {
 	display: flex;
 	flex-direction: column;
@@ -888,7 +936,7 @@ ul {
 .trailer-text {
 	margin-top: 20px;
 	font-size: 24px;
-	color: white;
+	color: gold;
 }
 
 .header-burger-btn {
@@ -1058,6 +1106,19 @@ input {
 
 .fade-exit {
 	opacity: 1;
+}
+.like-btn svg,
+.dislike-btn svg {
+	transition: transform 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
+}
+
+.like-btn.animate svg {
+	transform: scale(1.3);
+}
+
+.dislike-btn.animate svg {
+	transform: scale(1.3);
+	stroke: #5d5dff; /* синий или любой другой */
 }
 
 .fade-exit-active {

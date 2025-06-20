@@ -73,6 +73,10 @@ export const loginUserAsync = createAsyncThunk(
 			)
 			const userRef = doc(db, 'users', userCredentials.user.uid)
 			const userDoc = await getDoc(userRef)
+
+			if (!userDoc.exists()) {
+				return rejectWithValue('User data not found in Firestore')
+			}
 			const userData = userDoc.data()
 			return {
 				email: userCredentials.user?.email,

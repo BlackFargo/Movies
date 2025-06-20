@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Routes, useLocation, Navigate } from 'react-router-dom'
 import { publicRoutes, privateRoutes } from './routes'
@@ -22,8 +22,11 @@ export function RoutesConfig() {
 				classNames='fade'
 				timeout={300}
 				exit={false}
+				onEntered={() => {
+					window.scrollTo({ top: 0, behavior: 'smooth' })
+				}}
 			>
-				<div ref={nodeRef} className='main_container'>
+				<div key={location.key} ref={nodeRef} className='main_container'>
 					<Routes location={location}>
 						{publicRoutes.map(route => {
 							const { path, element } = route

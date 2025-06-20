@@ -1,27 +1,9 @@
-import video from '../../assets/videos/Titanik.mp4'
 import header_banner from '../../assets/images/background.jpg'
 import { ReactTyped } from 'react-typed'
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 
 export default function Banner() {
-	const [sound, setSound] = useState(false)
-	const videoRef = useRef(null)
-
-	useEffect(() => {
-		if (videoRef.current) {
-			videoRef.current.volume = 0.2
-			if (sound) {
-				videoRef.current.muted = true
-			} else {
-				videoRef.current.muted = false
-			}
-		}
-	}, [sound])
-
-	const changeSoundState = () => {
-		setSound(prev => !prev)
-	}
 	return (
 		<div className='header__banner'>
 			<div>
@@ -46,13 +28,18 @@ export default function Banner() {
 					<Link to={'/favorites'}>Favorites</Link>
 				</div>
 			</div>
-			<video autoPlay loop ref={videoRef}>
-				<source src={video} type='video/mp4' />
-			</video>
+
+			<iframe
+				width='560'
+				height='315'
+				src='https://www.youtube.com/embed/HcGU4C7Nw2g?autoplay=1&mute=1&loop=1&playlist=HcGU4C7Nw2g&controls=0&modestbranding=1'
+				title='YouTube video player'
+				frameborder='0'
+				allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+				referrerpolicy='strict-origin-when-cross-origin'
+				allowfullscreen
+			></iframe>
 			<img src={header_banner} alt='' />
-			<button className='soundButton' onClick={changeSoundState}>
-				{sound ? 'Sound off' : 'Sound on'}
-			</button>
 		</div>
 	)
 }

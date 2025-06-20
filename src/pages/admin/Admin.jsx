@@ -131,8 +131,7 @@ export function Admin() {
 		return (
 			<section className={s.admin}>
 				<form onSubmit={handleVerify} className={s.admin_auth_form}>
-					<label htmlFor='pass'> </label>
-					Enter admin password:{' '}
+					<label htmlFor='pass'>Enter admin password</label>
 					<Input
 						id='pass'
 						type='password'

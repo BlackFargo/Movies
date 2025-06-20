@@ -146,7 +146,6 @@ const moviesSlice = createSlice({
 		page: 1,
 		status: null,
 		error: null,
-
 		searchTerm: '',
 	},
 	reducers: {
