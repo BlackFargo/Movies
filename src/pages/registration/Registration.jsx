@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import s from './Registration.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { onAuthStateChanged } from 'firebase/auth'
 import {
 	loginUserAsync,
 	registerUserAsync,
@@ -17,6 +18,15 @@ export function Registration() {
 	const [switchType, setSwitchType] = useState(false)
 	const [resetPasswordStatus, setResetPasswordStatus] = useState('')
 	const authError = useSelector(state => state.auth.error)
+
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, user => {
+			if (user) {
+				navigate(`/user/${user.uid}`)
+			}
+		})
+		return () => unsubscribe()
+	}, [])
 
 	const switchTypeRef = useRef()
 
