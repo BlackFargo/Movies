@@ -5,9 +5,9 @@ import s from './Admin.module.scss'
 import { getUsers } from '../../firebase/firebaseHelpers/users'
 import { updateRole } from '../../firebase/firebaseHelpers/roles'
 import { Input } from '../../ui/input/Input'
+import { auth } from '../../firebase/firebaseConfing'
 
-const VERIFY_URL =
-	'https://us-central1-movies-ea8b8.cloudfunctions.net/verifyAdminPass'
+const VERIFY_URL = 'https://verifyadminpass-prmsag6nzq-ew.a.run.app'
 
 const DELETE_USER_URL =
 	'https://us-central1-movies-ea8b8.cloudfunctions.net/deleteUser'
@@ -38,9 +38,14 @@ export function Admin() {
 		setPassError(null)
 		setVerifying(true)
 		try {
+			const token = await auth.currentUser.getIdToken()
+			console.log('Token', token)
 			const res = await fetch(VERIFY_URL, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
 				body: JSON.stringify({ password }),
 			})
 			const data = await res.json()

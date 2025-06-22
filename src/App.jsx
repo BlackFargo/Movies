@@ -49,8 +49,7 @@ function App() {
 
 	return (
 		<>
-			basename='/Movies'
-			<BrowserRouter>
+			<BrowserRouter basename='/Movies'>
 				<Header />
 
 				<RoutesConfig />

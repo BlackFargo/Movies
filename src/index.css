@@ -139,6 +139,7 @@ header {
 	height: 100vh;
 	position: relative;
 	align-items: center;
+	overflow: hidden;
 }
 .header__banner > iframe {
 	position: absolute;
