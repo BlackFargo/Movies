@@ -89,11 +89,6 @@ export function UserPage() {
 									<li>
 										<span>Email:</span> <SkeletonText />
 									</li>
-									<li className={s.verifyEmail}>
-										{auth.currentUser?.emailVerified
-											? ''
-											: 'Please verify your email within 5 minutes or your account will be deleted'}
-									</li>
 								</>
 							)}
 						</ul>
@@ -133,9 +128,16 @@ export function UserPage() {
 							<span>Role:</span> {user?.role}
 						</li>
 						{isMe && (
-							<li>
-								<span>Email:</span> {user?.email}
-							</li>
+							<>
+								<li>
+									<span>Email:</span> {user?.email}
+								</li>
+								<li className={s.verifyEmail}>
+									{auth.currentUser?.emailVerified
+										? ''
+										: 'Please verify your email within 5 minutes or your account will be deleted'}
+								</li>
+							</>
 						)}
 					</ul>
 				</div>

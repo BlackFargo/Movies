@@ -98,7 +98,7 @@ export function Registration() {
 
 	const resetPasswordHandler = async () => {
 		const response = await resetPasswordByEmail(currentEmail)
-		console.log(response)
+
 		setResetPasswordStatus(response)
 	}
 
