@@ -6,7 +6,7 @@ import { useModal } from '../../hooks/UseModal'
 import { useEffect, useState } from 'react'
 import { auth } from '../../firebase/firebaseConfing'
 import { getRank } from '../../firebase/firebaseHelpers/rank'
-import userImage from '../../assets/images/user.png'
+import userImage from '../../assets/images/User.png'
 export default function Header() {
 	const [currentRank, setCurrentRank] = useState('')
 	const [logoText, setLogoText] = useState(true)

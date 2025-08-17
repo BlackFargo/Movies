@@ -11,7 +11,7 @@ import {
 } from '../../firebase/firebaseHelpers/auth'
 import { getRank } from '../../firebase/firebaseHelpers/rank'
 
-import userImage from '../../assets/images/user.png'
+import userImage from '../../assets/images/User.png'
 import { auth } from '../../firebase/firebaseConfing'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'

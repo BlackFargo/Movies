@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
-import Header from './Components/Layout/Header'
-import Footer from './Components/Layout/Footer'
+import Header from './Components/layout/Header'
+import Footer from './Components/layout/Footer'
 
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'

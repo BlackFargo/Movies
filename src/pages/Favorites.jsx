@@ -4,8 +4,8 @@ import MoviesScroll from '../Components/movies/MoviesScroll'
 
 import Banner from '../Components/favorites/Banner'
 import { useSelector } from 'react-redux'
-import MoviesCard from '../Components/Movies/MoviesCard'
-import { SkeletonMovie } from '../Components/skeletons/skeletonMovie'
+import MoviesCard from '../Components/movies/MoviesCard'
+import { SkeletonMovie } from '../Components/skeletons/SkeletonMovie'
 
 const baseUrl = 'https://image.tmdb.org/t/p/w200/'
 
