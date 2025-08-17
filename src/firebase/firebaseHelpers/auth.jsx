@@ -33,6 +33,7 @@ export const deleteAccount = async () => {
 		await deleteUser(user)
 	} catch (error) {
 		if (error.code === 'auth/requires-recent-login') {
+			// TODO: Replace window.prompt with a proper modal/form for better security
 			const password = window.prompt('Введите пароль для удаления аккаунта:')
 			if (!password) return
 

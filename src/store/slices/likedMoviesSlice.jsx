@@ -9,7 +9,7 @@ const fetchLikedMovies = createAsyncThunk(
 			const response = await fetch(
 				`https://api.themoviedb.org/3/movie/${movieId}`,
 				{
-					method: 'POST',
+					method: 'GET',
 					headers: {
 						'Content-type': 'application/json',
 						Authorization: `Bearer ${APIKEY}`,

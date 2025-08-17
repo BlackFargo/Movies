@@ -39,7 +39,6 @@ export function Admin() {
 		setVerifying(true)
 		try {
 			const token = await auth.currentUser.getIdToken()
-			console.log('Token', token)
 			const res = await fetch(VERIFY_URL, {
 				method: 'POST',
 				headers: {
