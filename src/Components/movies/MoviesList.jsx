@@ -2,7 +2,7 @@ import MoviesCard from './MoviesCard'
 import posterPlaceholder from '../../assets/images/poster-placeholder.png'
 
 import { useSelector } from 'react-redux'
-import { SkeletonMovie } from '../skeletons/skeletonMovie'
+import { SkeletonMovie } from '../skeletons/SkeletonMovie'
 import { selectFilteredMovies } from '../../store/slices/moviesSlice'
 
 const baseUrl = 'https://image.tmdb.org/t/p/w200/'

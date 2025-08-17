@@ -1,6 +1,6 @@
 import Banner from '../Components/Home/Banner'
 import Filter from '../Components/filter/Filter'
-import MoviesList from '../Components/Movies/MoviesList'
+import MoviesList from '../Components/movies/MoviesList'
 import MoviesScroll from '../Components/movies/MoviesScroll'
 
 export function Home() {

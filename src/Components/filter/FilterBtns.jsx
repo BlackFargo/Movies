@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { genreIdByName } from '../../utils/genreUtils'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMovies } from '../../store/slices/moviesSlice'
-import { useDebounce } from '../../hooks/useDebounce'
+import { useDebounce } from '../../hooks/UseDebounce'
 import { setPage } from '../../store/slices/filterSlice'
 import { setGenre } from '../../store/slices/filterSlice'
 const popularGenreMap = {
