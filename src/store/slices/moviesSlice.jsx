@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { createSelector } from '@reduxjs/toolkit'
-import { act } from 'react'
 
 const genreMap = {
 	28: 'Action',
@@ -31,7 +30,7 @@ export const fetchMovies = createAsyncThunk(
 
 	async function ({ category, genre = 28, page = 1 }, { rejectWithValue }) {
 		let url = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&page=${page}`
-		if (genre == 100000)
+		if (genre === 100000)
 			url = `https://api.themoviedb.org/3/discover/movie?page=${page}`
 		switch (category) {
 			case 'Popular':
@@ -96,7 +95,7 @@ export const fetchTrailer = createAsyncThunk(
 				item => item.name === 'Official Trailer'
 			)
 
-			return trailer.key
+			return trailer?.key || null
 		} catch (e) {
 			return rejectWithValue(e.message)
 		}

@@ -28,24 +28,11 @@ function App() {
 			}
 		}
 		fetchAndSetLikes()
-	}, [authState.user?.uid])
-
-	useEffect(() => {
-		const fetchAndSetLikes = async () => {
-			try {
-				const ids = await getMoviesIds()
-
-				dispatch(likesActions.getLikedMovies(ids))
-			} catch (err) {
-				console.error('Ошибка при загрузке лайков:', err)
-			}
-		}
-		fetchAndSetLikes()
-	}, [])
+	}, [authState.user?.uid, dispatch])
 
 	useEffect(() => {
 		checkUserAuth(dispatch)
-	}, [])
+	}, [dispatch])
 
 	return (
 		<>
